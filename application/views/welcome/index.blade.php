@@ -194,3 +194,8 @@
 </div><!-- #sticky-wrapper -->
 
 @endsection
+
+@section('scripts')
+<script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
+<script type="text/javascript" src="<?php echo asset_url() ?>js/jquery.easing.1.3.js"></script>
+@endsection
