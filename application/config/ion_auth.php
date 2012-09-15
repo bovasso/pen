@@ -77,7 +77,7 @@
 	/**
 	 * Site Title, example.com
 	 */
-	$config['site_title']		   = "Penpalnews.com";
+	$config['site_title']		   = "PenPal News";
 	
 	/**
 	 * Admin Email, admin@example.com
@@ -121,7 +121,7 @@
 	/**
 	 * Email Activation for registration
 	 **/
-	$config['email_activation']    = false;
+	$config['email_activation']    = true;
 
 	/**
 	 * Manual Activation for registration
@@ -164,19 +164,19 @@
 	 * activate Account Email Template
      * Default : activate.tpl.php
 	 **/
-	$config['email_activate']   = 'activate.tpl.php';
+	$config['email_activate']   = 'activate.blade.php';
 	
 	/**
 	 * Forgot Password Email Template
      * Default : forgot_password.tpl.php
 	 **/
-	$config['email_forgot_password']   = 'forgot_password.tpl.php';
+	$config['email_forgot_password']   = 'forgot_password.blade.php';
 
 	/**
 	 * Forgot Password Complete Email Template
      * Default : new_password.tpl.php
 	 **/
-	$config['email_forgot_password_complete']   = 'new_password.tpl.php';
+	$config['email_forgot_password_complete']   = 'new_password.blade.php';
 	
 	/**
 	 * Salt Length

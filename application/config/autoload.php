@@ -52,7 +52,7 @@ $autoload['packages'] = array(APPPATH.'third_party');
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','session','breadcrumbs');
+$autoload['libraries'] = array('database','session','Blade');
 
 
 /*
@@ -109,10 +109,10 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('Menu_model');
+$autoload['model'] = array();
 
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
 
-// $autoload['sparks'] = array('twiggy/0.8.5');
+$autoload['sparks'] = array('php-activerecord/0.0.2');;
