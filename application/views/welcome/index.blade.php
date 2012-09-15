@@ -1,15 +1,12 @@
 @layout('layouts/main')
+@section('stylesheets')
+<link href="<?php echo asset_url() ?>css/home.css" rel="stylesheet" type="text/css" />	
+@endsection
+
 @section('content')
-
-<link href="<?php echo asset_url() ?>/css/home.css" rel="stylesheet" type="text/css" />
-
-
 <div id="sticky-wrapper">
 	<div class="sticky-wrapper">
 		<div id="content" role="main">
-
-						
-				
 			<section id="intro">
 				<div id="video">
 					<div class="wrapper">
