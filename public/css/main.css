@@ -138,7 +138,7 @@ body {
 		margin: 0; padding: 0;
 	}
 	.field-box .mySelect li.level-1 {
-		background: url(img/select_bg.png) top right no-repeat;
+		background: url('../images/select_bg.png') top right no-repeat;
 		line-height: 28px;
 		margin: 0; padding: 0;
 		width: 132px; height: 35px;
@@ -185,7 +185,7 @@ body {
 		overflow: hidden;
 	}
 	.btn {
-		background: transparent url(img/airmail_border_hori.png) center bottom repeat-x;
+		background: transparent url('../images/airmail_border_hori.png') center bottom repeat-x;
 		color: #448ecf;
 		display: block;
 		font-family: "Avenir LT W01 85 Heavy",Arial,sans-serif;
@@ -226,7 +226,7 @@ body {
 			width: 0;
 		}
 		li:not(#foo) > input[type='radio'] + label {
-			background: url(img/radio_sprite.png) left top no-repeat; 
+			background: url('../images/radio_sprite.png') left top no-repeat; 
 			clear: none;
 			color: #333;
 			cursor: pointer;
@@ -239,7 +239,7 @@ body {
 		}
 		/* Change from unchecked to checked graphic */
 		li:not(#foo) > input[type='radio']:checked + label {
-			background: url(img/radio_sprite.png) left bottom no-repeat; 
+			background: url('../images/radio_sprite.png') left bottom no-repeat; 
 		}
 	/* @end */
 
@@ -255,11 +255,11 @@ body {
 			clear: none;
 			padding: 5px 0 4px 32px;	/* Left padding makes room for image */
 			cursor: pointer;			/* Make look clickable because they are */
-			background: url(off.png) left center no-repeat; 
+			background: url('off.png') left center no-repeat; 
 		}
 		/* Change from unchecked to checked graphic */
 		li:not(#foo) > input[type='checkbox']:checked + label {
-			background-image: url(check.png);
+			background-image: url('check.png');
 		}
 	/* @end */
 
@@ -359,7 +359,7 @@ body {
 			width: 100%;
 		}
 		.tabs > ul > li {
-			background: url(img/tab_li_bg_left_inactive.png) left top no-repeat;
+			background: url('../images/tab_li_bg_left_inactive.png') left top no-repeat;
 			float: left;
 			height: 54px;
 			margin-right: -2.375%; padding: 0 2% 0 4px;
@@ -373,7 +373,7 @@ body {
 			z-index: 1;
 		}
 		.tabs > ul > li > a {
-			background: url(img/tab_li_bg_right_inactive.png) right top no-repeat;
+			background: url('../images/tab_li_bg_right_inactive.png') right top no-repeat;
 			color: #999;
 			display: block;
 			float: left;
@@ -385,11 +385,11 @@ body {
 			width: 100%;
 		}
 		.tabs > ul > li.ui-tabs-selected, .tabs > ul > li.ui-state-active{
-			background: url(img/tab_li_bg_left_active.png) left top no-repeat;
+			background: url('../images/tab_li_bg_left_active.png') left top no-repeat;
 			z-index: 10;
 		}
 		.tabs > ul > li.ui-tabs-selected a, .tabs > ul > li.ui-state-active a{
-			background: url(img/tab_li_bg_right_active.png) right top no-repeat;
+			background: url('../images/tab_li_bg_right_active.png') right top no-repeat;
 			color: #000;
 		}
 		.tabs > ul > li a span {
@@ -397,19 +397,19 @@ body {
 			padding: 0 8px 0 0;
 		}
 		.tab {
-			background: url(img/tab_bg_right.png) right bottom no-repeat;
+			background: url('../images/tab_bg_right.png') right bottom no-repeat;
 			margin: 0 auto;
 			width: 100%;
 		}
 		.tab-inner {
-			background: url(img/tab_bg_left.png) left bottom no-repeat;
+			background: url('../images/tab_bg_left.png') left bottom no-repeat;
 			padding: 50px 6% 30px;
 			overflow: hidden;
 			width: 88%;
 			max-width: 880px;
 		}
 		#assignments .tab-inner {
-			background: url(img/tab_bg_left.png) left bottom no-repeat;
+			background: url('../images/tab_bg_left.png') left bottom no-repeat;
 			padding: 50px 40px;
 			overflow: hidden;
 			width: 100%;
@@ -484,7 +484,7 @@ body {
 		.tab center .btn-wrapper {float: none;}
 		.ui-tabs-hide {display: none;}
 		.tab_checkmark {
-			background: url(img/tab_checkmark.png) 0 0 no-repeat;
+			background: url('../images/tab_checkmark.png') 0 0 no-repeat;
 			display: none;
 			width: 16px; height: 16px;
 			position: absolute;
@@ -498,7 +498,7 @@ body {
 
 /* @group Footer */
 	#footer {
-		background: #fff url(img/airmail_border_hori.png) top center repeat-x;
+		background: #fff url('../images/airmail_border_hori.png') top center repeat-x;
 	}
 	#footer .wrapper {
 		padding: 18px 0 0;
@@ -523,11 +523,11 @@ body {
 /* @group Assignments */
 	#activity-heading{
     		padding-bottom: 27px;
-    		background: url('../img/brd9x27activity_top.png') repeat-x left bottom;
+    		background: url('../images/brd9x27activity_top.png') repeat-x left bottom;
 	}
 	#activity {
 
-		background: #f3f3f3 url('../img/brd100x29ribbon.png') repeat-x left bottom;
+		background: #f3f3f3 url('../images/brd100x29ribbon.png') repeat-x left bottom;
 		padding-top: 20px;
 		padding-bottom: 20px;
 		overflow:auto; 
@@ -716,19 +716,19 @@ body {
 		display: none;
 	}
 	.a70 .frame{
-		background: url('../img/frame70x70circle.png') no-repeat left top;
+		background: url('../images/frame70x70circle.png') no-repeat left top;
 	}
 	.a55 .frame{
-		background: url('../img/frame55x55circle.png') no-repeat left top;
+		background: url('../images/frame55x55circle.png') no-repeat left top;
 	}
 	.a64 .frame{
-		background: url('../img/frame64x64circle.png') no-repeat left top;
+		background: url('../images/frame64x64circle.png') no-repeat left top;
 	}
 	#activity .a64 .frame{
-		background: url('../img/frame64x64circle_grey.png') no-repeat left top;
+		background: url('../images/frame64x64circle_grey.png') no-repeat left top;
 	}
 	.a144 .frame{
-		background: url(../img/frame144x144circle.png) no-repeat left top;
+		background: url('../images/frame144x144circle.png') no-repeat left top;
 	}
 
 /* @end */
@@ -741,7 +741,7 @@ body {
 	.airplane-success{
 		display: inline-block;
 		background-repeat: no-repeat;
-		background-image: url('../img/assignment-sprites.png');
+		background-image: url('../images/assignment-sprites.png');
 	}
 	.tab-check {
 		background-position:0px 0px;
@@ -839,7 +839,7 @@ body {
 		margin: 0 5px 0 0px;
 		float: left;
 	}
-	.btn-next,.btn-prev{margin: 10px 0 0 0; display: block;background-repeat: no-repeat;background-image: url('../img/carousel.png'); float:left;}
+	.btn-next,.btn-prev{margin: 10px 0 0 0; display: block;background-repeat: no-repeat;background-image: url('../images/carousel.png'); float:left;}
 	.btn-next{background-position:0px 0px;width:39px;height:39px;}
 	.btn-prev{background-position:0px -39px;width:39px;height:39px;}
 /* @end */ 
@@ -852,7 +852,7 @@ body {
 	.airplane-success{
 		display: inline-block;
 		background-repeat: no-repeat;
-		background-image: url('../img/assignment-sprites.png');
+		background-image: url('../images/assignment-sprites.png');
 	}
 	.tab-check
 	{

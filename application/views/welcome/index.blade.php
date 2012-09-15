@@ -19,10 +19,10 @@
 							</li>
 						</ul>
 						<div class="video-container">
-							<a href="#"><img src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/intro-video-placeholder.jpg" alt="Introducing Penpal News Red-Blue: An Election Year Exchange" /><span class="play_btn">Play</span></a>
+							<a href="#"><img src="<?php echo asset_url()?>images/intro-video-placeholder.jpg" alt="Introducing Penpal News Red-Blue: An Election Year Exchange" /><span class="play_btn">Play</span></a>
 							<iframe id="video-intro" src="http://player.vimeo.com/video/44539140?api=1&amp;player_id=video-intro&amp;title=0&amp;byline=0&amp;portrait=0&amp;color=5a91df" width="960" height="540" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 						</div>
-						<img class="plane" src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/plane_01.png" alt="Paper plane" width="144" />
+						<img class="plane" src="<?php echo asset_url()?>images/plane_01.png" alt="Paper plane" width="144" />
 					</div>
 				</div>
 				<div id="intro-copy">
@@ -47,9 +47,9 @@
 
 			<aside id="banner-international">
 				<div class="wrapper">
-					<img class="globe" src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/globe_bg.png" alt="Globe graphic" />
-					<p class="promo">Interested in an international exchange? Check out <strong>Penpal News</strong><img src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/banner_international_bubble.png" alt="International" />&nbsp;&nbsp; <span><a class="self-link" href="#international">Learn More</a> and <a href="http://www.penpalnews.com/sign-up-international/">Sign Up</a></span></p>
-					<img class="plane" src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/plane_01.png" alt="Paper plane" width="86" />
+					<img class="globe" src="<?php echo asset_url()?>images/globe_bg.png" alt="Globe graphic" />
+					<p class="promo">Interested in an international exchange? Check out <strong>Penpal News</strong><img src="<?php echo asset_url()?>images/banner_international_bubble.png" alt="International" />&nbsp;&nbsp; <span><a class="self-link" href="#international">Learn More</a> and <a href="http://www.penpalnews.com/sign-up-international/">Sign Up</a></span></p>
+					<img class="plane" src="<?php echo asset_url()?>images/plane_01.png" alt="Paper plane" width="86" />
 				</div>
 			</aside>
 
@@ -59,22 +59,22 @@
 					<div class="copy-wrapper">
 						<p>We know teachers are busy, so we minimize prep time by matching students, creating assignments, and facilitating student discussion.</p>
 					</div>
-					<img class="arrow a1" src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/arrow_hand_right_1.png" alt="Paper plane" width="70" />
-					<img class="arrow a2" src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/arrow_hand_right_2.png" alt="Paper plane" width="70" />
+					<img class="arrow a1" src="<?php echo asset_url()?>images/arrow_hand_right_1.png" alt="Paper plane" width="70" />
+					<img class="arrow a2" src="<?php echo asset_url()?>images/arrow_hand_right_2.png" alt="Paper plane" width="70" />
 					<ul>
 						<li>
 							<h4>Match</h4>
-							<img src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/match.png" alt="Match" />
+							<img src="<?php echo asset_url()?>images/match.png" alt="Match" />
 							<p>Each class is matched with a partner class in another state or country. All Students are assigned penpals.</p>
 						</li>
 						<li>
 							<h4>Learn</h4>
-							<img src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/learn.png" alt="Learn" />
+							<img src="<?php echo asset_url()?>images/learn.png" alt="Learn" />
 							<p>Students complete six short weekly assignments about topics in the news. Assignments are aligned to Common Core Standards.</p>
 						</li>
 						<li>
 							<h4>Discuss</h4>
-							<img src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/discuss.png" alt="Discuss" />
+							<img src="<?php echo asset_url()?>images/discuss.png" alt="Discuss" />
 							<p>Students share what they&rsquo;ve written with their penpals, who respond with their own ideas and perspectives.</p>
 						</li>
 					</ul>
@@ -126,7 +126,7 @@
 				<div class="wrapper">
 					<h2>Penpal News&nbsp;&nbsp;<span class="bubble_grey"><span class="green">International</span></span></h2>
 					<div class="img-wrapper left">
-						<img src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/ghana_students.jpg" alt="Ghana Students communicating with their Huntington Beach Penpals" />
+						<img src="<?php echo asset_url()?>images/ghana_students.jpg" alt="Ghana Students communicating with their Huntington Beach Penpals" />
 						<p class="caption">Students at the Crossover International Academy in Ghana wait<br />in line to connect with their penpals in Huntington Beach.</p>
 					</div>
 					<div class="copy-wrapper right">
@@ -147,24 +147,24 @@
 					<h2>Why Teachers Like Us</h2>
 					<ul>
 						<li>
-							<img src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/teacher_icon_1_x2.png" alt="Match Icon" />
+							<img src="<?php echo asset_url()?>images/teacher_icon_1_x2.png" alt="Match Icon" />
 							<p>We match classes so teachers don&rsquo;t have to</p>
 						</li>
 						<li>
-							<img src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/teacher_icon_2_x2.png" alt="Step-by-step Icon" />
+							<img src="<?php echo asset_url()?>images/teacher_icon_2_x2.png" alt="Step-by-step Icon" />
 							<p>Our step-by-step penpal program keeps students engaged</p>
 						</li>
 						<li>
-							<img src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/teacher_icon_3_x2.png" alt="Stories Icon" />
+							<img src="<?php echo asset_url()?>images/teacher_icon_3_x2.png" alt="Stories Icon" />
 							<p>Curated news stories and assignments align with Common Core Standards</p>
 						</li>
 						<li>
-							<img src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/teacher_icon_4_x2.png" alt="Folder Icon" />
+							<img src="<?php echo asset_url()?>images/teacher_icon_4_x2.png" alt="Folder Icon" />
 							<p>Class management tools make teacher oversight easy</p>
 						</li>
 					</ul>
 					<div class="quote-container">
-						<img class="subject" src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/teacher_1_x2.png" alt="Photo of Scott Tuffiash" />
+						<img class="subject" src="<?php echo asset_url()?>images/teacher_1_x2.png" alt="Photo of Scott Tuffiash" />
 						<div>
 							<blockquote><span class="open-quote">&ldquo;</span>I&rsquo;ve long hoped for a program to engage my students beyond the world they know. PenPal News is the perfect fit.<span class="close-quote">&rdquo;</span></blockquote>
 							<p><strong>Scott Tuffiash</strong><br />
@@ -173,7 +173,7 @@
 						</div>
 					</div>
 					<div class="quote-container">
-						<img class="subject" src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/teacher_2_x2.png" alt="Photo of Robin Stayvas" />
+						<img class="subject" src="<?php echo asset_url()?>images/teacher_2_x2.png" alt="Photo of Robin Stayvas" />
 						<div>
 							<blockquote><span class="open-quote">&ldquo;</span>PenPal News got my students excited to read, write and learn about current events in a really special way. They loved it.<span class="close-quote">&rdquo;</span></blockquote>
 							<p><strong>Robin Stayvas</strong><br />
@@ -181,7 +181,7 @@
 							Scotch Plains High School</p>
 						</div>
 					</div>
-					<img class="plane" src="http://www.penpalnews.com/wp-content/themes/penpalnews/images/plane_02.png" alt="Paper plane" width="110" />
+					<img class="plane" src="<?php echo asset_url()?>images/plane_02.png" alt="Paper plane" width="110" />
 				</div>
 			</section><!-- #why-teachers-like-us -->
 			
