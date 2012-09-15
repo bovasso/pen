@@ -1,0 +1,1089 @@
+/*
+Theme Name: Toolbox
+Theme URI: http://wordpress.org/extend/themes/toolbox
+Author: Automattic
+Author URI: http://automattic.com/
+Description: A semantic, HTML5, canvas for CSS artists and an ultra-minimal set of super-clean templates for your own WordPress theme development.
+Version: 1.4
+License: GNU General Public License
+License URI: license.txt
+Tags: custom-menu, sticky-post, microformats, rtl-language-support, translation-ready, full-width-template, post-formats
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you’ve learned with others.
+*/
+
+/* @group Custom Reset */
+	html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, a, em, img, q, strong, dl, dt, dd, ol, ul, li, fieldset, form, input, select, textarea, label, legend, table
+	{padding: 0; margin: 0; border: 0; list-style-type: none; outline: 0; font-weight: inherit; font-style: inherit; font-family: inherit; vertical-align: baseline;}
+	a {color:#448ecf; text-decoration:none;}
+	a:hover {}
+	table {border-collapse: separate; border-spacing: 0;}
+	a:active {outline: 0;} *:focus {outline: none;}
+	blockquote:before, blockquote:after, q:before, q:after { content: ""; }
+	blockquote, q { quotes: "" ""; }
+	header, section, nav, hgroup, footer, article { display: block; }
+	strong, b { font-weight: bold; }
+	em {font-style:italic !important}
+	p {line-height:140%}
+	ul {margin: 0; padding: 0;}
+	html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+	body { margin: 0; font-size: 1em; line-height: 1.4; }
+	strong {
+		font-family:'Avenir LT W01 85 Heavy';
+		font-weight: normal;
+	}
+/* @end */
+
+/* @group Fonts from fonts.com */
+	/*
+	font-family:'Avenir LT W01 45 Book';
+	font-family:'Avenir LT W01 85 Heavy';
+	font-family:'Trade Gothic W01 Cn 18';
+	font-family:'TradeGothicW01-BoldCn20 675334';
+	*/
+/* @end */
+
+/* @group Structure */
+	body {
+		background:#f3f3f3;
+		color:#333;
+		font-family: "Avenir LT W01 45 Book",Arial,sans-serif;
+		-webkit-text-size-adjust:none;
+	}
+	.left {float:left !important;}
+	.right {float:right !important;}
+	.is-hidden {display:none !important;}
+	.clear {clear: both;}
+	.wrapper {
+		margin:0 auto;
+		max-width: 1000px;
+		min-width: 940px;
+		position: relative;
+		overflow: hidden;
+		width: 97.5%;
+	}
+	#page {
+		display: block;
+		margin: 1em;
+	}
+	#primary {
+		float: left;
+		margin: 0 -240px 0 0;
+		width: 100%;
+	}
+	#content {
+		margin: 0 280px 0 0;
+	}
+	#main .widget-area {
+		float: right;
+		overflow: hidden;
+		width: 220px;
+	}
+	#colophon {
+		clear: both;
+		display: block;
+		width: 100%;
+	}
+	/* Increase the size of the content area for templates without sidebars */
+	.full-width #content,
+	.image-attachment #content,
+	.error404 #content {
+		margin: 0;
+	}
+	/* Text meant only for screen readers */
+	.screen-reader-text,
+	.assistive-text {
+		position: absolute !important;
+		clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+		clip: rect(1px, 1px, 1px, 1px);
+	}
+	/* Alignment */
+	.alignleft {
+		display: inline;
+		float: left;
+	}
+	.alignright {
+		display: inline;
+		float: right;
+	}
+	.aligncenter {
+		clear: both;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	/* @group Sticky Footer */
+		html, body {height: 100%;}
+		#sticky-wrapper {
+			min-height: 100%;
+		}
+		.sticky-wrapper {overflow:auto; padding-bottom: 48px;}  /* must be same height as the footer */
+		#footer {
+			clear:both;
+			height: 48px;
+			margin-top: -48px; /* negative value of footer height */
+			position: relative;
+			width: 100%;
+		}
+		/*Opera Fix*/
+		body:before {
+			content:"";
+			height:100%;
+			float:left;
+			width:0;
+			margin-top:-32767px;
+		}
+	/* @end */
+/* @end */
+
+/* @group Header */
+	#header {
+		background-color: #5b92e0;
+		background-image: -webkit-gradient(linear, left top, left bottom, from(#5b92e0), to(#5484cd));
+		background-image: -webkit-linear-gradient(top, #5b92e0, #5484cd);
+		background-image:    -moz-linear-gradient(top, #5b92e0, #5484cd);
+		background-image:      -o-linear-gradient(top, #5b92e0, #5484cd);
+		background-image:         linear-gradient(to bottom, #5b92e0, #5484cd);
+		color:#fff;
+		position:relative;
+		width:100%; height:60px;
+		z-index:99;
+	}
+	#header .wrapper {
+		height: 100%;
+	}
+	#header #logo {float:left;}
+	#header h1#logo a, #header a#logo {
+		display:block;
+		padding: 6px;
+		width:170px; height:43px;
+	}
+	#join {
+		padding: 12px 0 0 0;
+		position: absolute;
+		right: 12%; top: 0;
+	}
+	#join label, #login > a {
+		color: white;
+		font-family: "Avenir LT W01 85 Heavy",Arial,sans-serif;
+		text-shadow: 0px 1px 2px rgba(0,0,0,.5);
+		text-transform: uppercase;
+	}
+	#join label {
+		float: left;
+		line-height: 35px;
+		padding: 0 16px 0 0;
+	}
+	#join input[type="text"] {
+		border-bottom: 1px solid #90adda;
+		float: left;
+		margin-right: 2px;
+	}
+	#join .btn-wrapper {
+		float: right;
+	}
+	#login {
+		position: absolute;
+		padding: 12px 0 0 0;
+		right: 0; top: 0;
+		width: 10%;
+	}
+/* @end */
+
+/* @group Content */
+	#content {
+		margin: 0 auto; padding:48px 0;
+		width: 100%;
+	}
+	#content .wrapper {
+		overflow: visible;
+	}
+
+	/* @group Homepage */
+		.home #content {
+			padding: 0;
+		}
+		.home section {
+			float: left;
+			padding: 64px 0 70px;
+			width: 100%;
+		}
+		#intro {
+			padding: 0;
+		}
+		#intro h1 {
+			color: #434343;
+			font-family:'Avenir LT W01 85 Heavy';
+			font-size: 28px;
+			margin-bottom: 4px;
+			text-align: center;
+		}
+		#intro ul {
+			text-align: center;
+			margin-bottom: 40px;
+		}
+		#intro ul li {
+			display: inline;
+		}
+		#video {
+			background: #cce8f3 url(images/PPN_bg.jpg) center top no-repeat;
+			padding-top: 40px;
+		}
+		#video .video-container {
+			-webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,.2);
+					box-shadow: 0px 0px 4px 0px rgba(0,0,0,.2);
+		}
+		.play_btn {
+			background: url(images/play_btn.png) 0 0 no-repeat;
+			display: block;
+			left: 50%; top: 60%;
+			margin: -25px 0 0 -44px;
+			opacity: .5;
+			position: absolute;
+			text-indent: 9999px;
+			white-space: nowrap;
+			width: 88px; height: 49px;
+			z-index: 20;
+		}
+		#video .video-container a:hover .play_btn {
+			opacity: .75;
+		}
+		#video img.plane {
+			position: absolute;
+			right: -100px; bottom: -6px;
+			z-index: 40;
+		}
+		#intro-copy {
+			background: #f4f4f4;
+			float: left;
+			width: 100%; min-height: 270px;
+		}
+		.copy-wrapper p {
+			font-size: 18px;
+			margin: 0 0 30px;
+		}
+		#intro-copy .left {
+			width: 65%;
+		}
+		#intro-copy .left p {
+			margin: 30px 0;
+		}
+		#intro-copy .right {
+			position: relative;
+			width: 31.25%; height: 214px;
+		}
+		.help {
+			font-family:'Avenir LT W01 85 Heavy';
+			font-size: 14px;
+		}
+		#intro-copy .help {
+			left: 0; bottom: 0;
+			position: absolute;
+			text-align: center;
+			text-indent: 18px;
+			width: 100%;
+		}
+		#intro-copy .cta-group {
+			background: url(images/cta-group_bg.png) 0 0 no-repeat;
+			height: 174px;
+			position: absolute;
+			right: -10px; top: -8px;
+			width: 100%;
+			z-index: 30;
+		}
+		#intro-copy .cta-group h3 {
+			color: #fff;
+			font-size: 18px;
+			padding: 14px 0 0 0;
+			text-align: center;
+			text-indent: 6px;
+		}
+		#intro-copy .cta-group .btn-wrapper-large {
+			position: relative;
+			left: 50%; top: 8px;
+			margin-left: -84px;
+			width: 166px;
+		}
+		#banner-international {
+			float: left;
+			background: url(images/bluetexture.jpg) left bottom repeat-x;
+			padding: 0;
+			width: 100%;
+		}
+		#banner-international img.globe {
+			float: left;
+			width: 22.5%;
+		}
+		#banner-international img.plane {
+			position: absolute;
+			left: -90px; top: 72px;
+			z-index: 40;
+		}
+		#banner-international .promo {
+			font-family:'Trade Gothic W01 Cn 18';
+			font-size: 18px;
+			float: right;
+			position: relative;
+			text-align: right;
+			text-transform: uppercase;
+			top: 60px;
+			width: 77.5%;
+		}
+		#banner-international .promo img {
+			margin: 0 0 -4px 6px; padding: 0;
+		}
+		#banner-international .promo strong {
+			font-family:'TradeGothicW01-BoldCn20 675334';
+			font-weight: normal;
+		}
+		#banner-international .promo span {
+			font-family:'Avenir LT W01 85 Heavy';
+			font-size: 14px;
+			text-transform: none;
+		}
+		#how-penpal-news-works {
+			background: #fff;
+		}
+		#how-penpal-news-works .copy-wrapper {
+			width: 65%;
+			margin: 0 auto;
+		}
+		#how-penpal-news-works .copy-wrapper p {
+			text-align: center;
+		}
+		#how-penpal-news-works .arrow {
+			position: absolute;
+			margin: 0 0 0 -35px; padding: 0;
+			top: 185px;
+		}
+		#how-penpal-news-works .a1 { left: 33.333%;}
+		#how-penpal-news-works .a2 { left: 66.666%;}
+		#how-penpal-news-works li {
+			float: left;
+			width: 30%;
+			margin-right: 5%;
+			text-align: center;
+		}
+		#how-penpal-news-works li:last-child {
+			margin-right: 0;
+		}
+		#how-penpal-news-works li h4 {
+			font-family:'Avenir LT W01 45 Book';
+			font-size: 28px;
+			text-transform: uppercase;
+		}
+		#how-penpal-news-works li img {
+			margin: 30px 0 30px;
+			width: 100%;
+		}
+		#red-blue h2 {
+			margin-bottom: 32px;
+		}
+		#red-blue .copy-wrapper {
+			text-align: center;
+		}
+		.its-free {
+			background: url(images/its_free_bg.png) right -2px no-repeat;
+			width: 186px;
+		}
+		#red-blue .its-free {
+			position: relative;
+			left: 50%;
+			margin: 0 0 20px -65px;
+		}
+		.video-showcase-container .help {
+			background: url(images/arrow_hand_down.png) 98% bottom no-repeat;
+			float: left;
+			margin: 0 0 8px;
+			padding: 0 0 18px;
+			width: 37%;
+		}
+		.video-showcase {
+			background: #fff;
+			float: left;
+			padding: 30px 3.5%;
+			width: 93%;
+		}
+		.video-showcase ul {
+			float: left;
+			width: 30%; height: 100%;
+		}
+		.video-showcase ul li a {
+			background-image: url(images/video_showcase_icons.png);
+			background-repeat: no-repeat;
+			border-bottom: 1px solid #ddd;
+			color: #333;
+			display: block;
+			font-size: 18px;
+			padding: 21px 0 19px 24%;
+			width: 76%;
+		}
+		.video-showcase ul li.is-selected {
+			background: #f4f4f4 url(images/is_selected_arrow.png) right center no-repeat;
+			-webkit-box-shadow: inset 0px 1px 4px 0px #ccc;
+					box-shadow: inset 0px 1px 4px 0px #ccc;
+		} 
+		.video-showcase ul li:last-child a {
+			border-bottom: 0;
+		}
+		.video-showcase ul li.video-tab-1 a {background-position: 0 0;}
+		.video-showcase ul li.video-tab-2 a {background-position: 0 -70px;}
+		.video-showcase ul li.video-tab-3 a {background-position: 0 -140px;}
+		.video-showcase ul li.video-tab-4 a {background-position: 0 -210px;}
+		.video-showcase ul li.video-tab-5 a {background-position: 0 -280px;}
+		.video-showcase .tab-content {
+			display: none;
+			float: right;
+			padding-bottom: 36.25%;
+			width: 62.5%;
+		}
+		.video-showcase div.is-selected {
+			display: block;
+		}
+		#international {
+			background: #fff;
+			padding: 0;
+		}
+		#international .wrapper {
+			background: url(images/globe_bg_2.png) right bottom no-repeat;
+			overflow: auto;
+			padding: 64px 0 80px 4px; /* Left padding to make room for box shadow */
+		}
+		#international h2 {
+			margin-bottom: 32px;
+		}
+		#international .left {
+			width: 55%;
+			overflow: visible;
+		}
+		.img-wrapper img {
+			width: 100%;
+		}
+		#international .left img {
+			display: inline-block;
+			-webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,.4);
+					box-shadow: 0px 0px 4px 0px rgba(0,0,0,.4);
+			margin-bottom: 4px;
+		}
+		#international .left .caption {
+			background: url(images/arrow_hand_left_down.png) 0 0 no-repeat;
+			padding: 30px 0 0 30px;
+		}
+		#international .right {
+			width: 40%;
+		}
+		#why-teachers-like-us {
+			background: #f4f4f4;
+		}
+		section h2 {
+			font-family:'TradeGothicW01-BoldCn20 675334';
+			font-size: 32px;
+			line-height: 50px;
+			margin: 0 0 48px;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.bubble_white {
+			background: url(images/bubble_white_left.png) top left no-repeat;
+			display: inline-block;
+			height: 65px;
+			padding: 0 0 0 18px;
+		}
+		.bubble_white span:last-child {
+			background: url(images/bubble_white_right.png) top right no-repeat;
+			display: inline-block;
+			height: 65px;
+			padding: 0 18px 0 0;
+		}
+		.bubble_grey {
+			background: url(images/bubble_grey_left.png) top left no-repeat;
+			display: inline-block;
+			height: 65px;
+			padding: 0 0 0 18px;
+		}
+		.bubble_grey span:last-child {
+			background: url(images/bubble_grey_right.png) top right no-repeat;
+			display: inline-block;
+			height: 65px;
+			padding: 0 18px 0 0;
+		}
+		.red {color:#e83739;}
+		.blue {color:#359dff;}
+		.green {color:#6dbf87;}
+		#why-teachers-like-us .wrapper {
+			padding-bottom: 20px;
+		}
+		#why-teachers-like-us ul {
+			margin-bottom: 90px;
+			overflow: hidden;
+		}
+		#why-teachers-like-us ul li {
+			background: url(images/teacher_li_bg.png) right center no-repeat;
+			float: left;
+			padding: 0 2.75%;
+			width: 20.75%;
+			height: 162px;
+		}
+		#why-teachers-like-us ul li:first-child {
+			padding-left: 0;
+		} 
+		#why-teachers-like-us ul li:last-child {
+			background-image: none;
+			padding-right: 0;
+		}
+		#why-teachers-like-us ul li img {
+			display: block;
+			margin: 0 auto 16px;
+			width: 35%;
+		}
+		#why-teachers-like-us ul li p {
+			color: #000;
+			text-align: center;
+		}
+		.quote-container {
+			clear: both;
+			margin: 0 auto 24px;
+			overflow: visible;
+			position: relative;
+			width: 95%;
+		}
+		.quote-container img.subject {
+			position: absolute;
+			width: 25%;
+			z-index: 90;
+		}
+		.quote-container:nth-child(odd) img.subject { left: 0; }
+		.quote-container:nth-child(even) img.subject { right: 0; }
+		.quote-container div {
+			overflow: hidden;
+			padding: 48px 0 0 12.5%;
+			width: 75%;
+		}
+		.quote-container blockquote {
+			background-color: white;
+			color: black;
+			font-size: 18px;
+			line-height: 24px;
+			padding-top: 36px;
+			padding-bottom: 30px;
+			position: relative;
+			width: 71%;
+		}
+		.quote-container:nth-child(odd) blockquote {
+			padding-right: 6%;
+			padding-left: 22%;
+			text-align: left;
+		}
+		.quote-container:nth-child(even) blockquote {
+			padding-right: 22%;
+			padding-left: 6%;
+			text-align: right;
+		}
+		.quote-container .open-quote, .quote-container .close-quote {
+			background-repeat: no-repeat;
+			display: block;
+			position: absolute;
+			text-indent: 9999px;
+			width: 13px; height: 10px;
+		}
+		.quote-container .open-quote { background-image: url(images/quote_open_bg.png); }
+		.quote-container .close-quote { background-image: url(images/quote_close_bg.png); }
+		.quote-container:nth-child(odd) .open-quote		{ top: 26px; left:19.5%; }
+		.quote-container:nth-child(even) .open-quote	{ top: 26px; left: 3.5%; }
+		.quote-container:nth-child(odd) .close-quote	{ bottom: 31px; right: 3.25%; }
+		.quote-container:nth-child(even) .close-quote	{ bottom: 31px; right: 19%; }
+		.quote-container p {
+			bottom: 0;
+			clear: both;
+			font-size: 14px;
+			padding-top: 8px;
+			position: relative;
+			width: 78%;
+		}
+		.quote-container:nth-child(odd) p {
+			padding-left: 22%;
+			text-align: left;
+		}
+		.quote-container:nth-child(even) p {
+			padding-right: 22%;
+			text-align: right;
+			width: 77%;
+		}
+		#why-teachers-like-us .plane {
+			display: block;
+			position: absolute;
+			right: 2%; top: 340px;
+		}
+	/* @end */
+
+	/* @group Page */
+		.page .entry-content h1 {
+			font-size: 24px;
+			font-family: "TradeGothicW01-BoldCn20 675334";
+			margin-bottom: 20px;
+			text-transform: uppercase;
+		}
+		.page .entry-content {
+			padding: 48px 0;
+		}
+		.entry-content .bio, .entry-content .position {
+			margin-bottom: 40px;
+		}
+		.entry-content .bio .img-wrapper {
+			display: block;
+			border-radius: 50%;
+			border: 4px solid #fff;
+			box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
+			float: left;
+			margin: 6px 0 10px 0; padding: 0;
+			overflow: hidden;
+			width: 12%;
+		}
+		.bio h2, .bio p {
+			padding-left: 15%;
+		}
+		.entry-content .bio img {
+			border-radius: 50%;
+			display: inline-block;
+			vertical-align: bottom;
+			width: 100%;
+		}
+		.entry-content p, .entry-content ul {
+			padding-right: 20%;
+			margin-bottom: 8px;
+		}
+		.entry-content h2. .gform_warpper h3 {
+			margin-bottom: 4px;
+		}
+		.gform_wrapper h3 {
+			font-family:'Avenir LT W01 85 Heavy';
+			margin-bottom: 4px;
+		}
+	/* @end */
+
+	.sticky {
+	}
+	.entry-meta {
+		clear: both;
+		display: block;
+	}
+	.single-author .entry-meta .byline {
+		display: none;
+	}
+	#content nav {
+		display: block;
+		overflow: hidden;
+	}
+	#content nav .nav-previous {
+		float: left;
+		width: 50%;
+	}
+	#content nav .nav-next {
+		float: right;
+		text-align: right;
+		width: 50%;
+	}
+	#content #nav-above {
+		display: none;
+	}
+	.paged #content #nav-above,
+	.single #content #nav-above {
+		display: block;
+	}
+	#nav-below {
+		margin: 1em 0 0;
+	}
+	.page-link {
+		clear: both;
+		margin: 0 0 1em;
+	}
+	.page .edit-link {
+		clear: both;
+		display: block;
+	}
+
+	/* 404 page */
+	.error404 .widget {
+		float: left;
+		width: 33%;
+	}
+	.error404 .widget .widgettitle,
+	.error404 .widget ul {
+		margin-right: 1em;
+	}
+	.error404 .widget_tag_cloud {
+		clear: both;
+		float: none;
+		width: 100%;
+	}
+
+	/* Elastic videos */
+	.video-container {
+		position: relative;
+		padding-bottom: 56.25%;
+		height: 0;
+		overflow: hidden;
+	}
+	.video-container img {
+		position: relative;
+		width: 100%;
+		z-index: 20;
+	}
+	.video-container iframe,
+	.video-container object,
+	.video-container embed {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 10;
+	}
+
+	/* Notices */
+	.post .notice,
+	.error404 #searchform {
+		background: #eee;
+		display: block;
+		padding: 1em;
+	}
+
+	/* Image Attachments */
+	.image-attachment div.entry-meta {
+		float: left;
+	}
+	.image-attachment nav {
+		float: right;
+		margin: 0 0 1em 0;
+	}
+	.image-attachment .entry-content {
+		clear: both;
+	}
+	.image-attachment .entry-content .entry-attachment {
+		background: #eee;
+		margin: 0 0 1em;
+		padding: 1em;
+		text-align: center;
+	}
+	.image-attachment .entry-content .attachment {
+		display: block;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	/* Aside Posts */
+	.format-aside .entry-header {
+		display: none;
+	}
+	.single .format-aside .entry-header {
+		display: block;
+	}
+	.format-aside .entry-content,
+	.format-aside .entry-summary {
+		padding-top: 1em;
+	}
+	.single .format-aside .entry-content,
+	.single .format-aside .entry-summary {
+		padding-top: 0;
+	}
+
+	/* Gallery Posts */
+	.format-gallery .gallery-thumb {
+		float: left;
+		margin: 0 1em 0 0;
+	}
+
+	/* Image Posts */
+	.format-image .entry-header {
+		display: none;
+	}
+	.single .format-image .entry-header {
+		display: block;
+	}
+	.format-image .entry-content,
+	.format-image .entry-summary {
+		padding-top: 1em;
+	}
+	.single .format-image .entry-content,
+	.single .format-image .entry-summary {
+		padding-top: 0;
+	}
+/* @end */
+
+/* @group Images */
+	a img {
+		border: none;
+	}
+	p img {
+		margin-bottom: 0.5em; /* a small bottom margin prevents content floating under images */
+	}
+	/*
+	Resize images to fit the main content area.
+	- Applies only to images uploaded via WordPress by targeting size-* classes.
+	- Other images will be left alone. Use "size-auto" class to apply to other images.
+	*/
+	img.size-auto,
+	img.size-full,
+	img.size-large,
+	img.size-medium,
+	.attachment img,
+	.widget-area img,
+	.wp-caption {
+		max-width: 100%; /* When images are too wide for containing element, force them to fit. */
+		height: auto; /* Override height to match resized width for correct aspect ratio. */
+	}
+	img.alignleft {
+		margin-right: 1em;
+	}
+	img.alignright {
+		margin-left: 1em;
+	}
+	.wp-caption {
+		padding: .5em;
+		text-align: center;
+	}
+	.wp-caption img {
+		margin: .25em;
+	}
+	.wp-caption .wp-caption-text {
+		margin: .5em;
+	}
+	.gallery-caption {
+	}
+	.wp-smiley {
+		margin: 0;
+	}
+/* @end */
+
+/* @group Form Elements */
+	input[type="text"],
+	input[type="password"],
+	input[type="email"],
+	textarea {
+		-webkit-border-radius: 0;
+				border-radius: 0;
+		color:#666;
+		font-size:13px;
+		font-family: "Avenir LT W01 45 Book",Arial,sans-serif;
+		-webkit-box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,.3);
+				box-shadow: inset 0px 1px 3px 0px rgba(0,0,0,.3);
+		margin: 0 0 6px; padding: 0 12px;
+		
+	}
+	fieldset input[type="text"],
+	fieldset input[type="password"],
+	fieldset input[type="email"] {
+		margin: 0 0 6px;
+		width: 248px;
+		background: #fafafa;
+	}
+	.gform_fields input[type="email"] {
+		width: 33%;
+	}
+	.gfield {
+		margin-top: 20px;
+	}
+	.gfield_label {
+		display: block;
+		margin-bottom: 8px;
+	}
+	input[type="text"],
+	input[type="password"],
+	input[type="email"] {
+		height: 35px;
+		line-height: 18px;
+		display: block;
+		margin: 0 0 6px;
+	}
+	input[type="text"]:focus,
+	input[type="password"]:focus,
+	input[type="email"]:focus,
+	textarea:focus {
+		color: #333;
+	}
+	input[type="submit"], button, label {cursor:pointer}
+	.btn-wrapper, .gform_footer {
+		background-color: #fff;
+		background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f3f3f3)); /* Safari 4+, Chrome */
+		background-image: -webkit-linear-gradient(top, #ffffff, #f3f3f3); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+		background-image:    -moz-linear-gradient(top, #ffffff, #f3f3f3); /* Firefox 3.6-15 */
+		background-image:      -o-linear-gradient(top, #ffffff, #f3f3f3); /* Opera 11.10+ */
+		background-image:         linear-gradient(to bottom, #ffffff, #f3f3f3); /* Firefox 16+ */
+		-webkit-border-radius: 3px;
+				border-radius: 3px;
+		-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+		-webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,.3);
+				box-shadow: 0px 0px 2px 0px rgba(0,0,0,.3);
+		display: inline-block;
+		height: 35px;
+		overflow: hidden;
+	}
+	.btn-wrapper-large {
+		background-color: #fff;
+		background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f3f3f3)); /* Safari 4+, Chrome */
+		background-image: -webkit-linear-gradient(top, #ffffff, #f3f3f3); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+		background-image:    -moz-linear-gradient(top, #ffffff, #f3f3f3); /* Firefox 3.6-15 */
+		background-image:      -o-linear-gradient(top, #ffffff, #f3f3f3); /* Opera 11.10+ */
+		background-image:         linear-gradient(to bottom, #ffffff, #f3f3f3); /* Firefox 16+ */
+		-webkit-border-radius: 5px;
+				border-radius: 5px;
+		-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+		-webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,.3);
+				box-shadow: 0px 0px 2px 0px rgba(0,0,0,.3);
+		display: inline-block;
+		height: 50px;
+		overflow: hidden;
+	}
+	.btn, input[type="submit"] {
+		background: transparent url(images/airmail_border_hori.png) center bottom repeat-x;
+		color: #448ecf;
+		display: block;
+		font-family: "Avenir LT W01 85 Heavy",Arial,sans-serif;
+		font-size: 14px;
+		height: 29px;
+		padding: 6px 30px 0;
+		text-transform: uppercase;
+	}
+	.btn-wrapper-large .btn {
+		font-size: 21px;
+		height: 38px;
+		padding: 12px 40px 0;
+		text-align: center;
+	}
+	input.btn, .gform_footer input[type="submit"] {
+		height: 35px;
+		padding: 5px 30px 8px;
+	}
+	.field-box {
+		padding: 6px 6px 8px;
+		width: auto;
+	}
+	input.inline-input {
+		display: inline;
+	}
+	div.error {
+		background: #fbf2f2;
+	}
+	span.error {
+		color: #ff5746;
+		display: block;
+		font-family:'Avenir LT W01 85 Heavy',Arial,sans-serif;
+		font-size: 14px;
+		text-indent: 4px;
+	}
+
+
+	/* @group Custom Radio Buttons */
+		/* Hide the original radios and checkboxes (but still accessible)
+		:not(#foo) > is a rule filter to block browsers that don't support that selector from applying rules they shouldn't */
+		li:not(#foo) > input[type='radio'] {
+			/* Hide the input, but have it still be clickable */
+			opacity: 0;
+			float: left;
+			width: 0;
+		}
+		li:not(#foo) > input[type='radio'] + label {
+			background: url(images/radio_sprite.png) left top no-repeat; 
+			clear: none;
+			color: #333;
+			cursor: pointer;
+			display: block;
+			font-family:'Avenir LT W01 85 Heavy',arial,sans-serif;
+			font-size: 13px;
+			height: 32px;
+			line-height: 32px;
+			margin: 0; padding: 0 0 0 42px;
+		}
+		/* Change from unchecked to checked graphic */
+		li:not(#foo) > input[type='radio']:checked + label {
+			background: url(images/radio_sprite.png) left bottom no-repeat; 
+		}
+	/* @end */
+
+	/* @group Custom Checkboxes */
+		li:not(#foo) > input[type='checkbox'] {
+			/* Hide the input, but have it still be clickable */
+			opacity: 0;
+			float: left;
+			width: 32px;
+		}
+		li:not(#foo) > input[type='checkbox'] + label {
+			margin: 0;
+			clear: none;
+			padding: 5px 0 4px 32px;	/* Left padding makes room for image */
+			cursor: pointer;			/* Make look clickable because they are */
+			background: url(off.png) left center no-repeat; 
+		}
+		/* Change from unchecked to checked graphic */
+		li:not(#foo) > input[type='checkbox']:checked + label {
+			background-image: url(check.png);
+		}
+	/* @end */
+/* @end */
+
+
+/* @group Comments */
+	article.comment {
+		display: block;
+	}
+	#respond input[type=text] {
+		display: block;
+		width: 60%;
+	}
+	#respond textarea {
+		display: block;
+		margin: 0 0 1em;
+		width: 80%;
+	}
+	#respond .form-allowed-tags {
+		clear: both;
+		width: 80%;
+	}
+	#respond .form-allowed-tags code {
+		display: block;
+	}
+/* @end */
+
+/* Widgets */
+	.widget {
+		display: block;
+	}
+	.widget-area .widget_search {
+		overflow: hidden;
+	}
+	.widget-area .widget_search input {
+		float: left;
+	}
+/* @end */
+
+/* @group Footer */
+	#footer {
+		background: #fff url(images/airmail_border_hori.png) top center repeat-x;
+	}
+	#footer .wrapper {
+		padding: 18px 0 0;
+	}
+	#footer small {
+		color: #000;
+		font-size: 14px;
+		line-height: 18px; /* Weird thing to match baseline of nav on right side of footer… */
+	}
+	#footer nav {
+		margin-top: -3px;
+	}
+	#footer nav ul li {
+		display: block;
+		float: left;
+	}
+	#footer nav a {
+		color: #000;
+		font-size: 14px;
+		padding: 0 6px;
+		text-transform: capitalize;
+	}
+	#footer nav a:hover {color:#448ecf; text-decoration: underline;}
+	#footer nav ul li.facebook {
+		padding-left: 30px;
+	}
+/* @end */

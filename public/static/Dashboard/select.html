@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Dashboard' /}
+
+Select Dashboard
+
+#{list courseAccounts}
+    <div>#{_.course.name}</div>
+#{/list}
+#{else}
+    <div>No Courses Available</div>
+#{/else}
