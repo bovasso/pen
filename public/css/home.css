@@ -193,7 +193,7 @@ Use it to make something cool, have fun, and share what you’ve learned with ot
 
 /* @group Content */
 	#content {
-		margin: 0 auto; padding: 48px 0;
+		margin: 0 auto; padding: 0 0 48px 0;
 		width: 100%;
 	}
 	#content .wrapper {
