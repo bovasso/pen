@@ -303,7 +303,7 @@ class Dashboard extends CI_Controller {
 	 **/
 	public function displayStatus($value, $row)
 	{
-	    return ( $value == 0 )? 'no' : 'yes';
+	    return ( $value == 0 )? 'enabled' : 'disabled';
 	}
 	
 	/**
