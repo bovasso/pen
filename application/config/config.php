@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://penpal.dev';
+$config['base_url']	= 'http://penpal.local';
 
 /*
 |--------------------------------------------------------------------------
