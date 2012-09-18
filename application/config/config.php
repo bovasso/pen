@@ -14,10 +14,14 @@
 | path to your installation.
 |
 */
+<<<<<<< HEAD
 $config['base_url']	= 'http://penpalnews.dev';
 
 // Configure an Asset Directory
 $config['asset_path'] = 'public/';
+=======
+$config['base_url']	= 'http://penpal.local';
+>>>>>>> 8834ae39594fcc01dcbfc9b04a8c12e6d399b159
 
 /*
 |--------------------------------------------------------------------------
