@@ -14,7 +14,10 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://penpal.dev';
+$config['base_url']	= 'http://penpalnews.dev';
+
+// Configure an Asset Directory
+$config['asset_path'] = 'public/';
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +30,7 @@ $config['base_url']	= 'http://penpal.dev';
 |
 */
 // $config['index_page'] = 'index.php';
-$config['index_page'] = is_file(FCPATH.'.htaccess') ? '' : 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -361,6 +364,3 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
-
-// config.php
-$config['asset_path'] = 'public/';
