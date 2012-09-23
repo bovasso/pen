@@ -17,7 +17,7 @@
 @endsection
 @section('content-header')
 <div id="content-header">
-	<h1>Assignment</h1>
+	<h1>Class</h1>
 </div>
 <div id="breadcrumb">
  <?php echo set_breadcrumb(); ?>
@@ -28,9 +28,8 @@
 	<div class="row-fluid">
 		<div class="widget-box">
 			<ul class="nav nav-tabs">
-              <li @if ( $title == 'View' ) class="active" @endif><a href="/admin/assignments/edit/{{$id}}">View</a></li>
-              <li @if ( $title == 'Articles' ) class="active" @endif><a href="/admin/articles/assign/{{$id}}">Articles</a></li>
-              <li @if ( $title == 'Questions' ) class="active" @endif><a href="/admin/questions/assign/{{$id}}">Questions</a></li>
+              <li @if ( $sub_menu == 'View' ) class="active" @endif><a href="/admin/classes/edit/{{$id}}">View</a></li>
+              <li @if ( $sub_menu == 'Students' ) class="active" @endif><a href="/admin/users/class/{{$id}}">Students</a></li>
             </ul>
 			<div class="widget-content nopadding">
                 {{$output}}
