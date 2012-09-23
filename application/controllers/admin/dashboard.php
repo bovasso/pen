@@ -286,7 +286,7 @@ class Dashboard extends CI_Controller {
 		$this->crud->set_subject('Group Code');	
         $this->data['title'] = 'Group Codes';            		    
         $this->crud->display_as('classroom_id', 'Class');     	               
-	    $this->crud->set_relation('classroom_id','classes','name');        
+	    $this->crud->set_relation('classroom_id','classrooms','name');        
 		$output = $this->crud->render();		
         $this->render($output);        
 	}
