@@ -12,7 +12,7 @@
 		<div id="assignment-tabs-1" class="tab">
 			<div class="tab-inner">
 
-				<div id="featured-topic" class="w100">
+				<div class="w100 featured-topic">
 					<div class="img-wrapper left "> 
 						<img src="http://placehold.it/354x196" class="">
 					</div>

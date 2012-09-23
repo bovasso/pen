@@ -198,4 +198,64 @@
 @section('scripts')
 <script type="text/javascript" src="http://a.vimeocdn.com/js/froogaloop2.min.js"></script>
 <script type="text/javascript" src="<?php echo asset_url() ?>js/jquery.easing.1.3.js"></script>
+<script>
+jQuery(document).ready(function($){
+
+	var placeholderImg = $(this).children('img');
+	var introIframe = $('#video-intro')[0];
+	var introPlayer = $f(introIframe);
+
+	var introPoster = $('#video .video-container a');
+
+	// Main home video with placeholder
+	$('#video .video-container a').click(function(){
+		$(introPoster).fadeOut(750, function(){ introPlayer.api('play'); });
+		return false;
+	});
+
+	introPlayer.addEvent('ready', function(id) {
+		introPlayer.addEvent('finish', onFinish);
+		console.log('added event');
+	});
+
+	function onFinish(id) {
+		introPoster.fadeIn(1500);
+	}
+
+	// Video Showcase
+	$('.video-showcase li a').click(function(){
+		if ( $(this).parent('li').hasClass('is-selected') ) {
+			return false;
+		} else {
+			var targetTabLi = $(this).parent('li');
+			var targetTabId = $(this).attr('href');
+
+			var currentIframe = $('.is-selected iframe').attr('id');
+			var currentPlayer = $f(currentIframe)
+			var newIframe = $(targetTabId).children('iframe').attr('id');
+			var newPlayer = $f(newIframe);
+
+			currentPlayer.api('pause');
+			$('.video-showcase li, .tab-content').removeClass('is-selected');
+			$(targetTabLi).addClass('is-selected');
+			$('.tab-content').hide();
+			$(targetTabId).fadeIn( 500, function(){ $(this).addClass('is-selected'); });
+
+			// Start the video
+			newPlayer.api('play');
+
+			return false;
+		}
+	});
+
+	$('.self-link').click(function(){
+		var inPageLink = $(this).attr('href');
+		$('html, body').animate({
+			scrollTop: $(inPageLink).offset().top},{"duration":1000,"easing":"easeInOutSine"}
+		);
+		return false;
+	}); 
+
+});
+</script>
 @endsection

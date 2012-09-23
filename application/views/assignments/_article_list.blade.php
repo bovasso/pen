@@ -24,5 +24,4 @@
 			</div><!-- end Featured Assignment Topic -->
 		</li>
 	</ul>
-
 </div> <!-- end Article List -->

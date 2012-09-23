@@ -1,7 +1,17 @@
 @layout('layouts/main')
 
 @section('content')
-<h1>dashboard.index</h1>
+	
+	<div id="dashboard" class="wrapper">
 
-<p>This view has been auto-generated to accompany the Dashboard_Controller's action_index()</p>
+		<div id="dashboard_left" class="left w30">
+			@include('dashboard/dashboard_left')
+		</div>
+
+		<div id="dashboard_right" class="right w70">
+			@include('dashboard/dashboard_right')
+		</div>
+
+	</div>
+
 @endsection

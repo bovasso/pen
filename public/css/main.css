@@ -138,7 +138,7 @@ body {
 		margin: 0; padding: 0;
 	}
 	.field-box .mySelect li.level-1 {
-		background: url('../images/select_bg.png') top right no-repeat;
+		background: url(images/select_bg.png) top right no-repeat;
 		line-height: 28px;
 		margin: 0; padding: 0;
 		width: 132px; height: 35px;
@@ -185,7 +185,7 @@ body {
 		overflow: hidden;
 	}
 	.btn {
-		background: transparent url('../images/airmail_border_hori.png') center bottom repeat-x;
+		background: transparent url(images/airmail_border_hori.png) center bottom repeat-x;
 		color: #448ecf;
 		display: block;
 		font-family: "Avenir LT W01 85 Heavy",Arial,sans-serif;
@@ -226,7 +226,7 @@ body {
 			width: 0;
 		}
 		li:not(#foo) > input[type='radio'] + label {
-			background: url('../images/radio_sprite.png') left top no-repeat; 
+			background: url(images/radio_sprite.png) left top no-repeat; 
 			clear: none;
 			color: #333;
 			cursor: pointer;
@@ -239,7 +239,7 @@ body {
 		}
 		/* Change from unchecked to checked graphic */
 		li:not(#foo) > input[type='radio']:checked + label {
-			background: url('../images/radio_sprite.png') left bottom no-repeat; 
+			background: url(images/radio_sprite.png) left bottom no-repeat; 
 		}
 	/* @end */
 
@@ -255,11 +255,11 @@ body {
 			clear: none;
 			padding: 5px 0 4px 32px;	/* Left padding makes room for image */
 			cursor: pointer;			/* Make look clickable because they are */
-			background: url('off.png') left center no-repeat; 
+			background: url(off.png) left center no-repeat; 
 		}
 		/* Change from unchecked to checked graphic */
 		li:not(#foo) > input[type='checkbox']:checked + label {
-			background-image: url('check.png');
+			background-image: url(check.png);
 		}
 	/* @end */
 
@@ -359,7 +359,7 @@ body {
 			width: 100%;
 		}
 		.tabs > ul > li {
-			background: url('../images/tab_li_bg_left_inactive.png') left top no-repeat;
+			background: url(images/tab_li_bg_left_inactive.png) left top no-repeat;
 			float: left;
 			height: 54px;
 			margin-right: -2.375%; padding: 0 2% 0 4px;
@@ -373,7 +373,7 @@ body {
 			z-index: 1;
 		}
 		.tabs > ul > li > a {
-			background: url('../images/tab_li_bg_right_inactive.png') right top no-repeat;
+			background: url(images/tab_li_bg_right_inactive.png) right top no-repeat;
 			color: #999;
 			display: block;
 			float: left;
@@ -384,12 +384,22 @@ body {
 			text-transform: uppercase;
 			width: 100%;
 		}
+		#dashboard .tabs > ul > li {
+			margin-right: -2.375%; padding: 0 2% 0 4px;
+			width: 12.900%;
+		}
+		#dashboard .tabs > ul > li:last-child {
+			width: 18.5%;
+		}
+		#dashboard .tabs > ul > li > a {
+			margin: 0; padding: 12px 0 0 10%;
+		}
 		.tabs > ul > li.ui-tabs-selected, .tabs > ul > li.ui-state-active{
-			background: url('../images/tab_li_bg_left_active.png') left top no-repeat;
+			background: url(images/tab_li_bg_left_active.png) left top no-repeat;
 			z-index: 10;
 		}
 		.tabs > ul > li.ui-tabs-selected a, .tabs > ul > li.ui-state-active a{
-			background: url('../images/tab_li_bg_right_active.png') right top no-repeat;
+			background: url(images/tab_li_bg_right_active.png) right top no-repeat;
 			color: #000;
 		}
 		.tabs > ul > li a span {
@@ -397,19 +407,19 @@ body {
 			padding: 0 8px 0 0;
 		}
 		.tab {
-			background: url('../images/tab_bg_right.png') right bottom no-repeat;
+			background: url(images/tab_bg_right.png) right bottom no-repeat;
 			margin: 0 auto;
 			width: 100%;
 		}
 		.tab-inner {
-			background: url('../images/tab_bg_left.png') left bottom no-repeat;
+			background: url(images/tab_bg_left.png) left bottom no-repeat;
 			padding: 50px 6% 30px;
 			overflow: hidden;
 			width: 88%;
 			max-width: 880px;
 		}
 		#assignments .tab-inner {
-			background: url('../images/tab_bg_left.png') left bottom no-repeat;
+			background: url(images/tab_bg_left.png) left bottom no-repeat;
 			padding: 50px 40px;
 			overflow: hidden;
 			width: 100%;
@@ -484,7 +494,7 @@ body {
 		.tab center .btn-wrapper {float: none;}
 		.ui-tabs-hide {display: none;}
 		.tab_checkmark {
-			background: url('../images/tab_checkmark.png') 0 0 no-repeat;
+			background: url(images/tab_checkmark.png) 0 0 no-repeat;
 			display: none;
 			width: 16px; height: 16px;
 			position: absolute;
@@ -498,7 +508,7 @@ body {
 
 /* @group Footer */
 	#footer {
-		background: #fff url('../images/airmail_border_hori.png') top center repeat-x;
+		background: #fff url(images/airmail_border_hori.png) top center repeat-x;
 	}
 	#footer .wrapper {
 		padding: 18px 0 0;
@@ -541,8 +551,8 @@ body {
 
 	#assignments h2, 
 	#activity h2, 
-	#assignments h3, 
-	#featured-topic h2, 
+	#assignments h3,  
+	.featured-topic h2,
 	.article-qa h4 , #activity-heading h2{
 		font-family:'TradeGothicW01-BoldCn20 675334';
 		font-size: 18px;
@@ -579,22 +589,30 @@ body {
 	padding:6px 20px 0;
 
 	}
-	#featured-topic{
+	.featured-topic{
 		margin: 0 0 40px 0;
 		float: left;
+		font-size: 14px;
 	}
-	#featured-topic .left {
+	#dashboard .featured-topic{
+		margin: 10px 0 40px 0;
+		font-size: 14px;
+	}
+	.featured-topic .left {
 		overflow: visible;
 		width:44%;
 	}
-	#featured-topic .right{
+	.featured-topic .right{
 		width: 54%;
 		float:left;
 	} 
 	.assignments-list li{
-		margin: 0 0 40px 0;
+		margin: 0 0 30px 0;
 		width: 100%;
 		float: left;
+	}
+	#dashboard .assignments-list{
+		margin: 20px 0 0px 0;
 	}
 	.assignments-list li p, #answer-questions .left p{
 		margin: 0 0 10px 0;
@@ -728,7 +746,7 @@ body {
 		background: url('../images/frame64x64circle_grey.png') no-repeat left top;
 	}
 	.a144 .frame{
-		background: url('../images/frame144x144circle.png') no-repeat left top;
+		background: url(../images/frame144x144circle.png) no-repeat left top;
 	}
 
 /* @end */
@@ -823,7 +841,8 @@ body {
 	.profile-edit {
 		font-size: 12px;
 	}
-	/* @Group Carousel */
+/* @end */ 
+/* @Group Carousel */
 	#avatar_carousel{
 		border-bottom: 1px solid #b5b5b5;
 		padding: 20px 0;
@@ -888,3 +907,97 @@ body {
 		height:53px;
 	}
 /* @end */
+
+#student_progress, #partner_classes{
+	background-color: #fafafa;
+	padding: 20px;
+	float:left;
+	-moz-box-shadow: 0 0 5px #d9d9d9;
+	-webkit-box-shadow: 0 0 5px#d9d9d9;
+	box-shadow: 0 0 5px #d9d9d9;
+	margin: 0 0 20px 0;
+	font-size: 0.8em;
+}
+
+#students_registered{
+	list-style: none;
+	margin: 0 0 20px 0;
+	float: left;
+}
+#students_registered li{
+	border-bottom: 1px solid #d9d9d9;
+	padding: 15px 10px;
+}
+#students_registered li:hover{
+	background-color: #f4f4f4;
+	-moz-box-shadow: inset 0 0 5px #d9d9d9;
+	-webkit-box-shadow: inset 0 0 5px#d9d9d9;
+	box-shadow: inner 0 0 5px #d9d9d9;
+	border-bottom: 1px solid transparent;
+}
+#students_registered .arrow-right{
+	margin: 0px 3px 0 0;
+	width: 0; 
+	height: 0; 
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-left: 8px solid #e1e1e1;
+}
+#students_registered li:hover .arrow-right{
+	border-left: 8px solid #337bcf;
+}
+#setup_steps{
+	width: 100%;
+	float: left;
+	margin: 0px 0 20px 0;
+}
+#setup_steps li{
+	list-style: decimal;
+	list-style-position: inside;
+	width:100%;
+	border-bottom: 1px solid #d9d9d9;
+	padding: 20px 0;
+}
+
+#setup_steps table{
+	margin: 25px 0 20px 0;
+	border-collapse: collapse;
+	font-size: 0.9em;
+}
+#setup_steps table tr{
+ border-bottom: 1px solid #d9d9d9;
+ 
+}
+#setup_steps table th, #setup_steps table td{
+	padding: 10px 50px 10px 0px;
+}
+#setup_steps table th{
+	font-family: "Avenir LT W01 85 Heavy",Arial,sans-serif;
+}
+
+#setup_steps .alert, .due-date{
+	background-color: #e3eeff;
+	padding: 12px 20px;
+	text-align: center;
+	font-size: 0.95em;
+}
+.due-date{
+	margin: -10px 0 0 0;
+	font-family: "Avenir LT W01 85 Heavy",Arial,sans-serif;
+}
+
+.heavy{
+	font-family: "Avenir LT W01 85 Heavy",Arial,sans-serif;
+}
+#dashboard #assignment-tabs-2 h2{
+	font-size: 1em;
+	margin: 0 0 20px 0;
+}
+#assignment-tabs-2 .instructions{
+	margin: 10px 0 20px 0;
+	font-size: 0.85em;
+	float: left;
+}
+h3{
+	font-size: 0.95em;
+}
