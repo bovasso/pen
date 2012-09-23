@@ -55,14 +55,14 @@ class Dashboard extends CI_Controller {
 
 		$this->crud->set_table('users');
 		$this->crud->set_subject('User');
-        $this->crud->unset_columns('password', 'suffix', 'class_id');
-        $this->crud->unset_fields('password','username', 'class_id');
+        $this->crud->unset_columns('password', 'suffix', 'classroom_id');
+        $this->crud->unset_fields('password','username', 'classroom_id');
                 
 	    $this->crud->set_relation('role_id','roles','name');        
-	    $this->crud->set_relation('class_id','classrooms','name');        
+	    $this->crud->set_relation('classroom_id','classrooms','name');        
 	            
 	    $this->crud->display_as('role_id', 'Role');     
-	    $this->crud->display_as('class_id', 'Class');     	       
+	    $this->crud->display_as('classroom_id', 'Class');     	       
 	    $this->crud->display_as('is_registered', 'Registered');	    
 	    $this->crud->display_as('first_name', 'First');
         $this->crud->display_as('last_name', 'Last');        
@@ -72,7 +72,7 @@ class Dashboard extends CI_Controller {
         $this->crud->callback_field('status',array($this,'displayAsDropdown'));
                 
         if ( $action == 'class' ) {
-            $this->crud->where('role_id = 2 AND class_id = ', $id);
+            $this->crud->where('role_id = 2 AND classroom_id = ', $id);
             $this->data['id'] = $id;
             $this->data['sub_menu'] = 'Students';
             $this->data['title'] = 'Classes';            
@@ -285,8 +285,8 @@ class Dashboard extends CI_Controller {
 	    $this->crud->set_table('groups');
 		$this->crud->set_subject('Group Code');	
         $this->data['title'] = 'Group Codes';            		    
-        $this->crud->display_as('class_id', 'Class');     	               
-	    $this->crud->set_relation('class_id','classes','name');        
+        $this->crud->display_as('classroom_id', 'Class');     	               
+	    $this->crud->set_relation('classroom_id','classes','name');        
 		$output = $this->crud->render();		
         $this->render($output);        
 	}
