@@ -25,14 +25,10 @@ class Dashboard extends CI_Controller {
         return $post_array;
     }    
 	
-	public function render($output = NULL, $template = "admin/base", $only_jquery = FALSE)
+	public function render($output = null, $template = "admin/base")
 	{   
         $this->data['output'] = $output->output;
-        if ( $only_jquery ) {
-            $this->data['js_files'] = array('/assets/grocery_crud/js/jquery-1.8.1.min.js', '/assets/grocery_crud/js/jquery_plugins/ui/jquery-ui-1.8.23.custom.min.js');            
-        }else{
-            $this->data['js_files'] = $output->js_files;
-        }
+        $this->data['js_files'] = $output->js_files;
         $this->data['css_files'] = $output->css_files;
         
         echo $this->blade->render($template, $this->data, TRUE);	        
@@ -43,7 +39,7 @@ class Dashboard extends CI_Controller {
 		$this->data['start_date'] = date("m/d/Y", strtotime("now -1 month") );
 	    $this->data['end_date'] = date("m/d/Y", strtotime("now") );
 	    
-        $this->data['total_classes'] = $this->db->count_all('classrooms');
+        $this->data['total_classes'] = $this->db->count_all('classes');
         $this->data['total_students'] = $this->db->from('users')->where('role_id', 2)->count_all_results();
         $this->data['total_teachers'] = $this->db->from('users')->where('role_id', 3)->count_all_results();        
         
@@ -55,14 +51,14 @@ class Dashboard extends CI_Controller {
 
 		$this->crud->set_table('users');
 		$this->crud->set_subject('User');
-        $this->crud->unset_columns('password', 'suffix', 'classroom_id');
-        $this->crud->unset_fields('password','username', 'classroom_id');
+        $this->crud->unset_columns('password', 'suffix', 'class_id');
+        $this->crud->unset_fields('password','username', 'class_id');
                 
 	    $this->crud->set_relation('role_id','roles','name');        
-	    $this->crud->set_relation('classroom_id','classrooms','name');        
+	    $this->crud->set_relation('class_id','classes','name');        
 	            
 	    $this->crud->display_as('role_id', 'Role');     
-	    $this->crud->display_as('classroom_id', 'Class');     	       
+	    $this->crud->display_as('class_id', 'Class');     	       
 	    $this->crud->display_as('is_registered', 'Registered');	    
 	    $this->crud->display_as('first_name', 'First');
         $this->crud->display_as('last_name', 'Last');        
@@ -72,7 +68,7 @@ class Dashboard extends CI_Controller {
         $this->crud->callback_field('status',array($this,'displayAsDropdown'));
                 
         if ( $action == 'class' ) {
-            $this->crud->where('role_id = 2 AND classroom_id = ', $id);
+            $this->crud->where('role_id = 2 AND class_id = ', $id);
             $this->data['id'] = $id;
             $this->data['sub_menu'] = 'Students';
             $this->data['title'] = 'Classes';            
@@ -108,89 +104,8 @@ class Dashboard extends CI_Controller {
         
         
 	}
-    public function classes($action = NULL, $id = NULL) 
-    {
-		$this->crud->set_table('classrooms');
-		$this->crud->set_subject('Class');
-        $this->crud->order_by('created_at','desc');
-        $this->crud->unset_columns('age_range_start', 'age_range_end');
-        $this->crud->unset_fields('teacher_id','course_id', 'area');
-        $this->crud->display_as('course_id', 'Course');        	  
-        $this->crud->display_as('group_id', 'Code');        	            
-        $this->crud->display_as('teacher_id', 'Teacher');   
-        $this->crud->display_as('class_size', 'Size');   
-        $this->crud->callback_field('state',array($this,'displayStateDropdown'));
-        $this->crud->required_fields('state','school','name', 'age_range_start', 'age_range_end', 'class_size');
-        $this->crud->set_relation('teacher_id','users','{first_name} {last_name}');        
-        $this->crud->set_relation('group_id','groups', 'code');
-        $this->crud->change_field_type('group_id', 'readonly');
-        
-	         	            
-        $this->data['title'] = 'Classes';
-        $this->data['action'] = $action;
-                
-        if ($action == 'assign') {
-            $this->data['id'] = $id;
-            $this->data['title'] = 'Course Schedule';            
-
-            if ( $this->input->get('view') ) {
-              $this->data['sub_menu'] = 'Find';              
-              $this->crud->unset_columns('age_range_start', 'age_range_end', 'course_id');              
-              $this->crud->where('course_id IS NULL OR course_id != ', $id);
-              $this->crud->add_action('View', '', '', '', array($this,'view_class_from_course_link'));              
-              $this->crud->add_action('Assign', '', '', 'ui-icon-plus', array($this,'assign_or_remove_class_to_course_link'));
-              $this->crud->unset_add();
-              $this->crud->unset_edit();
-              $this->crud->unset_delete();  
-      		  $output = $this->crud->render();            
-              $this->render($output, 'admin/edit_course');
-              exit;                          
-            } 
-            
-            if ( !$this->input->get('view') ) {                
-                $this->data['sub_menu'] = 'Classes';                                                  
-                $course = Course::find_by_pk(array($id), NULL);
-                $this->data['course'] = $course;                
-                $this->data['classrooms'] = $course->classrooms;
-//                $this->data['class_dropdown'] = form_dropdown('classes', $class_dropdown);                                
-                $this->crud->add_action('Remove', '', '', 'ui-icon-minus', array($this,'assign_or_remove_class_to_course_link'));
-                $output = $this->crud->render();                   
-                $this->render($output, 'admin/edit_course', $only_jquery = TRUE);
-                exit;
-            }
-                                
-        }
-        
-        
-        if ($action == 'edit' ) {
-            $this->data['id'] = $id;
-            $this->data['title'] = 'Classes';            
-            $this->data['sub_menu'] = 'View';                          
-            $output = $this->crud->render();            
-            $this->render($output, 'admin/edit_class');
-            exit;                		
-        }
-        
-        $this->crud->set_relation('course_id','courses', 'name');                
-        $output = $this->crud->render();		
-        $this->render($output);
-        
-	}
-	
-	/**
-	 * Students and Penpals
-	 *
-	 * @return void
-	 * @author Jason Punzalan
-	 **/
-	public function students_and_penpals($classroom_id = NULL)
-	{
-	    $classroom = Classroom::find_by_pk(array($classroom_id), NULL);	    
-        $this->data['students'] = $classroom->students;
-        echo $this->blade->render('admin/_paypals_list', $this->data, TRUE);
-	}
-	
-	public function classes_d($action = NULL, $id = NULL) 
+    
+	public function classes($action = NULL, $id = NULL) 
     {
 		$this->crud->set_table('classes');
 		$this->crud->set_subject('Class');
@@ -221,13 +136,40 @@ class Dashboard extends CI_Controller {
               $this->data['sub_menu'] = 'Find';              
               $this->crud->where('course_id IS NULL OR course_id != ', $id);
               $this->crud->add_action('View', '', '', '', array($this,'view_class_from_course_link'));              
-              $this->crud->add_action('Assign', '', '', 'ui-icon-plus', array($this,'assign_or_remove_class_to_course_link'));
+              $this->crud->add_action('Partner', '', '', 'ui-icon-heart', array($this,'partner_class_from_course_link'));                              
+              // $this->crud->add_action('Assign', '', '', 'ui-icon-plus', array($this,'assign_or_remove_class_to_course_link'));
             } 
             
             if ( !$this->input->get('view') ) {                
                 $this->data['sub_menu'] = 'Classes';
                 $this->crud->where('course_id', $id);
-                $this->crud->add_action('Partner', '', '', '', array($this,'partner_class_from_course_link'));                              
+                $this->crud->set_relation_n_n('partnership', 'partnerships', 'classes', 'class_id', 'partner_id', 'school');
+                   
+                $partnerships = array();
+                $query = $this->db->query("SELECT classes.*, partnerships.partner_id FROM classes LEFT JOIN partnerships ON ( partnerships.class_id = classes.id) WHERE partnerships.course_id = ". $id ." AND classes.course_id IS NOT NULL");
+                $partnerships = $query->result();                
+                
+                $i = 0;
+                var_dump($partnerships);exit;
+                foreach($partnerships as $key => $class ){
+                    $match = array_filter($partnerships, function($item) use ($class) {
+                        if ($class->id == $item->partner_id) {
+                            return true;
+                        }
+                    });
+                    array_push($match, $class);
+                    $paired[$i] = $match;
+                }
+                var_dump($paired);exit;
+                $this->data['partnerships'] = $partnerships;
+                $query = $this->db->query("SELECT classes.* FROM classes WHERE course_id = " . $id);
+                $classes = $result = $query->result();
+                $class_dropdown = array();
+                foreach ($classes as $key => $value) {
+                    $class_dropdown[$value->id] = $value->name;
+                }
+                $this->data['class_dropdown'] = form_dropdown('classes', $class_dropdown);                                
+                $this->data['classes'] = $result = $query->result();
                 $this->crud->add_action('Remove', '', '', 'ui-icon-minus', array($this,'assign_or_remove_class_to_course_link'));
             }
                                 
@@ -253,27 +195,7 @@ class Dashboard extends CI_Controller {
         $this->render($output);
         
 	}
-
-	/**
-	 * Students and Penpals
-	 *
-	 * @return void
-	 * @author Jason Punzalan
-	 **/
-	public function penpals($action = NULL, $id = NULL)
-	{
-	    $this->crud->set_table('classrooms');
-		$this->crud->set_subject('PenPal');	
-        $this->data['title'] = 'Course Schedule';            		    
-        $this->data['sub_menu'] = 'PenPals';   
-        $classes = Classroom::find_all_by_course_id(1);
-        $this->data['classes'] = $classes;
-        foreach($classes as $class) {
-//            var_dump($class->users);exit;
-        }
-        echo $this->blade->render('admin/edit_penpals', $this->data, TRUE);	                
-	}
-		
+	
 	/**
 	 * Groups
 	 *
@@ -285,8 +207,8 @@ class Dashboard extends CI_Controller {
 	    $this->crud->set_table('groups');
 		$this->crud->set_subject('Group Code');	
         $this->data['title'] = 'Group Codes';            		    
-        $this->crud->display_as('classroom_id', 'Class');     	               
-	    $this->crud->set_relation('classroom_id','classrooms','name');        
+        $this->crud->display_as('class_id', 'Class');     	               
+	    $this->crud->set_relation('class_id','classes','name');        
 		$output = $this->crud->render();		
         $this->render($output);        
 	}
@@ -420,7 +342,7 @@ class Dashboard extends CI_Controller {
 	 **/
 	public function assign_class_to_course($course_id = NULL, $class_id = NULL)
 	{
-        $sql = 'UPDATE classrooms SET course_id = ? WHERE id = ?';
+        $sql = 'UPDATE classes SET course_id = ? WHERE id = ?';
         $this->db->query($sql, array($course_id, $class_id));
         redirect( $this->agent->referrer() );        
 	}
@@ -433,50 +355,9 @@ class Dashboard extends CI_Controller {
 	 **/
 	public function remove_class_from_course($course_id = NULL, $class_id = NULL)
 	{
-        $sql = 'UPDATE classrooms SET course_id = NULL WHERE course_id = ? AND id= ?';
+        $sql = 'UPDATE classes SET course_id = NULL WHERE course_id = ? AND id= ?';
         $this->db->query($sql, array($course_id, $class_id));
         redirect( $this->agent->referrer() );        
-	}
-	
-	/**
-	 * Assign Partnership With Class function
-	 *
-	 * @return void
-	 * @author Jason Punzalan
-	 **/
-	public function assign_partnership_with_class($course_id = NULL, $class_id = NULL, $partnership_id)
-	{
-	    $this->db->trans_start();
-
-	    $sql = 'INSERT INTO partnerships (course_id, classroom_id, partnership_id) VALUES (?, ?, ?)';
-        $this->db->query($sql, array($course_id, $class_id, $partnership_id));
-
-	    $sql = 'INSERT INTO partnerships (course_id, classroom_id, partnership_id) VALUES (?, ?, ?)';
-        $this->db->query($sql, array($course_id, $partnership_id, $class_id));
-
-        $this->db->trans_complete();        
-        redirect( $this->agent->referrer() );                
-	    
-	}
-	
-	/**
-	 * undocumented function
-	 *
-	 * @return void
-	 * @author Jason Punzalan
-	 **/
-	public function remove_partnership_with_class($course_id = NULL, $class_id = NULL, $partnership_id)
-	{
-	    $this->db->trans_start();
-
-	    $sql = 'DELETE FROM partnerships WHERE course_id = ? AND classroom_id = ? AND partnership_id = ?';
-        $this->db->query($sql, array($course_id, $class_id, $partnership_id));
-
-	    $sql = 'DELETE FROM partnerships WHERE course_id = ? AND classroom_id = ? AND partnership_id = ?';
-        $this->db->query($sql, array($course_id, $partnership_id, $class_id));
-
-        $this->db->trans_complete();        
-        redirect( $this->agent->referrer() );                
 	}
 	
 	/**

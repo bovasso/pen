@@ -42,6 +42,7 @@
 				<li @if ( $title == 'Course Schedule' ) class="active" @endif><a href="/admin/courses"><i class="icon icon-globe"></i> <span>Courses</span></a></li>				
 				<li @if ( $title == 'Assignments' ) class="active" @endif><a href="/admin/assignments"><i class="icon icon-file"></i> <span>Assignments</span></a></li>								
 				<li @if ( $title == 'Classes' ) class="active" @endif><a href="/admin/classes"><i class="icon icon-pencil"></i> <span>Classes</span></a></li>				
+				<li @if ( $title == 'Group Codes' ) class="active" @endif><a href="/admin/groups"><i class="icon icon-barcode"></i> <span>Group Codes</span></a></li>								
 				<li @if ( $title == 'Users' ) class="active" @endif><a href="/admin/users"><i class="icon icon-user"></i> <span>Users</span></a></li>
 			</ul>
 		
@@ -56,9 +57,7 @@
 				PenPal News &copy;
 			</div>
 		</div>
-		<script src="/public/admin/js/jquery.min.js"></script>
-        <script src="/public/admin/js/jquery.ui.custom.js"></script>
-        <script src="/public/admin/js/bootstrap.min.js"></script>        
-		@yield('scripts')
+		@yield('scripts')        		
+		<script src="/public/admin/js/bootstrap.min.js"></script>		
 	</body>
 </html>

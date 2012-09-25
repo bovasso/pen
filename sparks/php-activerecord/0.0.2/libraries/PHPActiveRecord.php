@@ -56,7 +56,7 @@ class PHPActiveRecord {
                 // from pear, create phpar.log inside of your application/logs 
                 // directory, then uncomment the following block:
 
-                /*
+                
                 $log_file = $_SERVER['DOCUMENT_ROOT'].'/application/logs/phpar.log';
 
                 if (file_exists($log_file) and is_writable($log_file)) {
@@ -67,7 +67,7 @@ class PHPActiveRecord {
                 } else {
                     log_message('warning', 'Cannot initialize logger. Log file does not exist or is not writeable');
                 }
-                */
+                
             });
 
         }
