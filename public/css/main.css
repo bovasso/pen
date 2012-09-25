@@ -134,6 +134,9 @@ body {
 		position: relative;
 		width: 132px; height: 35px;
 	}
+	.student_progress_header .field-box .mySelect{
+		width: 162px;
+	}
 	.field-box .mySelect li {
 		margin: 0; padding: 0;
 	}
@@ -142,6 +145,9 @@ body {
 		line-height: 28px;
 		margin: 0; padding: 0;
 		width: 132px; height: 35px;
+	}
+	.student_progress_header .field-box .mySelect li.level-1 {
+		width: 162px;
 	}
 	.field-box .mySelect li span {
 		display: block;
@@ -989,6 +995,7 @@ body {
 .heavy{
 	font-family: "Avenir LT W01 85 Heavy",Arial,sans-serif;
 }
+
 #dashboard #assignment-tabs-2 h2{
 	font-size: 1em;
 	margin: 0 0 20px 0;
@@ -998,6 +1005,79 @@ body {
 	font-size: 0.85em;
 	float: left;
 }
-h3{
+
+#dashboard #assignment-tabs-2 h3{
 	font-size: 0.95em;
 }
+
+#dashboard_progress{
+
+	padding: 0px;
+}
+#dashboard_progress table{
+	width: 100%;
+	font-size:0.9em;
+	background-color: white;
+		-moz-box-shadow: 0 0 5px #d9d9d9;
+	-webkit-box-shadow: 0 0 5px#d9d9d9;
+	box-shadow: 0 0 5px #d9d9d9;
+}
+#dashboard_progress table thead{
+	background-image: linear-gradient(bottom, rgb(243,243,243) 35%, rgb(243,243,243) 34%, rgb(255,255,255) 84%);
+	background-image: -o-linear-gradient(bottom, rgb(243,243,243) 35%, rgb(243,243,243) 34%, rgb(255,255,255) 84%);
+	background-image: -moz-linear-gradient(bottom, rgb(243,243,243) 35%, rgb(243,243,243) 34%, rgb(255,255,255) 84%);
+	background-image: -webkit-linear-gradient(bottom, rgb(243,243,243) 35%, rgb(243,243,243) 34%, rgb(255,255,255) 84%);
+	background-image: -ms-linear-gradient(bottom, rgb(243,243,243) 35%, rgb(243,243,243) 34%, rgb(255,255,255) 84%);
+	background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.35, rgb(243,243,243)),
+	color-stop(0.34, rgb(243,243,243)),
+	color-stop(0.84, rgb(255,255,255))
+	);
+	width:100%;
+	-moz-box-shadow: 0 0 10px #888;
+	-webkit-box-shadow: 0 0 10px#888;
+	box-shadow: 0 0 10px #888;
+}
+
+#dashboard_progress table thead th{
+	padding: 25px 30px 20px 25px;
+	text-transform: uppercase;
+	border-right: 1px solid #bfbfbf;
+	border-bottom: 1px solid #d9d9d9;
+	font-weight: normal;
+
+}
+#dashboard_progress table tbody td{
+	padding: 25px 30px 20px 25px;
+	border-right: 1px solid #bfbfbf;
+	border-bottom: 1px solid #d9d9d9;
+	vertical-align: top;
+}
+.student_progress_header .field-box {
+float:left;
+margin:-10px 10px 0 0;
+}
+
+#dashboard_progress table .assignment_details{
+	width: 70%;
+}
+#dashboard_progress table td.assignment_details{
+	background-color: #f3f3f3;
+}
+
+/* @Group Student Progress Icons */
+.student_actions li{ float:left; padding: 0 4px;}
+.bubble.completed,.bubble.default,.bubble.late,.doc.completed,.doc.default,.doc.late{display: inline-block;background-repeat: no-repeat;background-image: url('../images/progress_sprite.png');}
+.bubble.completed{background-position:0px 0px;width:19px;height:17px;}
+.bubble.default{background-position:-19px 0px;width:19px;height:17px;}
+.bubble.late{background-position:-38px 0px;width:19px;height:17px;}
+.doc.completed{background-position:0px -17px;width:14px;height:17px;}
+.doc.default{background-position:-14px -17px;width:14px;height:17px;}
+.doc.late{background-position:-28px -17px;width:14px;height:17px;}
+/* @end */
+
+
+

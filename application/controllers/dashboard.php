@@ -10,4 +10,10 @@ class Dashboard extends MY_Controller {
 		$this->data['title'] = "Dashboard";
 		$this->blade->render('dashboard/index', $this->data);
 	}
+
+	function student_progress() {
+		$this->data['title'] = "Student Progress";
+		$this->blade->render('dashboard/student_progress', $this->data);
+	}
+
 }
