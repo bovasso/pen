@@ -78,9 +78,9 @@
 					</div>
 					<!-- end Left -->
 					<div id="assignments-right" class="right w40">
-						@include('assignment/_before_assignment_posted')
-						@include('assignment/_assignment_answer_questions')
-						@include('assignment/_assignment_after_submission')
+						@include('assignments/_before_assignment_posted')
+						@include('assignments/_assignment_answer_questions')
+						@include('assignments/_assignment_after_submission')
 					</div><!-- end Right -->
 				</div>
 
