@@ -6,4 +6,11 @@
 	@include('profile/_profile_top')	
 
 </div>
+
+<div class="wrapper" id="profile">
+
+	@include('profile/_profile_activity')	
+
+</div>
+
 @endsection
