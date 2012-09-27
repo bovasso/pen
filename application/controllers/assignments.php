@@ -10,8 +10,9 @@ class Assignments extends MY_Controller {
 		$this->data['title'] = "Assignments";
 		$this->blade->render('assignments/index', $this->data);
 	}
+	
 	function this_week() {
-		$this->data['title'] = "Assignments";
-		$this->blade->render('assignments/thisweek', $this->data);
+		$this->data['title'] = "This Weeks Assignments";
+		$this->blade->render('assignments/this_week', $this->data);
 	}
 }

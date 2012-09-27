@@ -12,7 +12,7 @@ class Dashboard extends MY_Controller {
 	}
 
 	function all() {
-		$this->data['title'] = "Dashboard";
+		$this->data['title'] = "All Assignments";
 		$this->blade->render('dashboard/all', $this->data);
 	}
 
