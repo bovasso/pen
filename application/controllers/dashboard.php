@@ -4,10 +4,15 @@ class Dashboard extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();	
-	}
+		$this->teacher = Teacher::session();
+    }
 	
 	function index() {
 		$this->data['title'] = "Dashboard";
+		$this->data['teacher'] = $this->teacher;
+        $this->data['classrooms'] = $this->teacher->classrooms;	
+        $this->data['course'] = $this->teacher->course;
+                
 		$this->blade->render('dashboard/index', $this->data);
 	}
 
