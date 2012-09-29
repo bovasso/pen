@@ -379,6 +379,7 @@ body {
 			z-index: 1;
 		}
 		.tabs > ul > li > a {
+      cursor:default;
 			background: url(images/tab_li_bg_right_inactive.png) right top no-repeat;
 			color: #999;
 			display: block;

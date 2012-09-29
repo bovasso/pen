@@ -23,14 +23,10 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#assignment-tabs').tabs({
-		select: function(event, ui){
-		tabIndex = ui.index + 1;
-		// console.log(tabIndex);
-		$('.assignment-tabs'+tabIndex).removeClass('tab-valid');
-	}
-	});
-
+  // $('.nav-link').on('click', function(event) {
+  //   event.preventDefault();
+  // });
+  
 	$('.field-box select').customSelect({
 		fixedWidth: true
 	});

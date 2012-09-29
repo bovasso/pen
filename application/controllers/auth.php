@@ -11,7 +11,7 @@ class Auth extends MY_Controller {
 		$this->load->database();
 		$this->load->helper('url');
 	}
-
+    
 	//redirect if needed, otherwise display the user list
 	function index()
 	{

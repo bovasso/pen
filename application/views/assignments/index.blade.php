@@ -1,11 +1,10 @@
 @layout('layouts/main')
 @section('content')
-
 <div class="wrapper" id="assignments">
 	<h1>All Assignments</h1>
 	<div id="assignment-tabs" class="tabs">
 		<ul>
-			<li class="assignment-tab-1"><a href="#assignment-tabs-1"><span>1.</span>select a news story</a></li>
+			<li class="assignment-tab-1"><a href="/assignments"><span>1.</span>select a news story</a></li>
 			<li class="assignment-tab-2"><a href="#assignment-tabs-2"><span>2.</span>answer the questions</a></li>
 			<li class="assignment-tab-3"><a href="#assignment-tabs-3"><span>3.</span>comment on your penpals answers</a></li>
 		</ul>
@@ -17,37 +16,26 @@
 						<img src="http://placehold.it/354x196" class="">
 					</div>
 					<div class="right">
-						<h2>The Economy Explained in One Minute</h2>
-						<p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p> 
-						<p>Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue.</p>
+						<h2>{{$assignment->name}}</h2>
+						<p>{{$assignment->description}}</p>
 					</div>
 				</div><!-- end Featured Assignment Topic -->
 
 				<div class="w100">
-					<h3>Select a News Story about the Economy</h3>
+					<h3>Select a News Story about the {{$assignment->name}}</h3>
 					<ul class="assignments-list">
+                        @foreach( $assignment->articles as $article)					    
 						<li>
 							<div class="left w30">
 								<img src="http://placehold.it/220x127" class="">	
 							</div>
 							<div class="right w70">
-								<h4>The Economy Explained in One Minute</h4>
-								<p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p> 
-								<p>Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue.</p>
-								<p class="read-more"><a href="#">Read More...</a></p>
+								<h4><a href="/assignments/{{$article->id}}">{{$article->title}}</a></h4>
+                                <p>{{$article->abstract}}</p>
+								<p class="read-more"><a target="_blank" href="{{$article->source}}">Read More...</a></p>
 							</div><!-- end Featured Assignment Topic -->
 						</li>
-						<li>
-							<div class="left w30">
-								<img src="http://placehold.it/220x127" class="">	
-							</div>
-							<div class="right w70">
-								<h4>The Economy Explained in One Minute</h4>
-								<p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p> 
-								<p>Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue.</p>
-								<p class="read-more"><a href="#">Read More...</a></p>
-							</div><!-- end Featured Assignment Topic -->
-						</li>
+						@endforeach
 					</ul>
 
 				</div>
@@ -57,7 +45,6 @@
 
 		<div id="assignment-tabs-2" class="tab">
 			<div class="tab-inner">
-
 				<div id="answer-questions" class="w100">
 					<div class="left w60">
 						<h2>Immigration to the United States is a complex demographic</h2>
@@ -85,7 +72,6 @@
 
 					</div><!-- end Right -->
 				</div>
-
 			</div>
 		</div><!-- end Assignment Tab 2 -->
 

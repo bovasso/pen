@@ -451,6 +451,9 @@ class Dashboard extends CI_Controller {
 	    $sql = 'INSERT INTO partnerships (course_id, classroom_id, partnership_id) VALUES (?, ?, ?)';
         $this->db->query($sql, array($course_id, $class_id, $partnership_id));
 
+	    $sql = 'SELECT ';
+        $this->db->query($sql, array($course_id, $class_id, $partnership_id));
+
 	    $sql = 'INSERT INTO partnerships (course_id, classroom_id, partnership_id) VALUES (?, ?, ?)';
         $this->db->query($sql, array($course_id, $partnership_id, $class_id));
 
