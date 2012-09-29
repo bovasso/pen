@@ -7,7 +7,6 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->database();
-        $this->load->spark('state-helper/1.0.0');				
 		$this->load->library(array('blade', 'user_agent'));
 		$this->load->library('grocery_CRUD', '', 'crud');		
 	    $this->load->helper(array('breadcrumb', 'form', 'url'));  	    

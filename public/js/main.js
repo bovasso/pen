@@ -13,8 +13,6 @@ $.fn.clearInput = function() {
 
 $(document).ready(function() {
 
-//	$('.clear-value').clearInput();
-
 	$('#sign-up-tabs').tabs({
 		select: function(event, ui){
 			tabIndex = ui.index + 1;
@@ -96,34 +94,34 @@ $(document).ready(function() {
 	});
 	$("#sign-up-teacher-tab-2").validate({
 		rules: {
-			schoolName: "required",
-			schoolLoc: "required",
-			areaChar: "required",
-			className: "required",
-			ageRangeLow: {
+			school: "required",
+			state: "required",
+			area: "required",
+			name: "required",
+			age_range_start: {
 				required: true,
 				minlength: 1,
 				maxlength: 2
 			},
-			ageRangeHigh: {
+			age_range_end: {
 				required: true,
 				minlength: 1,
 				maxlength: 2
 			},
-			numStudents: {
+			class_size: {
 				required: true,
 				minlength: 1,
 				maxlength: 2
 			}
 		},
 		messages: {
-			schoolName: "Please enter your school name",
-			schoolLoc: "Please choose your state",
-			areaChar: "Please characterize the area in which you teach",
-			className: "Please enter your first class",
-			ageRangeLow: "Please enter a low for your student&rsquo;s age range",
-			ageRangeHigh: "Please enter a high for your student&rsquo;s age range",
-			numStudents: "Please enter the amount of students in your class"
+			school: "Please enter your school name",
+			state: "Please choose your state",
+			area: "Please characterize the area in which you teach",
+			name: "Please enter your first class",
+			age_range_start: "Please enter a low for your student&rsquo;s age range",
+			age_range_end: "Please enter a high for your student&rsquo;s age range",
+			class_size: "Please enter the amount of students in your class"
 		},
 		errorElement: "span",
 		highlight: function(element, errorClass) {
@@ -147,22 +145,22 @@ $(document).ready(function() {
 	});
 	$("#sign-up-teacher-tab-3").validate({
 		rules: {
-			title: "required",
-			firstName: "required",
-			lastName: "required",
+			suffix: "required",
+			first_name: "required",
+			last_name: "required",
 			email: {
 				required: true,
 				email: true,
 				remote: {
-					url: "/signup/verify/email",
-					type: "post"
+					url: "/register/verify_email",
+					type: "get"
 				}
 			},
-			emailConfirm: {
+			confirm_email: {
 				required: true,
 				equalTo: "#email"
 			},
-			phoneNumber: {
+			phone: {
 				required: true,
 				minlength: 10,
 				maxlength: 10
@@ -178,25 +176,25 @@ $(document).ready(function() {
 				required: true,
 				minlength: 6
 			},
-			passwordConfirm: {
+			confirm_password: {
 				required: true,
 				equalTo: "#password"
 			}
 		},
 		messages: {
-			title: "Please enter an appropriate suffix",
-			firstName: "Please enter your first name",
-			lastName: "Please enter your last name",
+			suffix: "Please enter an appropriate suffix",
+			first_name: "Please enter your first name",
+			last_name: "Please enter your last name",
 			email: {
 				required: "Please enter your email address",
 				email: "Please enter a valid email address",
 				remote: "There is already an account associated with this email address"
 			},
-			emailConfirm: {
+			confirm_email: {
 				required: "Please re-enter your email address",
 				equalTo: "Please enter the same email address as the email field"
 			},
-			phoneNumber: {
+			phone: {
 				required: "Please enter a phone number",
 				minlength: "You must enter a 10 digit phone number",
 				maxlength: "Please enter a 10 digit phone number"
@@ -210,7 +208,7 @@ $(document).ready(function() {
 				required: "Please provide a password"
 			//	minlength: jQuery.format("Your password must contain at least {0} characters")
 			}, 
-			passwordConfirm: { 
+			confirm_password: { 
 				required: "Please re-enter your password",
 				equalTo: "Please enter the same password as the password field"
 			}
