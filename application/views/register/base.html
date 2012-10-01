@@ -1,0 +1,93 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+	<title>#{get 'title' /}</title>
+	<meta charset="${_response_encoding}">
+	<meta name="description" content="">
+	<link rel="shortcut icon" type="image/png" href="/public/images/favicon.ico">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<!-- CSS -->
+	<link type="text/css" rel="stylesheet" href="/public/stylesheets/main.css" media="all">
+	#{get 'moreStyles' /}
+
+	<!-- Boilerplate/Header JS & External HTTP Request Scripts -->
+	<script type="text/javascript" src="/public/javascripts/modernizr.js"></script>
+	<script type="text/javascript" src="http://fast.fonts.com/jsapi/54aa4dbe-b544-446f-8b71-2ac8fa086982.js"></script>
+
+	<!-- jQuery & Related/Future Footer JS, to be compiled, minified/gzipped at launch -->
+	<script type="text/javascript" src="/public/javascripts/jquery.js"></script>
+	
+	<script type="text/javascript" src="/public/javascripts/jquery-ui-1.8.22.custom.min.js"></script>
+	<script type="text/javascript" src="/public/javascripts/jquery.validate.min.js"></script>
+	
+	<script type="text/javascript" src="/public/javascripts/main.js"></script>
+	#{get 'moreScripts' /}
+</head>
+<body id="sign-up-pages">
+	<div id="sticky-wrapper">
+		<div class="sticky-wrapper">
+		
+			<header id="header">
+				<div class="wrapper">
+
+					<h1 id="logo">
+						<a href=""><img src="/public/images/logo.png" alt="Penpal News" title="Return to Penpal News Home" width="170" /></a>
+					</h1>
+
+					<form id="join" action="#" method="post">
+						<label for="group-code">Students</label>
+						<input type="text" class="text clear-value" name="group-code" id="group-code" placeholder="Enter Group Code" />
+						<div class="btn-wrapper"><input type="submit" class="submit btn" name="join" value="Join" /></div>
+					</form><!-- #join -->
+
+					<div id="login" class="is-logged-out">
+						<a href="#" class="toggle">Log In</a>
+						<form action="#" method="post" class="is-hidden">
+							<div class="field">
+								<label for="login-username" class="hidden">Username or Email</label>
+								<input type="text" class="text clear-value" name="login-username" id="login-username" value="Username or Email" />
+							</div>
+							<div class="field">
+								<label for="login-password" class="hidden">Password</label>
+								<input type="password" class="text clear-value" name="login-password" id="login-password" value="Password" />
+							</div>
+							<div class="field">
+								<p><a href="#">Forgot Something?</a></p>
+							</div>
+							<div class="field">
+								<input type="submit" class="submit" name="login" value="Login" />
+							</div>
+							<span class="arrow"></span>
+						</form>
+					</div><!-- #login -->
+
+				</div><!-- .wrapper -->
+			</header>
+
+			<div id="content">
+					#{doLayout /}
+			</div>
+
+		</div><!-- .sticky-wrapper -->
+	</div><!-- #sticky-wrapper -->
+
+	<footer id="footer">
+		<div class="wrapper">
+			<small class="left copyright">Penpal News &copy; 2012</small>
+			<nav class="right">
+				<ul>
+					<li><a href="">about</a></li>
+					<li><a href="">blog</a></li>
+					<li><a href="">jobs</a></li>
+					<li><a href="">contact</a></li>
+					<li><a href="">terms</a></li>
+					<li><a href="">privacy</a></li>
+					<li><a href="">site map</a></li>
+				</ul>
+			</nav>
+		</div><!-- .wrapper -->
+	</footer>
+
+</body>
+</html>

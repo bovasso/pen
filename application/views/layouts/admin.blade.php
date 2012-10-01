@@ -57,6 +57,8 @@
 				PenPal News &copy;
 			</div>
 		</div>
+		<script src="/assets/grocery_crud/js/jquery-1.8.1.min.js"></script>
+		<script src="/assets/grocery_crud/js/jquery_plugins/ui/jquery-ui-1.8.23.custom.min.js"></script>
 		@yield('scripts')        		
 		<script src="/public/admin/js/bootstrap.min.js"></script>		
 	</body>

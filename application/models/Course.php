@@ -3,9 +3,20 @@
 class Course extends ActiveRecord\Model {
     static $has_many = array(
         array('classrooms'),
-        array('partnerships'),        
+        array('partnerships'),
+        array('assignments'),
     );    
 
+    /**
+     * This weeks assignment function
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_this_weeks_assignment($week = 1)
+    {
+        return Assignment::find_by_course_id_and_week($this->id, $week);
+    }
     
     /**
      * has available

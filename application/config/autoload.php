@@ -52,7 +52,7 @@ $autoload['packages'] = array(APPPATH.'third_party');
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','session','Blade');
+$autoload['libraries'] = array('database','session','blade', 'ion_auth', 'diffbot', 'typography');
 
 
 /*
@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database','session','Blade');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'path');
+$autoload['helper'] = array('url', 'path', 'text', 'form');
 
 
 /*
@@ -115,4 +115,4 @@ $autoload['model'] = array();
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
 
-$autoload['sparks'] = array('php-activerecord/0.0.2');;
+$autoload['sparks'] = array('php-activerecord/0.0.2', 'state-helper/1.0.0', 'formbuilder/1.3.0');

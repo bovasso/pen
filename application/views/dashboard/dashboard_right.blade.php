@@ -1,15 +1,15 @@
 <h1>ASSIGNMENTS</h1>
 <div id="assignment-tabs" class="tabs">
 	<ul>
-		<li class="assignment-tab-1"><a href="#assignment-tabs-1">SETUP</a></li>
-		<li class="assignment-tab-2"><a href="#assignment-tabs-2">WEEK 1</a></li>
-		<li class="assignment-tab-3"><a href="#assignment-tabs-3">WEEK 2</a></li>
-		<li class="assignment-tab-4"><a href="#assignment-tabs-4">WEEK 3</a></li>
-		<li class="assignment-tab-5"><a href="#assignment-tabs-5">WEEK 4</a></li>
-		<li class="assignment-tab-6"><a href="#assignment-tabs-6">WEEK 5</a></li>
-		<li class="assignment-tab-7"><a href="#assignment-tabs-7">FINAL PROJECT</a></li>
+		<li class="assignment-tab-setup"><a href="#assignment-tabs-setup">SETUP</a></li>
+		<li class="assignment-tab-1"><a href="#assignment-tabs-1">WEEK 1</a></li>
+		<li class="assignment-tab-2"><a href="#assignment-tabs-2">WEEK 2</a></li>
+		<li class="assignment-tab-3"><a href="#assignment-tabs-3">WEEK 3</a></li>
+		<li class="assignment-tab-4"><a href="#assignment-tabs-4">WEEK 4</a></li>
+		<li class="assignment-tab-5"><a href="#assignment-tabs-5">WEEK 5</a></li>
+		<li class="assignment-tab-6"><a href="#assignment-tabs-6">FINAL PROJECT</a></li>
 	</ul>
-	<div id="assignment-tabs-1" class="tab">
+	<div id="assignment-tabs-setup" class="tab">
 		<div class="tab-inner">
 
 			<div class="w100 left">					
@@ -68,84 +68,41 @@
 
 		</div>
 	</div><!-- end Assignment Tab 1 -->
-
-	<div id="assignment-tabs-2" class="tab">
+    @foreach ($course->assignments as $assignment)
+	<div id="assignment-tabs-{{$assignment->week}}" class="tab">
 		<div class="tab-inner">
-				<div class="due-date right">Due Monday, October 2, 2012</div>
+				<div class="due-date right">Due {{$assignment->due_date}}</div>
 				<h2>YOUR STUDENTS' TO-DO LIST</h2>
-				<h3 class="heavy">1. Watch the Video<br />Immigration Explained in One Minute</h3>
+				<h3 class="heavy">1. Watch the Video<br />{{$assignment->name}}</h3>
 				<div class="featured-topic w100">
 					<div class="img-wrapper left "> 
 						<img src="http://placehold.it/272x153" class="">
 					</div>
 					<div class="right">
-						<a href="#">The Economy Explained in One Minute</a>
-						<p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p> 
-						<p>Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue.</p>
+						<a href="#">{{$assignment->name}}</a>
+						<p>{{$assignment->description}}</p> 
 					</div>
 				</div><!-- end Featured Assignment Topic -->
 
 				<div class="w100">
 					<h3 class="heavy">2. Select a News Story about the Economy</h3>
-					<p class="instructions">Students will select news to reas and write about or you may direct the whole class to read an article of your choice. Students should answer the questions associated with the story.</p>
-					<ul class="assignments-list">
-						<li>
-							<div class="left w20">
-								<img src="http://placehold.it/173x96" class="">	
-							</div>
-							<div class="right w70">
-								<a href="#">The Economy Explained in One Minute</a>
-								<p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p> 
-								<p>Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue.</p>
-								<p class="read-more"><a href="#">Read More...</a></p>
-							</div><!-- end Featured Assignment Topic -->
-						</li>
-						<li>
-							<div class="left w20">
-								<img src="http://placehold.it/173x96" class="">	
-							</div>
-							<div class="right w70">
-								<a href="#">The Economy Explained in One Minute</a>
-								<p>Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.</p> 
-								<p>Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue.</p>
-								<p class="read-more"><a href="#">Read More...</a></p>
-							</div><!-- end Featured Assignment Topic -->
-						</li>
-					</ul>
-
+					<p class="instructions">Students will select news to read and write about or you may direct the whole class to read an article of your choice. Students should answer the questions associated with the story.</p>
+                    <ul class="assignments-list">
+                        @foreach( $assignment->articles as $article)					    
+                		<li>
+                			<div class="left w30">
+                				<a href="/assignments/article/{{$article->id}}"><img src="{{$article->primary_image}}"/></a>	
+                			</div>
+                			<div class="right w70">
+                				<h4><a href="/assignments/article/{{$article->id}}">{{$article->title}}</a></h4>
+                                <p>{{$article->abstract}}</p>
+                				<p class="read-more"><a href="/assignments/article/{{$article->id}}">Read More...</a></p>
+                			</div><!-- end Featured Assignment Topic -->
+                		</li>
+                		@endforeach
+                	</ul>                	
 				</div>
-
 		</div>
 	</div><!-- end Assignment Tab 2 -->
-
-	<div id="assignment-tabs-3" class="tab">
-		<div class="tab-inner">
-
-		</div>
-	</div><!-- end Assignment Tab 3 -->
-
-	<div id="assignment-tabs-4" class="tab">
-		<div class="tab-inner">
-
-		</div>
-	</div><!-- end Assignment Tab 4 -->
-
-	<div id="assignment-tabs-5" class="tab">
-		<div class="tab-inner">
-
-		</div>
-	</div><!-- end Assignment Tab 5 -->
-
-	<div id="assignment-tabs-6" class="tab">
-		<div class="tab-inner">
-
-		</div>
-	</div><!-- end Assignment Tab 6 -->
-
-	<div id="assignment-tabs-7" class="tab">
-		<div class="tab-inner">
-
-		</div>
-	</div><!-- end Assignment Tab 7 -->
-
+    @endforeach
 </div>

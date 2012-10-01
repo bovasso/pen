@@ -1,0 +1,25 @@
+#{extends 'Signup/base.html' /}
+#{set title:'PenPal News' /}
+
+<div id="sign-up-form-wrapper">			
+	<form action="#" method="post">
+		<div id="sign-up-form-content" class="centered">
+			<div class="field">
+				<h2>Where do you teach?</h2>
+			</div>
+			<div class="field">
+				<select name="country" id="country" class="custom-select">
+					<option value="0">Pick Country</option>
+					<option value="1">United States</option>
+					<option value="2">United Kingdom</option>
+					<option value="3">Canada</option>
+					<option value="4">Mexico</option>
+				</select>
+				<div id="demoShowSelected"></div>
+			</div>
+		</div>
+		<div id="sign-up-form-submit">
+			<input type="submit" class="submit" name="submit" value="Get Started" />
+		</div>
+	</form>
+</div>

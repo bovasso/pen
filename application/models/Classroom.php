@@ -5,7 +5,7 @@ class Classroom extends ActiveRecord\Model {
         array('students', 'class'=>'User', 'conditions'=>'role_id = 2'),
     );    
 
-    static $has_one = array(
+    static $belongs_to = array(
         array('course'),
     );    
         

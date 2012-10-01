@@ -7,7 +7,6 @@ class Dashboard extends CI_Controller {
 		parent::__construct();
 		
 		$this->load->database();
-        $this->load->spark('state-helper/1.0.0');				
 		$this->load->library(array('blade', 'user_agent'));
 		$this->load->library('grocery_CRUD', '', 'crud');		
 	    $this->load->helper(array('breadcrumb', 'form', 'url'));  	    
@@ -33,6 +32,7 @@ class Dashboard extends CI_Controller {
         }else{
             $this->data['js_files'] = $output->js_files;
         }
+        
         $this->data['css_files'] = $output->css_files;
         
         echo $this->blade->render($template, $this->data, TRUE);	        
@@ -47,7 +47,7 @@ class Dashboard extends CI_Controller {
         $this->data['total_students'] = $this->db->from('users')->where('role_id', 2)->count_all_results();
         $this->data['total_teachers'] = $this->db->from('users')->where('role_id', 3)->count_all_results();        
         
-        $this->data['title'] = 'Dashboard';	    
+        $this->data['title'] = 'Dashboard';	            
 	    $this->blade->render('admin/index', $this->data);
 	}
 	
@@ -308,6 +308,8 @@ class Dashboard extends CI_Controller {
         $this->crud->change_field_type('video', 'text');
         $this->crud->unset_texteditor('video');
         $this->crud->required_fields('week','name','description');
+        $this->crud->set_relation('course_id','courses','name');
+        
         $this->data['title'] = 'Assignments';
         $this->data['action'] = $action;
         		
@@ -451,6 +453,9 @@ class Dashboard extends CI_Controller {
 	    $sql = 'INSERT INTO partnerships (course_id, classroom_id, partnership_id) VALUES (?, ?, ?)';
         $this->db->query($sql, array($course_id, $class_id, $partnership_id));
 
+	    $sql = 'SELECT ';
+        $this->db->query($sql, array($course_id, $class_id, $partnership_id));
+
 	    $sql = 'INSERT INTO partnerships (course_id, classroom_id, partnership_id) VALUES (?, ?, ?)';
         $this->db->query($sql, array($course_id, $partnership_id, $class_id));
 
@@ -553,6 +558,20 @@ class Dashboard extends CI_Controller {
 	public function displayAsDropdownWeek($value, $row)
 	{
         $options = range('1','6');
+        $keys = range('1','6');
+        $options = array_combine($keys, $options);
+        return form_dropdown('week', $options, $value);	    	            
+	}
+	
+	/**
+	 * displayAsDropdownCourse function
+	 *
+	 * @return void
+	 * @author Jason Punzalan
+	 **/
+	public function displayAsDropdownCourse($value, $row)
+	{
+        
         return form_dropdown('week', $options, $value);	    	            
 	}
 
