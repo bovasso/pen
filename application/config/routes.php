@@ -40,7 +40,7 @@
 
 $route['assignments/(:any)'] = 'assignments/$1';
 $route['profile/(:num)'] = 'profile/index/$1';
-$route['profile/(:any)'] = 'profile/$1';
+$route['profile/edit/(:num)'] = 'profile/edit/$1';
 $route['dashboard/(:any)'] = 'dashboard/$1';
 $route['admin'] = 'admin/dashboard';
 $route['admin/(:any)'] = 'admin/dashboard/$1';

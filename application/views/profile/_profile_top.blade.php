@@ -1,4 +1,4 @@
-	<h1>{{$user->first_name}}</h1>
+	<h1>{{$user->first_name}}&nbsp;{{$user->last_name}}</h1>
 	<div class="profile_container">
 
 		<div class="left w50">
