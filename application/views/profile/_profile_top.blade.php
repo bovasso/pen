@@ -1,4 +1,4 @@
-	<h1>${account.getFullName()}</h1>
+	<h1>{{$user->first_name}}&nbsp;{{$user->last_name}}</h1>
 	<div class="profile_container">
 
 		<div class="left w50">
@@ -8,21 +8,19 @@
 				<div id="profile-image" class="left w40">
 					<a href="#" class="avatar a144">
 						<span class="frame">&nbsp;</span>
-						<img src="${account.avatar}" class="" alt="${account.getFullName()}" title="${account.getFullName()}" />
+						<img src="" class="" alt="{{$user->first_name}}" title="{{$user->first_name}}" />
 					</a>
 				</div>
 				<div class="right w60">
 					<ul>
-						#{list account.accounts}
 						<li>
 							<label>School:</label>
-							<p>${_.course.school.name}</p>
+							<p>{{$user->classroom->school}}</p>
 						</li>
 						<li>
 							<label>Class:</label>
-							<p>${_.course.name}</p>
+							<p>Class Name</p>
 						</li>
-						#{/list}
 					</ul>
 				</div>
 			</div> <!-- end Profile Avatar -->
@@ -32,8 +30,7 @@
 		<div class="right w50">
 			<div class="profile-box w100">
 				<h3>About</h3>
-			<!-- 	<p>${account.about}</p> -->
-				<p>Vestibulum id ligula porta felis euismod semper. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Nulla vitae elit libero, a pharetra augue.</p>
+				<p>{{$user->about}}</p>
 			</div>
 
 		</div><!-- end Right Column-->

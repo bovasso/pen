@@ -1,4 +1,4 @@
-	<h1>Hello ${account.getFullName()}</h1>
+	<h1>{{$user->first_name}}&nbsp;{{$user->last_name}}</h1>
 	<div class="profile_container">
 
 		<div class="left w40">
@@ -62,7 +62,7 @@
 				<h3>About</h3>
 				
 				<form id="join_profile">
-					<textarea class="w100" rows="10">${account.about}</textarea>
+					<textarea class="w100" rows="10" value="{{$user->about}}">{{$user->about}}</textarea>
 					<div class="btn-wrapper right"><input type="submit" class="btn" value="Join" /></div>
                 </form>
 			</div>
@@ -72,19 +72,19 @@
 					<ul>
 						<li>
 							<label>Name:</label>
-							<p>${account.getFullName()}<br/><a href="#" class="profile-edit">Edit</a></p>
+							<p>{{$user->first_name}}&nbsp;{{$user->last_name}}<br/><a href="#" class="profile-edit">Edit</a></p>
 						</li>
 						<li>
 							<label>Username:</label>
-							<p>${account.username}<br/><a href="#" class="profile-edit">Change Password</a></p>
+							<p>{{$user->username}}<br/><a href="#" class="profile-edit">Change Password</a></p>
 						</li>
 					</ul>
 				
 				</div>
 				<div class="right w50">
 					<ul>
-						<li><label>School:</label>&nbsp;${_.course.school.name}</li>
-						<li><label>Class:</label>&nbsp;${_.course.school.name}</li>
+						<li><label>School:</label>&nbsp;{{$user->classroom->school}}</li>
+						<li><label>Class:</label>&nbsp;{{$user->classroom->school}}</li>
 					</ul>
 				</div>
 			</div>
