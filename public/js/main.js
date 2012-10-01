@@ -68,10 +68,10 @@ $(document).ready(function() {
 	// Signup Form Teacher
 	$("#sign-up-teacher-tab-1").validate({
 		rules: {
-			sessionId: "required"
+			course_id: "required"
 		},
 		messages: {
-			sessionId: "Please select a session date to continue"
+			course_id: "Please select a session date to continue"
 		},
 		errorElement: "span",
 		errorPlacement: function(error, element) { 
@@ -84,15 +84,16 @@ $(document).ready(function() {
 		},
 		// specifying a submitHandler prevents the default submit, good for the demo 
 		submitHandler: function() {
-			$('.sign-up-tab-1').addClass('tab-valid');
-			$('#sign-up-tabs').tabs('select',1);
+      $.post('/register/save_step1', $('#sign-up-teacher-tab-1').serialize(), function(data) {
+        $('#sign-up-tabs').tabs('select',1);
+      });
 		}, 
 		// set this class to error-labels to indicate valid fields 
 		success: function(label) {
 			
 		}
 	});
-	$("#sign-up-teacher-tab-2").validate({
+	$("#sign-up-teacher-classes").validate({
 		rules: {
 			school: "required",
 			state: "required",
@@ -135,8 +136,12 @@ $(document).ready(function() {
 		},
 		// specifying a submitHandler prevents the default submit, good for the demo 
 		submitHandler: function() {
-			$('.sign-up-tab-2').addClass('tab-valid');
-			$('#sign-up-tabs').tabs('select',2);
+  	  $.post('/register/save_step2', $('#sign-up-teacher-classes').serialize(), function(data) {
+        $('#sign-up-tabs').tabs('select',2);
+      });
+		  
+      // $('.sign-up-tab-2').addClass('tab-valid');
+      // $('#sign-up-tabs').tabs('select',2);
 		}, 
 		// set this class to error-labels to indicate valid fields 
 		success: function(label) {
@@ -168,8 +173,8 @@ $(document).ready(function() {
 			username: {
 				required: true,
 				remote: {
-					url: "/signup/verify/username",
-					type: "post"
+					url: "/register/verify_username",
+					type: "get"
 				}
 			},
 			password: {
@@ -226,19 +231,19 @@ $(document).ready(function() {
 		},
 		// specifying a submitHandler prevents the default submit, good for the demo 
 		submitHandler: function() {
-			$('.sign-up-tab-3').addClass('tab-valid');
-			$('#sign-up-teacher-tab-1 :input, #sign-up-teacher-tab-2 :input').not(':submit').clone().hide().insertBefore('#suffix');
-//			$('#sign-up-teacher-tab-3').submit();
-			var form3 = $('#sign-up-teacher-tab-3');
-			var formData = form3.serialize();
-			$.ajax( {
-				type: "POST",
-				url: form3.attr('action'),
-				data: formData,
-				success: function(response) {
-					console.log(form3.serialize());
-				}
-			});
+//      $('.sign-up-tab-3').addClass('tab-valid');
+//      $('#sign-up-teacher-tab-1 :input, #sign-up-teacher-tab-2 :input').not(':submit').clone().hide().insertBefore('#suffix');
+// //     $('#sign-up-teacher-tab-3').submit();
+//      var form3 = $('#sign-up-teacher-tab-3');
+//      var formData = form3.serialize();
+//      $.ajax( {
+//        type: "POST",
+//        url: form3.attr('action'),
+//        data: formData,
+//        success: function(response) {
+//          console.log(form3.serialize());
+//        }
+//      });
 			/*$.post(
 				form3.attr("action"),
 				formData,
@@ -252,23 +257,26 @@ $(document).ready(function() {
 		}
 	});
 
-	// Add a class to your session
-	var sessionClassNumber = $('#sign-up-teacher-tab-2 .session-class').size();
-	console.log('There are '+sessionClassNumber+' session classes present');
-	$('#sign-up-teacher-tab-2').on('click', '.add-session-class', function(){
-		var cloneId = $('#session-class-'+sessionClassNumber);
-		cloneId.clone().attr('id', 'session-class-'+(++sessionClassNumber)).insertAfter(cloneId);
-		console.log('There are '+sessionClassNumber+' session classes present');
-		return false;
-	});
-	// Remove class from session
-	$('#sign-up-teacher-tab-2').on('click', '.remove-session-class', function(){
-		var itemId = $(this).parent('.session-class').attr('id');
-		var lastChar = itemId.substr(itemId.length - 1);
-		$(this).parent('#session-class-'+lastChar).remove();
-		console.log('clicked remove on '+lastChar);
-		return false;
-	});
+  $("#class-info").dynamicForm("#add-session-class", "#remove-session-class", {limit:5,formPrefix:'classes'});
+  // // Add a class to your session
+  // var sessionClassNumber = $('#sign-up-teacher-tab-2 .session-class').size();
+  //   // console.log('There are '+sessionClassNumber+' session classes present');
+  // $('#sign-up-teacher-tab-2').on('click', '.add-session-class', function(){    
+  // 
+  //     
+  //     // var cloneId = $('#session-class-'+sessionClassNumber);
+  //     // cloneId.clone().attr('id', 'session-class-'+(++sessionClassNumber)).insertAfter(cloneId);
+  //     //     // console.log('There are '+sessionClassNumber+' session classes present');
+  //  return false;
+  // });
+  // // Remove class from session
+  // $('#sign-up-teacher-tab-2').on('click', '.remove-session-class', function(){
+  //  var itemId = $(this).parent('.session-class').attr('id');
+  //  var lastChar = itemId.substr(itemId.length - 1);
+  //  $(this).parent('#session-class-'+lastChar).remove();
+  //  console.log('clicked remove on '+lastChar);
+  //  return false;
+  // });
 
 	$("#sign-up-student-tab-1").validate({
 		rules: {
