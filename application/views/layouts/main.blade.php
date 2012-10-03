@@ -34,7 +34,6 @@
 	<script type="text/javascript" src="<?php echo asset_url() ?>js/jquery-ui-1.8.23.custom.min.js"></script>
 	<script type="text/javascript" src="<?php echo asset_url() ?>js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<?php echo asset_url() ?>js/jquery.customselect.js"></script>
-	<script type="text/javascript" src="<?php echo asset_url() ?>js/main.js"></script>
 
 	@yield('scripts')
     <script type="text/javascript" src="/public/js/humane/humane.min.js"></script>

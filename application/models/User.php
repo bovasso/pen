@@ -19,9 +19,23 @@ class User extends ActiveRecord\Model {
     
     public static function session() {
         $ci =& get_instance();
-        $user = $ci->ion_auth->user(1)->row();
-        if ( !is_null($user->id) ) {
+        $user = $ci->ion_auth->user()->row();
+        if ( isset($user->id) ) {
             return parent::find_by_pk(array($user->id), NULL);
         }		
+        
+        return parent::find_by_pk(array(8), NULL);
+    }
+    
+    /**
+     * Login 
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function login()
+    {
+        $ci =& get_instance();
+        return $ci->session->set_userdata('user_id', $this->id);
     }
 }

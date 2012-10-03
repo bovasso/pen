@@ -5,13 +5,44 @@
 	<div id="sign-up-tabs" class="tabs">
 		<ul>
 			<li class="sign-up-step1 ui-state-active"><a href="#"><span>1.</span>Create Your Account<span class="tab_checkmark"></span></a></li>
-			<li class="sign-up-step2"><a href="#"><span>2.Pick Your Session</span><span class="tab_checkmark"></span></a></li>
-			<li class="sign-up-step3"><a href="#"><span>3.</span>Add Your Class<span class="tab_checkmark"></span></a></li>
+			<li class="sign-up-step2"><a href="#"><span>2.Add Your Class</span><span class="tab_checkmark"></span></a></li>
+			<li class="sign-up-step3"><a href="#"><span>3.</span>Pick Your Session<span class="tab_checkmark"></span></a></li>
 		</ul>
     <div id="sign-up-tabs-3" class="tab">
-    	<div class="tab-inner">
-        		<form action="/signup/create" method="post" id="sign-up-teacher-tab-3">
+    	<div class="tab-inner">			    
+    	        <?php echo $this->formbuilder->open( NULL, array('id'=>'sign-up-teacher-tab-3')) ?>    	            
         			<fieldset>
+        			    <div class="left w50">
+							<label class="question" for="school-name">What is the name of your school?</label>
+							<div class="field-box">
+                                <?php echo $this->formbuilder->text( 'school', '' ) ?>
+							</div>
+						</div>
+						<div class="left w50">
+							<label class="question" for="state">In what state is it located?</label>
+							<div class="field-box">
+                                    <?php echo $this->formbuilder->drop_down( 'state', '', state_array() )  ?>
+							</div>
+						</div>
+						<div class="clear">
+							<legend class="question">How would you characterize the area where you teach?</legend>
+							<div class="field-box">
+								<ul class="radio-inline">
+									<li>
+									    <?php echo $this->formbuilder->radio( 'area', '', 'u', FALSE, NULL, array('id'=>'area-char-urban')); ?>
+										<label for="area-char-urban">Urban</label>
+									</li>
+									<li>
+                                        <?php echo $this->formbuilder->radio( 'area', '', 'r', FALSE, NULL, array('id'=>'area-char-rural')); ?>
+										<label for="area-char-rural">Rural</label>
+									</li>
+									<li>
+									    <?php echo $this->formbuilder->radio( 'area', '', 's', FALSE, NULL, array('id'=>'area-char-suburban')); ?>									    
+										<label for="area-char-suburban">Suburban</label>
+									</li>
+								</ul>
+							</div>
+						</div>
         				<div class="left w20">
         					<label class="question" for="suffix">Suffix</label>
         					<div class="field-box">

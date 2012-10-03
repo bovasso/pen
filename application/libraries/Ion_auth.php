@@ -408,5 +408,6 @@ class Ion_auth
 
 		return FALSE;
 	}
+	
 
 }

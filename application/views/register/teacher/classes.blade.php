@@ -1,49 +1,43 @@
 @layout('layouts/main')
+@section('scripts')
+<script type="text/javascript" src="/public/js/jquery-alerts/jquery.alerts.js" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+    $('.remove').on('click', function(event) {
+        event.preventDefault();
+        var url = $(this).attr('href');
+        jConfirm('Are you sure?', 'Confirmation Dialog', function(r) {
+            if (r) location.href = url;
+        });        
+    });
+</script>
+@endsection
+@section('stylesheets')
+<link href="/public/js/jquery-alerts/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen">
+@endsection
 @section('content')
 <div class="wrapper" id="sign-up-form">
 	<h1>Sign Up</h1>
 	<div id="sign-up-tabs" class="tabs">
 		<ul>
 			<li class="sign-up-step1"><a href="#"><span>1.</span>Create Your Account<span class="tab_checkmark"></span></a></li>
-			<li class="sign-up-step2"><a href="#"><span>2.Pick Your Session</span><span class="tab_checkmark"></span></a></li>
-			<li class="sign-up-step3 ui-state-active"><a href="#"><span>3.</span>Add Your Class<span class="tab_checkmark"></span></a></li>
+			<li class="sign-up-step2 ui-state-active"><a href="#"><span>2.Add Your Class</span><span class="tab_checkmark"></span></a></li>
+			<li class="sign-up-step3"><a href="#"><span>3.</span>Pick Your Session<span class="tab_checkmark"></span></a></li>
 		</ul>
-		<div id="sign-up-classes" class="tab">
+		<div id="sign-up-classes" class="tab">		    
 			<div class="tab-inner">
-			    <?php echo $this->formbuilder->open( NULL, FALSE, array('id' => 'sign-up-teacher-classes') ) ?>
+			    @if( $classes )
+			        <ol>
+    			    @foreach ($classes as $class )
+                        <li>{{$class->name}} <a href="/register/classes/{{$class->id}}"> edit </a> | <a href="/register/classes/{{$class->id}}/remove" class="remove">remove</a></li>
+                    @endforeach                
+                    </ol>
+			    @endif
+			    
+			    <?php echo $this->formbuilder->open( NULL, FALSE, array('id' => 'sign-up-class-form') ) ?>
+			        @if( isset($class) )
+			        <?php echo $this->formbuilder->hidden( 'id', $class->id ) ?>
+			        @endif
 					<fieldset>
-						<div class="left w50">
-							<label class="question" for="school-name">What is the name of your school?</label>
-							<div class="field-box">
-                                <?php echo $this->formbuilder->text( 'school', '' ) ?>
-							</div>
-						</div>
-						<div class="left w50">
-							<label class="question" for="state">In what state is it located?</label>
-							<div class="field-box">
-                                    <?php echo $this->formbuilder->drop_down( 'state', '', state_array() )  ?>
-							</div>
-						</div>
-						<div class="clear">
-							<legend class="question">How would you characterize the area where you teach?</legend>
-							<div class="field-box">
-								<ul class="radio-inline">
-									<li>
-									    <?php echo $this->formbuilder->radio( 'area', '', 'urban', FALSE, NULL, array('id'=>'area-char-urban')); ?>
-										<label for="area-char-urban">Urban</label>
-									</li>
-									<li>
-                                        <?php echo $this->formbuilder->radio( 'area', '', 'rural', FALSE, NULL, array('id'=>'area-char-rural')); ?>
-										<label for="area-char-rural">Rural</label>
-									</li>
-									<li>
-									    <?php echo $this->formbuilder->radio( 'area', '', 'suburban', FALSE, NULL, array('id'=>'area-char-suburban')); ?>									    
-										<label for="area-char-suburban">Suburban</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-
 						<fieldset class="session-class" id="class-info">
 							<div class="w100">
 								<label class="question" for="class-name">What is your class called?&nbsp;<span>(ex. Social Studies Period 3)</span></label>
@@ -65,16 +59,17 @@
 								<div class="field-box">
                                     <?php echo $this->formbuilder->text( 'class_size', '', '', array('size'=>2, 'maxlength'=>2, 'class'=>'text clear-value inline-input') ) ?>
 								</div>
-							</div>
-							<a href="#" id="add-session-class">+&nbsp;Add Another Class</a>
+							</div>							
+							<input type="submit" class="submit" name="submit" value="+&nbsp;Save & Add Another Class" />
+                            <!--
 							<a href="#" id="remove-session-class">–&nbsp;Remove This Class</a>
+						    -->
 						</fieldset>
 
 					</fieldset>
-					<a class="btn-back" href="/register/index">Back</a>
 					<div class="btn-wrapper">
-						<!-- <a href="" class="btn" id="val-sign-up-fieldset-1">Next Step</a> -->
-						<input type="submit" class="submit btn" name="submit" value="Next Step" />
+                        <!-- <a href="/register/course" class="submit btn" id="val-sign-up-fieldset-1">Next Step</a> -->
+                        <input type="submit" class="submit btn" name="submit" value="Next Step" />
 					</div>
 				</form>
 			</div>
