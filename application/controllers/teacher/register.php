@@ -75,7 +75,7 @@ class Register extends MY_Controller {
             
             $teacher->login();
             
-            redirect('register/classes');            
+            redirect('/teacher/register/classes');            
 	    }
 	    
 		$this->blade->render('register/teacher/account', $this->data);
@@ -103,7 +103,7 @@ class Register extends MY_Controller {
          */
         if ( $this->input->post('submit') == 'Next Step' ) {
             if ( count($teacher->classrooms) >= 1 ) {
-                redirect('/register/course');   
+                redirect('/teacher/register/course');   
                 exit;
             };
         };
@@ -117,7 +117,7 @@ class Register extends MY_Controller {
                 Classroom::transaction(function() use ($classroom){
                     $classroom->delete();                
                 });
-                redirect('/register/classes');
+                redirect('/teacher/register/classes');
             }
             
             $this->formbuilder->defaults = $classroom->to_array();
@@ -139,7 +139,7 @@ class Register extends MY_Controller {
                 $classroom->save();                
             });
             
-            redirect('/register/classes');
+            redirect('/teacher/register/classes');
         }
         
 	    $this->blade->render('register/teacher/classes', $this->data);			   	
@@ -162,7 +162,7 @@ class Register extends MY_Controller {
             $teacher = Teacher::session();
             $teacher->course_id = $this->input->post('course_id');
             $teacher->save();
-            redirect('register/complete');                        
+            redirect('/teacher/register/complete');                        
         }
         
 	    $this->blade->render('register/teacher/course', $this->data);		
@@ -176,6 +176,7 @@ class Register extends MY_Controller {
 	 **/
 	public function complete()
 	{
+	    $this->data['title'] = "Thanks!";			    
 	    $this->data['teacher'] = Teacher::session();
 	    $this->blade->render('register/teacher/complete', $this->data);			    
 	}

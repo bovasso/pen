@@ -10516,3 +10516,27 @@
 2012-10-03 17:48:57 ident [info] (Time: 0.6ms)  SELECT * FROM `users` WHERE `id` IN(?) [['8']]
 2012-10-03 17:48:57 ident [info] (Time: 1.5ms)  SHOW COLUMNS FROM `users`
 2012-10-03 17:48:57 ident [info] (Time: 0.4ms)  SELECT * FROM `users` WHERE `id` IN(?) [['8']]
+2012-10-03 17:54:24 ident [info] (Time: 0.2ms)  SET NAMES ? [['utf8']]
+2012-10-03 17:54:24 ident [info] (Time: 3.0ms)  SHOW COLUMNS FROM `users`
+2012-10-03 17:54:24 ident [info] (Time: 1.5ms)  SHOW COLUMNS FROM `classrooms`
+2012-10-03 17:54:24 ident [info] (Time: 1.3ms)  SHOW COLUMNS FROM `courses`
+2012-10-03 17:54:24 ident [info] (Time: 0.5ms)  SELECT * FROM `users` WHERE `id` IN(?) [['8']]
+2012-10-03 17:54:24 ident [info] (Time: 1.6ms)  SHOW COLUMNS FROM `users`
+2012-10-03 17:54:24 ident [info] (Time: 0.5ms)  SELECT * FROM `users` WHERE `id` IN(?) [['8']]
+2012-10-03 17:54:25 ident [info] (Time: 0.2ms)  SET NAMES ? [['utf8']]
+2012-10-03 17:54:25 ident [info] (Time: 1.9ms)  SHOW COLUMNS FROM `users`
+2012-10-03 17:54:25 ident [info] (Time: 1.9ms)  SHOW COLUMNS FROM `classrooms`
+2012-10-03 17:54:25 ident [info] (Time: 1.5ms)  SHOW COLUMNS FROM `courses`
+2012-10-03 17:54:25 ident [info] (Time: 0.7ms)  SELECT * FROM `users` WHERE `id` IN(?) [['8']]
+2012-10-03 17:54:26 ident [info] (Time: 0.2ms)  SET NAMES ? [['utf8']]
+2012-10-03 17:54:26 ident [info] (Time: 6.8ms)  SHOW COLUMNS FROM `users`
+2012-10-03 17:54:26 ident [info] (Time: 2.1ms)  SHOW COLUMNS FROM `classrooms`
+2012-10-03 17:54:26 ident [info] (Time: 1.7ms)  SHOW COLUMNS FROM `courses`
+2012-10-03 17:54:26 ident [info] (Time: 1.3ms)  SELECT * FROM `users` WHERE `id` IN(?) [['8']]
+2012-10-03 17:54:49 ident [info] (Time: 0.2ms)  SET NAMES ? [['utf8']]
+2012-10-03 17:54:49 ident [info] (Time: 1.7ms)  SHOW COLUMNS FROM `users`
+2012-10-03 17:54:49 ident [info] (Time: 1.8ms)  SHOW COLUMNS FROM `classrooms`
+2012-10-03 17:54:49 ident [info] (Time: 1.6ms)  SHOW COLUMNS FROM `courses`
+2012-10-03 17:54:49 ident [info] (Time: 0.5ms)  SELECT * FROM `users` WHERE `id` IN(?) [['8']]
+2012-10-03 17:54:49 ident [info] (Time: 1.9ms)  SHOW COLUMNS FROM `users`
+2012-10-03 17:54:49 ident [info] (Time: 0.5ms)  SELECT * FROM `users` WHERE `id` IN(?) [['8']]
