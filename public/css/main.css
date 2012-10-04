@@ -16,6 +16,9 @@
 	ul {margin: 0; padding: 0;}
 	html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 	body { margin: 0; font-size: 1em; line-height: 1.4; }
+	html,body {
+    height:100%;
+}
 
 /* @end */
 
@@ -36,9 +39,11 @@
 	#footer {
 		clear:both;
 		height: 48px;
-		margin-top: -48px; /* negative value of footer height */
-		position: relative;
+		position: fixed;
 		width: 100%;
+		bottom: fixed;
+		left:0;
+		bottom: 0;
 	}
 	/*Opera Fix*/
 	body:before {
@@ -634,7 +639,7 @@ body {
 		font-family:'Avenir LT W01 85 Heavy';
 	}
 	#answer-questions .left img{
-		margin: 0px 0 10px 0;
+		margin: 0px 10px 10px 0;
 	}
 	.action{
 		float: left;
@@ -1075,7 +1080,7 @@ margin:-10px 10px 0 0;
 	width: 28%;
 }
 #dashboard_progress table td.assignment_details .right .right{
-	width: 78%;
+	width: 68%;
 }
 /* @Group Student Progress Icons */
 .student_actions li{ float:left; padding: 0 4px;}
@@ -1126,4 +1131,118 @@ div.image-wrap {
 		-moz-box-shadow: 0 0 5px #888;
 	-webkit-box-shadow: 0 0 5px#888;
 	box-shadow: 0 0 5px #888;
+}
+
+/*@group Sudent Dashboard*/
+body.fluid{margin: 0 0 20px 0;
+	background: #f8f8f8 url('/public/images/bg452x21fluid_bg.png') repeat-y -45px top;
+}
+#fullwrapper{
+	width:100%;
+	height:100%;
+	float: left;
+}
+.content{
+	width: 1000px;
+	height: 100%;
+	margin: 0 auto 0;
+}
+#student_dashboard_left{
+	background-color: white;
+	min-height: 100%;
+	float: left;
+	width: 300px;
+}
+.fluid h3 {
+	font-size: 24px;
+	font-family: "TradeGothicW01-BoldCn20 675334";
+	margin-bottom: 20px; padding-left: 6px;
+	text-transform: uppercase;
+}
+#student_dashboard_left h4{
+	font-family:'Avenir LT W01 85 Heavy',arial,sans-serif;
+	margin-bottom: 5px;
+}
+#student_dashboard_right{
+	min-height: 100%;
+	float: left;
+	width: 640px;
+	margin: 0 0 0 0px;
+}
+#assignment_checklist{
+	margin: 0 0 20px 0;
+	float: left;
+}
+#assignment_checklist li{
+	width: 95%;
+	float: right;
+	list-style-type: decimal;
+	border-bottom: 1px solid #d9d9d9;
+	padding: 20px 0;
+	font-size: 14px;
+}
+#assignment_checklist li:last-child{
+	border-bottom: none;
+}
+
+
+/* Progressbar
+----------------------------------*/
+.ui-progressbar { height:2em; text-align: left; }
+.ui-progressbar .ui-progressbar-value {margin: 0px; height:100%;}/* Resizable */
+
+#assignment_status #progressbar{
+	width:300px;
+	height:1.6em;
+	margin: 5px 0 0px 0;
+	background-color: white; /* Needed for IEs */
+	-moz-box-shadow:    inset 0 0 10px #ccc;
+	-webkit-box-shadow: inset 0 0 10px #ccc;
+	box-shadow:         inset 0 0 10px #ccc;
+}
+
+#assignment_status .ui-progressbar-value{
+	background-image: linear-gradient(bottom, rgb(78,181,0) 14%, rgb(108,197,0) 57%);
+	background-image: -o-linear-gradient(bottom, rgb(78,181,0) 14%, rgb(108,197,0) 57%);
+	background-image: -moz-linear-gradient(bottom, rgb(78,181,0) 14%, rgb(108,197,0) 57%);
+	background-image: -webkit-linear-gradient(bottom, rgb(78,181,0) 14%, rgb(108,197,0) 57%);
+	background-image: -ms-linear-gradient(bottom, rgb(78,181,0) 14%, rgb(108,197,0) 57%);
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.14, rgb(78,181,0)),
+		color-stop(0.57, rgb(108,197,0))
+	);
+	-moz-box-shadow:    inset 0 0 10px #65b200;
+	-webkit-box-shadow: inset 0 0 10px #65b200;
+	box-shadow:         inset 0 0 10px #65b200;
+}
+#assignment_status .due_date{
+	font-size: 11px;
+	margin: 5px 0 20px 0;
+}
+#assigment_weeks{
+	background-color: #fafafa;
+	padding: 20px 20px 10px 20px;
+	float:left;
+	-moz-box-shadow:    inset 0 0 10px #ccc;
+	-webkit-box-shadow: inset 0 0 10px #ccc;
+	box-shadow:         inset 0 0 10px #ccc;
+	margin: 0 0 20px 0;
+	font-size: 0.8em;
+}
+
+#assigment_weeks > ul > li{
+	width: 84%;
+	padding: 15px 20px;
+	border-bottom: 1px solid #ccc;
+	float: left;
+}
+
+#assigment_weeks > ul > li:last-child{
+	width: 85%;
+	padding: 20px;
+	border-bottom: none;
+	float: left;
 }

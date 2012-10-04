@@ -39,6 +39,7 @@
 */
 
 $route['assignments/(:any)'] = 'assignments/$1';
+$route['student_dashboard/(:num)/(:num)/(:num)'] = 'dashboard/student_dashboard/$1/$2/$3';
 $route['profile/(:num)'] = 'profile/index/$1';
 $route['profile/edit/(:num)'] = 'profile/edit/$1';
 $route['dashboard/student_progress/all'] = 'dashboard/all';

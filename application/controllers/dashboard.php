@@ -22,9 +22,13 @@ class Dashboard extends MY_Controller {
 	}
 
 	function student_progress($student_id, $course_id, $week_id) {
-		$this->data['week'] = 
 		$this->data['title'] = "Student Progress";
 		$this->blade->render('dashboard/student_progress', $this->data);
+	}
+
+	function student_dashboard($student_id, $course_id, $week_id) {
+		$this->data['title'] = "Student Dashboard";
+		$this->blade->render('dashboard/student_dashboard', $this->data);
 	}
 
 }
