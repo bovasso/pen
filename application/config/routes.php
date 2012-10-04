@@ -41,6 +41,8 @@
 $route['assignments/(:any)'] = 'assignments/$1';
 $route['profile/(:num)'] = 'profile/index/$1';
 $route['profile/edit/(:num)'] = 'profile/edit/$1';
+$route['dashboard/student_progress/all'] = 'dashboard/all';
+$route['dashboard/student_progress/(:num)/(:num)/(:num)'] = 'dashboard/student_progress/$1/$2/$3';
 $route['dashboard/(:any)'] = 'dashboard/$1';
 $route['admin'] = 'admin/dashboard';
 $route['admin/(:any)'] = 'admin/dashboard/$1';

@@ -2,18 +2,85 @@
 	<thead>
 	    <tr>
 	    	<th>Student Name</th>
-	    	<th data-week="one">Week 1</th>
 	    	<th class="assignment_details">Assignments Details</th>
 	    </tr>
 	</thead>
 	<tbody>
 	    <tr>
-	    	<td>Brian L.</td>
-	    	<td data-week="four">
-	    		<ul class="student_actions">
-	    			<li class="read"><i class="doc default"></i></li>
-	    			<li class="answer"><i class="bubble default"></i></li>
-	    			<li class="comment"><i class="bubble default"></i></li>
+	    	<td class="student_left">
+	    		<ul class="class_list">
+	    			<li>
+	    				<div class="student_name"><a href="#">Brian L.</a></div>
+	    				<ul class="student_actions">
+			    			<li class="read"><a href=""><i class="doc default"></i></a></li>
+			    			<li class="answer"><a href=""><i class="bubble default"></i></a></li>
+			    			<li class="comment"><a href=""><i class="bubble default"></i></a></li>
+			    		</ul>
+	    			</li>
+	    			<li>
+	    				<div class="student_name"><a href="#">Holly N.</a></div>
+	    				<ul class="student_actions">
+			    			<li class="read"><a href=""><i class="doc default"></i></a></li>
+			    			<li class="answer"><a href=""><i class="bubble default"></i></a></li>
+			    			<li class="comment"><a href=""><i class="bubble default"></i></a></li>
+			    		</ul>
+	    			</li>
+	    			<li>
+	    				<div class="student_name"><a href="#">Jason P.</a></div>
+	    				<ul class="student_actions">
+			    			<li class="read"><a href=""><i class="doc default"></i></a></li>
+			    			<li class="answer"><a href=""><i class="bubble default"></i></a></li>
+			    			<li class="comment"><a href=""><i class="bubble default"></i></a></li>
+			    		</ul>
+	    			</li>
+	    			<li>
+	    				<div class="student_name"><a href="#">Brian L.</a></div>
+	    				<ul class="student_actions">
+			    			<li class="read"><a href=""><i class="doc default"></i></a></li>
+			    			<li class="answer"><a href=""><i class="bubble default"></i></a></li>
+			    			<li class="comment"><a href=""><i class="bubble default"></i></a></li>
+			    		</ul>
+	    			</li>
+	    			<li>
+	    				<div class="student_name"><a href="#">Holly N.</a></div>
+	    				<ul class="student_actions">
+			    			<li class="read"><a href=""><i class="doc default"></i></a></li>
+			    			<li class="answer"><a href=""><i class="bubble default"></i></a></li>
+			    			<li class="comment"><a href=""><i class="bubble default"></i></a></li>
+			    		</ul>
+	    			</li>
+	    			<li>
+	    				<div class="student_name"><a href="#">Jason P.</a></div>
+	    				<ul class="student_actions">
+			    			<li class="read"><a href=""><i class="doc default"></i></a></li>
+			    			<li class="answer"><a href=""><i class="bubble default"></i></a></li>
+			    			<li class="comment"><a href=""><i class="bubble default"></i></a></li>
+			    		</ul>
+	    			</li>
+	    			<li>
+	    				<div class="student_name"><a href="#">Brian L.</a></div>
+	    				<ul class="student_actions">
+			    			<li class="read"><a href=""><i class="doc default"></i></a></li>
+			    			<li class="answer"><a href=""><i class="bubble default"></i></a></li>
+			    			<li class="comment"><a href=""><i class="bubble default"></i></a></li>
+			    		</ul>
+	    			</li>
+	    			<li>
+	    				<div class="student_name"><a href="#">Holly N.</a></div>
+	    				<ul class="student_actions">
+			    			<li class="read"><a href=""><i class="doc default"></i></a></li>
+			    			<li class="answer"><a href=""><i class="bubble default"></i></a></li>
+			    			<li class="comment"><a href=""><i class="bubble default"></i></a></li>
+			    		</ul>
+	    			</li>
+	    			<li>
+	    				<div class="student_name"><a href="#">Jason P.</a></div>
+	    				<ul class="student_actions">
+			    			<li class="read"><a href=""><i class="doc default"></i></a></li>
+			    			<li class="answer"><a href=""><i class="bubble default"></i></a></li>
+			    			<li class="comment"><a href=""><i class="bubble default"></i></a></li>
+			    		</ul>
+	    			</li>
 	    		</ul>
 	    	</td>
 	    	<td class="assignment_details">
@@ -24,11 +91,10 @@
 
 					<li class="action w100">
     					<div class="left avatar a70">
-    						<span class="frame">&nbsp;</span>
-    						<img src="http://placehold.it/70x70">
+    						<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
     					</div><!-- end Avatar -->
 
-    					<div class="right w90">
+    					<div class="right">
 	    					<div class="action-details">
 	    						<div class="action-authoring">
 	    							<div class="action-title left">Brian L shared his Energy assignment:</div>
@@ -51,8 +117,7 @@
 	    							<div class="comment-container left w100">
 
 	    								<div class="left avatar a55 w10">
-    										<span class="frame">&nbsp;</span>
-    										<img src="http://placehold.it/55x55">
+				    						<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
     									</div><!-- end Avatar -->
     									<div class="comment-form right w90">
     										<form>
@@ -70,8 +135,7 @@
 	    							<div class="comment-container left w100">
 
 	    								<div class="left avatar a55 w10">
-    										<span class="frame">&nbsp;</span>
-    										<img src="http://placehold.it/55x55">
+				    						<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
     									</div><!-- end Avatar -->
     									<div class="comment-form right w90">
     										<form>
@@ -88,8 +152,7 @@
 
 					<li class="action w100">
     					<div class="left avatar a70">
-    						<span class="frame">&nbsp;</span>
-    						<img src="http://placehold.it/70x70">
+    						<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
     					</div><!-- end Avatar -->
 
     					<div class="right w90">
@@ -115,8 +178,7 @@
 	    							<div class="comment-container left w100">
 
 	    								<div class="left avatar a55 w10">
-    										<span class="frame">&nbsp;</span>
-    										<img src="http://placehold.it/55x55">
+				    						<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
     									</div><!-- end Avatar -->
     									<div class="comment-form right w90">
     										<form>
@@ -129,7 +191,7 @@
 	    							<div class="comment-container left w100 success">
 
 	    								<div class="left avatar a55 w10">
-    										<span class="airplane-success"></span>
+											<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/default55.png'?>);"></div>
     									</div><!-- end Avatar -->
     									<div class="comment-success right w90">
 			    							<p>Congratulations! You’ve completed part of your assignment.<br />
@@ -149,8 +211,7 @@
 	    							<div class="comment-container left w100">
 
 	    								<div class="left avatar a55 w10">
-    										<span class="frame">&nbsp;</span>
-    										<img src="http://placehold.it/55x55">
+    										<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
     									</div><!-- end Avatar -->
     									<div class="comment-form right w90">
     										<form>
