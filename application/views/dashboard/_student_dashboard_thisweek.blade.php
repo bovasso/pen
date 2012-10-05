@@ -8,4 +8,4 @@
 		@include('dashboard/_student_dashboard_right')
 	</div>
 
-</div>
+</div
