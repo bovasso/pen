@@ -6,7 +6,30 @@
 	<button id="all" href="" class"toggle">COMMENTS</button>
 </div><!-- END #TOGGLES -->
 
-<div id="assignment-comments">
+<div id="main_comments" class="comment-container w100">
+
+	<div class="left avatar a70 w10">
+		<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
+	</div><!-- end Avatar -->
+	<div class="comment-form right w80">
+		<form>
+			<textarea class="w100">Write a comment...</textarea>
+			<p id="student_selector" class="left">
+				<span>Select a Student: </span>
+				<input type="radio" name="radiogroup" id="radio-1">
+				<label for="radio-1">Jack A.</label>
+				<input type="radio" name="radiogroup" id="radio-1">
+				<label for="radio-1">Peggy O.</label>
+			</p>
+			<p class="btn-wrapper right">
+				<?php echo anchor_popup('#', 'SEND', array('class'=>"submit btn")) ?>
+			</p>
+		</form>
+	</div><!-- end Comment Form -->
+
+</div><!-- end Comments -->
+
+<div id="assignment-feed">
 	<ul id="actions" class="w100">
 
 		<li class="action w100">
@@ -14,9 +37,9 @@
 				<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
 			</div><!-- end Avatar -->
 
-			<div class="right">
+			<div class="right w80">
 				<div class="action-details">
-					<div class="action-authoring">
+					<div class="action-authoring w80">
 						<div class="action-title left">Brian L shared his Energy assignment:</div>
 						<div class="action-date right">Thursday, Sept 6, 2012</div>
 					</div> <!-- end Authour and Date -->
@@ -24,7 +47,7 @@
 					<div class="action-article">
 						<h4>Immigration to the United States is a complex demographic phenomenon that has been a major source of population growth and cultural change</h4>
 						<div class="article-image left"><img src="http://placehold.it/109x80"></div><!-- end Article Image -->
-						<div class="article-details right w80">
+						<div class="article-details right w70">
 							<p>Eum causa causa inhibeo, wisi lucidus vel, iusto brevitas te ea. Blandit gravis olim foras autem paratus consequat dolor augue. Vicis meus saluto quis, lobortis ea. Abico fatua tum lobortis gilvus brevitas fatua vel rusticus paratus.</p>
 							<p><a href="#" alt="Article Name">Read More</a></p>
 						</div>
@@ -39,9 +62,9 @@
 							<div class="left avatar a55 w10">
 	    						<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
 							</div><!-- end Avatar -->
-							<div class="comment-form right w90">
+							<div class="comment-form right w80">
 								<form>
-									<textarea>Write a comment...</textarea>
+									<textarea class="w90">Write a comment...</textarea>
 								</form>
 							</div><!-- end Comment Form -->
 
@@ -57,9 +80,9 @@
 							<div class="left avatar a55 w10">
 	    						<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
 							</div><!-- end Avatar -->
-							<div class="comment-form right w90">
+							<div class="comment-form right w80">
 								<form>
-									<textarea>Write a comment...</textarea>
+									<textarea class="w90">Write a comment...</textarea>
 								</form>
 							</div><!-- end Comment Form -->
 
@@ -75,7 +98,7 @@
 				<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
 			</div><!-- end Avatar -->
 
-			<div class="right w90">
+			<div class="right w80">
 				<div class="action-details">
 					<div class="action-authoring">
 						<div class="action-title left">Brian L shared his Energy assignment:</div>
@@ -85,7 +108,7 @@
 					<div class="action-article">
 						<h4>Immigration to the United States is a complex demographic phenomenon that has been a major source of population growth and cultural change</h4>
 						<div class="article-image left"><img src="http://placehold.it/109x80"></div><!-- end Article Image -->
-						<div class="article-details right w80">
+						<div class="article-details right w70">
 							<p>Eum causa causa inhibeo, wisi lucidus vel, iusto brevitas te ea. Blandit gravis olim foras autem paratus consequat dolor augue. Vicis meus saluto quis, lobortis ea. Abico fatua tum lobortis gilvus brevitas fatua vel rusticus paratus.</p>
 							<p><a href="#" alt="Article Name">Read More</a></p>
 						</div>
@@ -100,9 +123,9 @@
 							<div class="left avatar a55 w10">
 	    						<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
 							</div><!-- end Avatar -->
-							<div class="comment-form right w90">
+							<div class="comment-form right w80">
 								<form>
-									<textarea>Write a comment...</textarea>
+									<textarea class="w90">Write a comment...</textarea>
 								</form>
 							</div><!-- end Comment Form -->					
 
@@ -113,7 +136,7 @@
 							<div class="left avatar a55 w10">
 								<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/default55.png'?>);"></div>
 							</div><!-- end Avatar -->
-							<div class="comment-success right w90">
+							<div class="comment-success right w80">
 								<p>Congratulations! You’ve completed part of your assignment.<br />
 									Keep the conversation going.
 								</p>
@@ -133,9 +156,9 @@
 							<div class="left avatar a55 w10">
 								<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
 							</div><!-- end Avatar -->
-							<div class="comment-form right w90">
+							<div class="comment-form right w80">
 								<form>
-									<textarea>Write a comment...</textarea>
+									<textarea class="w90">Write a comment...</textarea>
 								</form>
 							</div><!-- end Comment Form -->
 

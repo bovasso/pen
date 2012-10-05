@@ -22,7 +22,6 @@
 			<div id="content">
 				@yield('content')
 			</div>
-
 		</div><!-- .sticky-wrapper -->
 	</div><!-- #sticky-wrapper -->
 

@@ -1,4 +1,4 @@
-<div class="content">
+<div class="wrapper">
 
 	<div id="student_dashboard_left" class="left">
 		@include('dashboard/_student_dashboard_left')

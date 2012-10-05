@@ -85,7 +85,7 @@
 	    	</td>
 	    	<td class="assignment_details">
 	    	
-	    	<div id="assignment-comments">
+	    	<div id="assignment-feed">
 
 				<ul id="actions" class="w100">
 
