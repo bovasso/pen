@@ -1,9 +1,9 @@
 <h1 class="left w50">ACTIVITY FEED</h1>
 
 <div id="toggles" class="right w40">
-	<button id="all" href="" class"toggle">ALL</button>
-	<button id="all" href="" class"toggle">ASSIGNMENTS</button>
-	<button id="all" href="" class"toggle">COMMENTS</button>
+	<button id="all" href="" class="toggle_left active">ALL</button>
+	<button id="all" href="" class="">ASSIGNMENTS</button>
+	<button id="all" href="" class="toggle_right">COMMENTS</button>
 </div><!-- END #TOGGLES -->
 
 <div id="main_comments" class="comment-container w100">
