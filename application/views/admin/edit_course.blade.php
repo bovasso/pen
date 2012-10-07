@@ -98,7 +98,7 @@ s@layout('layouts/admin')
           <tbody>
               @foreach ($classrooms as $class)
                   @if ($class->seats_available > 0 )
-                  <tr id="class_row_{{$class->id}}"><td>{{$class->school}}</td><td>{{$class->name}}</td><td>{{$class->state}}</td><td>{{$class->class_size}}</td><td>{{$class->seats_available}}</td><td><a href="/admin/assign_partnership_with_class/{{$course->id}}/{{$class->id}}" class="btn btn-info partner_with_class">Yes</a></td></tr>
+                  <tr id="class_row_{{$class->id}}"><td>{{$class->school->name}}</td><td>{{$class->name}}</td><td>{{$class->school->state}}</td><td>{{$class->class_size}}</td><td>{{$class->seats_available}}</td><td><a href="/admin/assign_partnership_with_class/{{$course->id}}/{{$class->id}}" class="btn btn-info partner_with_class">Yes</a></td></tr>
                   @endif
               @endforeach
           </tbody>
@@ -162,13 +162,13 @@ s@layout('layouts/admin')
                         @if( $classroom->partnerships )                                       
                         <tbody>                        
                             <tr rowspan="2">
-                                <td>{{$classroom->seats_available}}</td><td>{{$classroom->school}}</td><td>{{$classroom->name}}</td><td>{{$classroom->state}}</td><td>{{$classroom->class_size}}</td><td><a href="#" data-row="#row_{{$key}}" class="show_hide_partner btn">View Partners</a>&nbsp;<a href="#" data-classroom="{{$classroom->id}}" class="view_students_button btn">View Students</a></td>
+                                <td>{{$classroom->seats_available}}</td><td>{{$classroom->school->name}}</td><td>{{$classroom->name}}</td><td>{{$classroom->school->state}}</td><td>{{$classroom->class_size}}</td><td><a href="#" data-row="#row_{{$key}}" class="show_hide_partner btn">View Partners</a>&nbsp;<a href="#" data-classroom="{{$classroom->id}}" class="view_students_button btn">View Students</a></td>
                             </tr>
                         </tbody>                                                                                                                                
                         <tbody class="hide" id="row_{{$key}}"> 
                             @foreach ( $classroom->partnerships as $key => $partner )                   
                             <tr>
-                                <td><i class="icon-arrow-right"></i></td><td>{{$partner->classroom->school}}</td><td>{{$partner->classroom->name}}</td><td>{{$partner->classroom->state}}</td><td>{{$partner->classroom->class_size}}</td><td><a href="/admin/remove_partnership_with_class/{{$partner->course_id}}/{{$partner->parent_classroom->id}}/{{$partner->classroom->id}}" class="btn">Undo</a></td>
+                                <td><i class="icon-arrow-right"></i></td><td>{{$partner->classroom->school->name}}</td><td>{{$partner->classroom->name}}</td><td>{{$partner->classroom->school->state}}</td><td>{{$partner->classroom->class_size}}</td><td><a href="/admin/remove_partnership_with_class/{{$partner->course_id}}/{{$partner->parent_classroom->id}}/{{$partner->classroom->id}}" class="btn">Undo</a></td>
                             </tr>
                             @endforeach
                         </tbody>  
@@ -194,7 +194,7 @@ s@layout('layouts/admin')
                         @foreach ($classrooms as $key => $classroom)
                             @if( !$classroom->partnerships )                                       
                                 <tr>
-                                    <td>&nbsp;</td><td>{{$classroom->school}}</td><td>{{$classroom->name}}</td><td>{{$classroom->state}}</td><td>{{$classroom->class_size}}</td><td><a href="#" data-classroom="{{$classroom->id}}" class="assign_class btn">Partner</a>&nbsp;<a href="/admin/remove_class_from_course/{{$classroom->course_id}}/{{$classroom->id}}" class="btn">Remove</a></td>
+                                    <td>&nbsp;</td><td>{{$classroom->school->name}}</td><td>{{$classroom->name}}</td><td>{{$classroom->school->state}}</td><td>{{$classroom->class_size}}</td><td><a href="#" data-classroom="{{$classroom->id}}" class="assign_class btn">Partner</a>&nbsp;<a href="/admin/remove_class_from_course/{{$classroom->course_id}}/{{$classroom->id}}" class="btn">Remove</a></td>
                                 </tr>                          
                             @endif  
                         @endforeach

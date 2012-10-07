@@ -98,7 +98,7 @@
         					</div>
         				</div>
         			</fieldset>
-        			<a class="btn-back" href="#" onClick="jQuery('#sign-up-tabs').tabs('select',1); return false;">Back</a>
+                    <!-- <a class="btn-back" href="#" onClick="jQuery('#sign-up-tabs').tabs('select',1); return false;">Back</a> -->
         			<div class="btn-wrapper">
         				<input type="submit" class="submit btn" name="submit" value="Create Account" />
         			</div>

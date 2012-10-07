@@ -1,7 +1,6 @@
 <?php
 
 class Teacher extends User {
-    const TEACHER_ROLE = 3;
     static $table_name = 'users';
     
     static $has_many = array('classrooms');
@@ -28,7 +27,7 @@ class Teacher extends User {
      **/
     public function save_as_teacher()
     {
-        $this->role_id = Teacher::TEACHER_ROLE;
+        $this->role_id = User::TEACHER_ROLE;
     }
         
 }

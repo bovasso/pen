@@ -1,7 +1,8 @@
 <?php
 
 class User extends ActiveRecord\Model {
-
+    const STUDENT_ROLE = 2;
+    const TEACHER_ROLE = 3;
     
     static $has_many = array('penpals', 'through'=>'penpals');
     static $belongs_to = array('classroom');
@@ -25,6 +26,17 @@ class User extends ActiveRecord\Model {
         }		
         
         return parent::find_by_pk(array(8), NULL);
+    }
+    
+    /**
+     * Full name
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_full_name()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
     
     /**

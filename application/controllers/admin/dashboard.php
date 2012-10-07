@@ -123,6 +123,7 @@ class Dashboard extends CI_Controller {
         $this->crud->required_fields('state','school','name', 'age_range_start', 'age_range_end', 'class_size');
         $this->crud->set_relation('teacher_id','users','{first_name} {last_name}');        
         $this->crud->set_relation('group_id','groups', 'code');
+        $this->crud->set_relation('school_id','schools', 'name');        
         $this->crud->change_field_type('group_id', 'readonly');
         
 	         	            
@@ -152,7 +153,6 @@ class Dashboard extends CI_Controller {
                 $course = Course::find_by_pk(array($id), NULL);
                 $this->data['course'] = $course;                
                 $this->data['classrooms'] = $course->classrooms;
-//                $this->data['class_dropdown'] = form_dropdown('classes', $class_dropdown);                                
                 $this->crud->add_action('Remove', '', '', 'ui-icon-minus', array($this,'assign_or_remove_class_to_course_link'));
                 $output = $this->crud->render();                   
                 $this->render($output, 'admin/edit_course', $only_jquery = TRUE);
@@ -446,41 +446,37 @@ class Dashboard extends CI_Controller {
 	 * @return void
 	 * @author Jason Punzalan
 	 **/
-	public function assign_partnership_with_class($course_id = NULL, $class_id = NULL, $partnership_id)
+	public function assign_partnership_with_class($course_id = NULL, $classroom_id = NULL, $partnership_id)
 	{
-	    $this->db->trans_start();
+        Partnership::transaction(function() use ($course_id, $classroom_id, $partnership_id) {
+            $attributes = array('course_id' => $course_id, 'classroom_id' => $classroom_id, 'partnership_id' => $partnership_id);
+            Partnership::create($attributes);
+            $attributes = array('course_id' => $course_id, 'classroom_id' => $partnership_id, 'partnership_id' => $classroom_id);
+            Partnership::create($attributes);                        
+        });
 
-	    $sql = 'INSERT INTO partnerships (course_id, classroom_id, partnership_id) VALUES (?, ?, ?)';
-        $this->db->query($sql, array($course_id, $class_id, $partnership_id));
-
-	    $sql = 'SELECT ';
-        $this->db->query($sql, array($course_id, $class_id, $partnership_id));
-
-	    $sql = 'INSERT INTO partnerships (course_id, classroom_id, partnership_id) VALUES (?, ?, ?)';
-        $this->db->query($sql, array($course_id, $partnership_id, $class_id));
-
-        $this->db->trans_complete();        
         redirect( $this->agent->referrer() );                
 	    
 	}
 	
 	/**
-	 * undocumented function
+	 * Remove Partnerships function
 	 *
 	 * @return void
 	 * @author Jason Punzalan
 	 **/
-	public function remove_partnership_with_class($course_id = NULL, $class_id = NULL, $partnership_id)
+	public function remove_partnership_with_class($course_id = NULL, $classroom_id = NULL, $partnership_id)
 	{
-	    $this->db->trans_start();
+	    Partnership::transaction(function() use ($course_id, $classroom_id, $partnership_id) {
+	        
+            $partnership = Partnership::find_by_course_id_and_classroom_id_and_partnership_id($course_id, $classroom_id, $partnership_id);
+            
+            $partnership->delete();
+            
+            $partnership = Partnership::find_by_course_id_and_classroom_id_and_partnership_id($course_id, $partnership_id, $classroom_id);                        
+            $partnership->delete();            
+        });
 
-	    $sql = 'DELETE FROM partnerships WHERE course_id = ? AND classroom_id = ? AND partnership_id = ?';
-        $this->db->query($sql, array($course_id, $class_id, $partnership_id));
-
-	    $sql = 'DELETE FROM partnerships WHERE course_id = ? AND classroom_id = ? AND partnership_id = ?';
-        $this->db->query($sql, array($course_id, $partnership_id, $class_id));
-
-        $this->db->trans_complete();        
         redirect( $this->agent->referrer() );                
 	}
 	
