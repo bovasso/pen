@@ -33,3 +33,11 @@
 	</div>
 
 @endsection
+
+@section('scripts')
+	<script type="text/javascript">
+	$('.field-box select').customSelect({
+		fixedWidth: true
+	});
+	</script>
+@endsection

@@ -7,7 +7,7 @@
 </script>
 @endsection
 @section('scripts')
-<div id="assignment-comments" class="tab-inner">
+<div id="assignment-feed" class="tab-inner">
 	<ul id="actions" class="w100">
 
 		<li class="action w100">

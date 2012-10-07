@@ -22,7 +22,7 @@
 		</div><!-- end Assignment Tab 2 -->
 
 		<div id="assignment-tabs-3" class="tab">
-			<div id="assignment-comments" class="tab-inner">
+			<div id="assignment-feed" class="tab-inner">
 			    @yield('comment')
 			</div>
 		</div>

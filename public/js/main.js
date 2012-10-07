@@ -24,10 +24,6 @@ $(document).ready(function() {
   // $('.nav-link').on('click', function(event) {
   //   event.preventDefault();
   // });
-  
-	$('.field-box select').customSelect({
-		fixedWidth: true
-	});
 
 	// Form Element Javascript
 	$('.radio-lines').find('input[type="radio"]').each(function() {

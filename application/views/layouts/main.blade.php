@@ -5,16 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="shortcut icon" type="image/png" href="favicon.ico">
+	<link rel="shortcut icon" type="image/png" href="<?php echo asset_url()?>favicon.ico">
 	<link type="text/css" rel="stylesheet" href="<?php echo asset_url()?>css/main.css" media="all">
     <link type="text/css" rel="stylesheet" href="/public/js/humane/themes/original.css" media="all">	    
 	@yield('stylesheets')
 
 	<!-- Boilerplate/Header JS & External HTTP Request Scripts -->
 	<script type="text/javascript" src="<?php echo asset_url() ?>js/modernizr.js"></script>
-	<!--
 	<script type="text/javascript" src="http://fast.fonts.com/jsapi/54aa4dbe-b544-446f-8b71-2ac8fa086982.js"></script>
-	-->
+	
 </head>
 <body <?php if(isset($onload)){echo "onload=$onload";}?>>
 	@include('partials/header')
