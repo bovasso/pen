@@ -1,5 +1,4 @@
 @layout('layouts/main')
-@endsection
 @section('content')
 <div class="wrapper" id="assignments">
 	<h1>All Assignments</h1>
