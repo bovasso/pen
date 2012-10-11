@@ -4,8 +4,8 @@ class User extends ActiveRecord\Model {
     const STUDENT_ROLE = 2;
     const TEACHER_ROLE = 3;
     
-    static $has_many = array('penpals', 'through'=>'penpals');
     static $belongs_to = array('classroom');
+
     /**
      * Penpals sorted by course
      *
@@ -50,4 +50,19 @@ class User extends ActiveRecord\Model {
         $ci =& get_instance();
         return $ci->session->set_userdata('user_id', $this->id);
     }
+    
+    /**
+     * Homework
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_homework()
+    {
+        $homework = Homework::find_by_user_id( $this->id );
+        
+        if (is_null($homework)) return new Homework();
+        return $homework;
+    }
+    
 }

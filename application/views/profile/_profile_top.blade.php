@@ -15,7 +15,7 @@
 					<ul>
 						<li>
 							<label>School:</label>
-							<p>{{$user->classroom->school}}</p>
+							<p>{{$user->school->name}}</p>
 						</li>
 						<li>
 							<label>Class:</label>
@@ -30,7 +30,7 @@
 		<div class="right w50">
 			<div class="profile-box w100">
 				<h3>About</h3>
-				<p>{{$user->about}}</p>
+				<p>{{$user->about_me}}</p>
 			</div>
 
 		</div><!-- end Right Column-->

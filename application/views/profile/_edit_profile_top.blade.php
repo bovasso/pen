@@ -83,8 +83,8 @@
 				</div>
 				<div class="right w50">
 					<ul>
-						<li><label>School:</label>&nbsp;{{$user->classroom->school}}</li>
-						<li><label>Class:</label>&nbsp;{{$user->classroom->school}}</li>
+						<li><label>School:</label>&nbsp;{{$user->school->name}}</li>
+						<li><label>Class:</label>&nbsp;{{$user->school->name}}</li>
 					</ul>
 				</div>
 			</div>

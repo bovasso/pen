@@ -20,7 +20,8 @@ class Profile extends MY_Controller {
 		$this->blade->render('profile/edit', $this->data);
 	}
 	function student_teacher() {
-
+        $user = Student::session();	
+        $this->data['user'] = $user;        	
 		$this->data['title'] = "Student Teacher Profile";
 		$this->blade->render('profile/student_teacher', $this->data);
 	}

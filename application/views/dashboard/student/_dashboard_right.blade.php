@@ -1,0 +1,55 @@
+<h1 class="left w50">ACTIVITY FEED</h1>
+
+<!-- <div id="toggles" class="right w40">
+    <button id="all" href="" class="toggle_left active">ALL</button>
+    <button id="all" href="" class="">ASSIGNMENTS</button>
+    <button id="all" href="" class="toggle_right">COMMENTS</button>
+</div>-->
+<!-- END #TOGGLES --> 
+
+<div id="main_comments" class="comment-container w100">
+
+	<div class="left avatar a70 w10">
+		<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
+	</div><!-- end Avatar -->
+	<div class="comment-form right w80">
+        <?php echo $this->formbuilder->open( '/student/dashboard/save_comment', array('id'=>'comment')) ?>
+            <?php echo $this->formbuilder->textarea( 'comment', '', '', array('class'=>'w100')) ?>
+            <!-- <p id="student_selector" class="left">
+                <span>Select a Student: </span>
+                <input type="radio" name="radiogroup" id="radio-1">
+                <label for="radio-1">Jack A.</label>
+                <input type="radio" name="radiogroup" id="radio-1">
+                <label for="radio-1">Peggy O.</label>
+            </p> -->
+			<p class="btn-wrapper right">
+				<input type="submit" class="submit btn" value="SEND"/>
+			</p>
+		</form>
+	</div><!-- end Comment Form -->
+
+</div><!-- end Comments -->
+
+<div id="assignment-feed">
+	<ul id="actions" class="w100">
+        
+        @foreach( $activities as $activity)
+		<li class="action w100">
+			<div class="left avatar a70">
+				<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
+			</div><!-- end Avatar -->            
+			<div class="right w80">
+				<div class="action-details">
+					<div class="action-auth oring w80">
+						<div class="action-title left">{{$activity->user->first_name}} {{$activity->action}}</div>
+						<div class="action-date right">{{$activity->full_date}}</div>
+					</div> <!-- end Author and Date -->
+                    
+                    {{$activity->output}}
+                    
+				</div>
+			</div><!-- end Right -->
+		</li><!-- end Comment Item -->
+        @endforeach
+	</ul>
+</div>

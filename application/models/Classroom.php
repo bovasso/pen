@@ -8,6 +8,7 @@ class Classroom extends ActiveRecord\Model {
     static $belongs_to = array(
         array('course'),
         array('school'),
+        array('teacher')
     );    
         
     /**
