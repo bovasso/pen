@@ -1,5 +1,4 @@
 @layout('layouts/main')
-@endsection
 @section('content')
 <?php echo $this->ci_alerts->display() ?>
 <div class="wrapper" id="assignments">
