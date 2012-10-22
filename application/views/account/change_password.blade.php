@@ -5,7 +5,7 @@
 
 <div id="infoMessage"><?php echo $message;?></div>
 
-<?php echo form_open("auth/change_password");?>
+<?php echo form_open("account/change_password");?>
 
       <p>Old Password:<br />
       <?php echo form_input($old_password);?>

@@ -1,10 +1,12 @@
 <?php
 
 class User extends ActiveRecord\Model {
-    const STUDENT_ROLE = 2;
-    const TEACHER_ROLE = 3;
     
-    static $belongs_to = array('classroom');
+    static $belongs_to = array(
+        array('classroom'),
+        array('role')
+    );
+    
 
     /**
      * Penpals sorted by course
@@ -18,16 +20,16 @@ class User extends ActiveRecord\Model {
         return $penpals;
     }
     
-    public static function session() {
-        $ci =& get_instance();
-        $user = $ci->ion_auth->user()->row();
-        if ( isset($user->id) ) {
-            return parent::find_by_pk(array($user->id), NULL);
-        }		
-        
-        return parent::find_by_pk(array(8), NULL);
+    /**
+     * undocumented function
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_avatar()
+    {
+        if (empty($this->avatar)) return '/public/images/default_avatars/default144.png';
     }
-    
     /**
      * Full name
      *
@@ -63,6 +65,31 @@ class User extends ActiveRecord\Model {
         
         if (is_null($homework)) return new Homework();
         return $homework;
-    }
+    }    
+    
+    /**
+     * Session
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public static function session()
+    {       
+        $ci =& get_instance();
+        
+        return $ci->ion_auth->user();
+    } 
+    
+    /**
+     * Override find_by_pk
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    // public static function find_by_pk( $id )
+    // {       
+    //     $user = ActiveRecord\Model::find_by_sql(array($id), NULL);
+    //     var_dump($user);exit;
+    // }
     
 }

@@ -1,6 +1,6 @@
-@foreach($homework->answers as $answer )
+@foreach($homework->answers as $key => $answer )
 <div class="article-qa left w100">
-    <h4>Question {{$answer->question->position}}</h4>	
+    <h4>Question {{$key + 1}}</h4>	
 	<p>{{$answer->question->title}}</p>
 	<div class="left avatar a55 w10">
 			<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
@@ -37,7 +37,7 @@
 			
     			<div class="comment-form right w80">
                       <?php echo $this->formbuilder->open( '/student/dashboard/save_reply', array('id'=>'comment')) ?>                                
-    					<?php echo $this->formbuilder->textarea( 'comment', '', '', array('class'=>'w90')) ?>       
+    					<?php echo $this->formbuilder->textarea( 'comment', '', '', array('class'=>'w100', 'style'=>'width:100%')) ?>       
                           <?php echo $this->formbuilder->hidden( 'activity_id', $answer->id) ?>               							                             
     					<p class="btn-wrapper right">
               				<input type="submit" class="submit btn" value="reply"/>

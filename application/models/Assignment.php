@@ -44,4 +44,15 @@ class Assignment extends ActiveRecord\Model {
         return $topics[$this->week];
      }
      
+     /**
+      * Due Date
+      *
+      * @return void
+      * @author Jason Punzalan
+      **/
+     public function get_due_date()
+     {                         
+         $date = $this->read_attribute('due_date');
+         return $date->format('l, F j');
+     }
 }

@@ -12,14 +12,19 @@
 		</form>
 
 		<div id="login" class="is-logged-out">
-			<a href="#" class="toggle">Log In</a>
-			<form action="#" method="post" class="is-hidden">
+            @if ( !logged_in() )
+			<a href="/account/login" class="toggle">Login</a>
+			@else
+            <a href="/account/logout" class="toggle">Logout</a>			
+			@endif
+			<!--
+			<form action="#" id="login-form" method="post" class="is-hidden">
 				<div class="field">
-					<label for="login-username" class="hidden">Username or Email</label>
+					<label for="login-username">Username or Email</label>
 					<input type="text" class="text clear-value" name="login-username" id="login-username" value="Username or Email" />
 				</div>
 				<div class="field">
-					<label for="login-password" class="hidden">Password</label>
+					<label for="login-password">Password</label>
 					<input type="password" class="text clear-value" name="login-password" id="login-password" value="Password" />
 				</div>
 				<div class="field">
@@ -29,7 +34,7 @@
 					<input type="submit" class="submit" name="login" value="Login" />
 				</div>
 				<span class="arrow"></span>
-			</form>
+			</form>-->
 		</div><!-- #login -->
 
 	</div><!-- .wrapper -->

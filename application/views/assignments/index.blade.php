@@ -13,7 +13,7 @@
 
 				<div class="w100 featured-topic">
 					<div class="img-wrapper left "> 
-						<img src="http://placehold.it/354x196" class="">
+                        {{$assignment->video}}
 					</div>
 					<div class="right">
 						<h2>{{$assignment->name}}</h2>

@@ -6,7 +6,7 @@ class Partnership extends ActiveRecord\Model {
         array('parent_classroom', 'class' => 'Classroom', 'foreign_key' => 'classroom_id' )        
     );
     
-    static $after_create = array('create_penpal_relationships'); # new records only
+    // static $after_create = array('create_penpal_relationships'); # new records only
     static $before_destroy = array('destroy_penpal_relationships');
 
     /**
@@ -62,20 +62,19 @@ class Partnership extends ActiveRecord\Model {
 
         // If we have extra students left over, match again
         if ( count($checklist) > 0 ) {
-            foreach($checklist as $obj ) {
-                foreach($students as $key => $student){
-                    if ( $student->classroom_id !== $obj->classroom_id) {   
+            foreach($checklist as $obj ) { 
+                foreach($students as $key => $student){                     
+                    if ( $obj->classroom_id !== $student->classroom_id) {   
                        $penpals[] = array($obj, $student);
-                        array_splice($students, $key, 1);
-                        break;                 
+                       array_splice($students, $key, 1);
+                       break;                 
                     }
                 }                
             }
-        }
-
+        }    
+        
         foreach($penpals as $entry ) {
             Penpal::create(array('classroom_id'=>$entry[0]->classroom_id, 'user_id'=>$entry[0]->id, 'penpal_id'=>$entry[1]->id));
-//            Penpal::create(array('classroom_id'=>$entry[1]->classroom_id, 'user_id'=>$entry[1]->id, 'penpal_id'=>$entry[0]->id));
         }
     }
     

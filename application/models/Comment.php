@@ -2,7 +2,10 @@
 
 class Comment extends ActiveRecord\Model {
     
-    static $belongs_to = array('user');
+    static $belongs_to = array(
+        array('user'),
+    );   
+    
     static $after_create = array('create_activity'); # new records only
     
     static $delegate = array( 
@@ -18,12 +21,23 @@ class Comment extends ActiveRecord\Model {
      **/
     public function create_activity()
     {
-      if ( !is_null($this->parent_id) ) return TRUE;
       $activity = new Activity();
       $activity->user_id = $this->user->id;
       $activity->type = 'comment';
       $activity->source_id = $this->id;
       $activity->save();      
+    }        
+    
+    /**
+     * belongsToUser
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_belongsToUser()
+    {    
+        $user = Student::session();	    
+        return $this->answer->user->id == $user->id;
     }
     
     /**
@@ -45,7 +59,7 @@ class Comment extends ActiveRecord\Model {
      **/
     public function get_action()
     {
-        return ' wrote a comment ';
+        return ' commented on your response ';
     }
     
     /**
@@ -56,9 +70,21 @@ class Comment extends ActiveRecord\Model {
      **/
     public function get_replies()
     {
-        $replies = Comment::find('all', array('conditions'=> array('parent_id = ?', $this->id) ));
+        $replies = Reply::find('all', array('conditions'=> array('parent_id = ? AND source="comment"', $this->id) ));
         return $replies;
     }
+
+    /**
+     * Get Answer
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_answer()
+    {
+        $answer = Answer::find_by_pk(array($this->parent_id), NULL);
+        return $answer;
+    }     
     
     /**
      * Output
@@ -68,7 +94,7 @@ class Comment extends ActiveRecord\Model {
      **/
     public function get_output()
     {
-        $ci =& get_instance();
+        $ci =& get_instance();   
         $data['comment'] = $this;
         echo $ci->blade->render('dashboard/student/_comment', $data, TRUE);         
     }

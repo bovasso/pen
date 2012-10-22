@@ -238,12 +238,13 @@ input[type="submit"], button, label {
     height: 35px;
 }
 .student_progress_header .field-box .mySelect li.level-1 {
-    width: 162px;
+/*    width: 162px;*/
+  width: 115%;
 }
 .field-box .mySelect li span {
     display: block;
     padding: 5px 12px;
-    width: 108px;
+    width: 100%;
 }
 .field-box .mySelect li ul {
     background: #fafafa;
@@ -258,7 +259,7 @@ input[type="submit"], button, label {
     position: absolute;
     top: 35px;
     left: 0;
-    width: 130px;
+    width: 115%;
 }
 .field-box .mySelect li ul span:hover {
     background: #e1e1e1;
@@ -457,7 +458,7 @@ li:not(#foo) > input[type='checkbox']:checked + label {
     width: 100%;
 }
 #content .wrapper {
-    overflow: visible;
+/*    overflow: visible;    */
 }
 
 /* @group tabs */
@@ -476,7 +477,7 @@ li:not(#foo) > input[type='checkbox']:checked + label {
     margin-right: -2.375%;
     padding: 0 2% 0 4px;
     position: relative;
-    width: 32.375%;
+    width: 32.575%;
     z-index: 5;
 }
 .tabs > ul > li:last-child {
@@ -781,7 +782,7 @@ li:not(#foo) > input[type='checkbox']:checked + label {
 .article-qa {
     font-size: 13px;
     padding: 0 0 20px 0;
-    margin: 0 0 20px 0;
+    margin: 0 10px 20px 10px;
     border-bottom: 1px solid #ccc;
 }
 .article-qa p {

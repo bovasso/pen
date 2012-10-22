@@ -9,7 +9,7 @@
 	
 	<div id="infoMessage"><?php echo $message;?></div>
 	
-    <?php echo form_open("auth/login");?>
+    <?php echo form_open("account/login");?>
     	
       <p>
       	<label for="identity">Email/Username:</label>

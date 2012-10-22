@@ -2,7 +2,8 @@
 
 class Classroom extends ActiveRecord\Model {
     static $has_many = array(
-        array('students', 'class'=>'User', 'conditions'=>'role_id = 2'),
+        array('students', 'class'=>'Student', 'conditions'=>'role_id = 2'),
+        array('students_sorted_by_name', 'class'=>'Student', 'conditions'=>'role_id = 2', 'order'=>'first_name ASC'),        
     );    
 
     static $belongs_to = array(
@@ -46,4 +47,19 @@ class Classroom extends ActiveRecord\Model {
         return $total_size;
     }
     
+    /**
+     * Get Group 
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_group()
+    {       
+        if ( isset($this->group) ) return $this->group;
+        
+        $group = new Group();
+        $group->classroom_id = $this->id;
+        $group->save();
+        return $group;
+    }
 }

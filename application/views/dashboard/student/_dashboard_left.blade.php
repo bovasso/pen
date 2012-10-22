@@ -2,7 +2,7 @@
 
 <div id="assignment_checklist">
 	<h4>{{$assignment->name}}</h4>
-	<div class="article-image left"></div><!-- end Article Image -->
+	<div class="article-image left">{{$assignment->video}}</div><!-- end Article Image -->
 	<ol>
 		<li><p class="left w80">Watch the video on Immigration and select an article</p><a href="/assignments" class="check_status not_started right"></a></li>
 		<li><p class="left w80">Answer the questions about the article you selected</p><a href="/assignments/article/{{$assignment->id}}" class="check_status not_started right"></a></li>

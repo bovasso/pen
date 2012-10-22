@@ -2,8 +2,11 @@
 
 class Student extends User {
     static $table_name = 'users';    
-    static $foreign_key = 'user_id';
-    static $belongs_to = array('school', 'classroom');    
+    static $belongs_to = array(
+        array('school'),
+        array('classroom')
+    );
+    
     static $before_create = array('save_as_student'); # new records only
 
     /**
@@ -28,7 +31,19 @@ class Student extends User {
         $penpals = Penpal::find('all', array('conditions' => array('classroom_id = ? AND user_id = ?', $this->classroom_id, $this->id)));
         return $penpals;
     }
-        
+      
+    /**
+     * Two Penpals function
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_hasMoreThanOnePenpal()
+    {
+        $penpals = Penpal::find('all', array('conditions' => array('classroom_id = ? AND user_id = ?', $this->classroom_id, $this->id)));
+        return count($penpals) > 1;
+    }    
+    
     /**
      * Penpal Activity
      *
@@ -62,9 +77,22 @@ class Student extends User {
             $ids[] = $penpal->penpal_id;
         }
         $ids = array_values($ids);
-        $assignments = Homework::find('all', array('conditions' => array('user_id IN (?) AND status="submitted"', $ids)));
+        $assignments = Homework::find('all', array('conditions' => array('user_id IN (?)', $ids)));
         
         return $assignments;
+    }
+    
+    /**
+     * Get Progress
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_progress()
+    {                    
+        $homework = Homework::find_by_user_id_and_assignment_id_and_course_id($this->id, 1, $this->classroom->course->id);
+        if (is_null($homework)) $homework = new Homework();
+        return $homework;
     }
     
 }

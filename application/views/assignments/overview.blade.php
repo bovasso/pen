@@ -10,7 +10,7 @@
 <div class="tab-inner">
     <div class="w100 featured-topic">
     	<div class="img-wrapper left "> 
-    		<img src="http://placehold.it/354x196" class="">
+            {{$assignment->video}}
     	</div>
     	<div class="right">
     		<h2>{{$assignment->name}}</h2>
@@ -24,7 +24,7 @@
             @foreach( $assignment->articles as $article)					    
     		<li>
     			<div class="left w30">
-    				<a href="/assignments/article/{{$article->id}}"><img src="{{$article->primary_image}}"/></a>	
+    				<a href="/assignments/article/{{$article->id}}"><img src="http://src.sencha.io/354/194/{{$article->primary_image}}"/></a>	
     			</div>
     			<div class="right w70">
     				<h4><a href="/assignments/article/{{$article->id}}">{{$article->title}}</a></h4>

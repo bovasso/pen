@@ -1,8 +1,7 @@
 <?php
 
 class Teacher extends User {
-    static $table_name = 'users';
-    
+    static $table_name = 'users';        
     static $has_many = array('classrooms');
     static $has_one = array('school');    
     static $before_create = array('save_as_teacher'); # new records only
@@ -29,5 +28,16 @@ class Teacher extends User {
     {
         $this->role_id = User::TEACHER_ROLE;
     }
+    
+    /**
+     * Get Students
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_students()
+    {
         
+    }
+            
 }

@@ -60,7 +60,7 @@ s@layout('layouts/admin')
         });
 
         $('.partner_with_class').on('click', function(event){
-           event.preventDefault();
+           event.preventDefault();                  
            window.location = $(this).attr("href") + '/' + class_id;
         });
     

@@ -22,7 +22,7 @@
     	<div class="left w60">
     		<h2>{{$homework->article->title}}</h2>
             <p class="subhead">Author: {{$homework->article->author}} {{$homework->article->date}}</p>
-            <img src="{{$homework->article->primary_image}}"/>
+            <img src="http://src.sencha.io/354/194/{{$homework->article->primary_image}}"/>
             <p>
                 {{$homework->article->content}}
             </p>		

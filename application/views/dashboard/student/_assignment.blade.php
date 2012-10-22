@@ -1,6 +1,6 @@
 <div class="action-article">
 	<h4>{{$article->title}}</h4>
-	<div class="article-image left"><img src="{{$article->primary_image}}"/></div><!-- end Article Image -->
+	<div class="article-image left"><img src="http://src.sencha.io/90/80/{{$article->primary_image}}"/></div><!-- end Article Image -->
 	<div class="article-details right w80">
 		<p>{{$article->abstract}}</p>
 		<p><a href="#" alt="Article Name">Read More</a></p>
@@ -26,15 +26,16 @@
             </p>
 			</div>                                
         </div>
-        @endforeach
+        @endforeach                               
         
+        @if ($answer->user->id !== $student->id )        
         <div class="comment-container left w100">
 			<div class="left avatar a55 w10">
 					<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
 			</div><!-- end Avatar -->
 			
 			<div class="comment-form right w80">
-                  <?php echo $this->formbuilder->open( '/student/dashboard/save_reply', array('id'=>'comment')) ?>                                
+                  <?php echo $this->formbuilder->open( '/student/dashboard/save_comment', array('id'=>'comment')) ?>                                
 					<?php echo $this->formbuilder->textarea( 'comment', '', '', array('class'=>'w90')) ?>       
                       <?php echo $this->formbuilder->hidden( 'activity_id', $answer->id) ?>               							                             
 					<p class="btn-wrapper right">
@@ -42,8 +43,8 @@
           			</p>                        			
 				</form>
 			</div><!-- end Comment Form -->					
-
-		</div><!-- end Comments BEFORE SUBMISSION-->
+		</div><!-- end Comments BEFORE SUBMISSION-->        
+	    @endif
 	</div><!-- end Comments -->
 </div><!-- end Articla QA -->
 @endforeach

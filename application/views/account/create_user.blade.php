@@ -8,7 +8,7 @@
 	
 	<div id="infoMessage"><?php echo $message;?></div>
 	
-    <?php echo form_open("auth/create_user");?>
+    <?php echo form_open("account/create_user");?>
       <p>First Name:<br />
       <?php echo form_input($first_name);?>
       </p>

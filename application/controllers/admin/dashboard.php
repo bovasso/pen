@@ -186,73 +186,11 @@ class Dashboard extends CI_Controller {
 	public function students_and_penpals($classroom_id = NULL)
 	{
 	    $classroom = Classroom::find_by_pk(array($classroom_id), NULL);	    
-        $this->data['students'] = $classroom->students;
+        $this->data['students'] = $classroom->students_sorted_by_name;
         echo $this->blade->render('admin/_paypals_list', $this->data, TRUE);
 	}
 	
-	public function classes_d($action = NULL, $id = NULL) 
-    {
-		$this->crud->set_table('classes');
-		$this->crud->set_subject('Class');
-        $this->crud->order_by('created_at','desc');
-        $this->crud->unset_columns('age_range_start', 'age_range_end');
-        $this->crud->unset_fields('teacher_id','course_id', 'area');
-        $this->crud->display_as('course_id', 'Course');        	    
-        $this->crud->display_as('partner_id', 'Partner');        	            
-        $this->crud->display_as('group_id', 'Code');        	            
-        $this->crud->display_as('teacher_id', 'Teacher');   
-        $this->crud->display_as('class_size', 'Size');   
-        $this->crud->callback_field('state',array($this,'displayStateDropdown'));
-        $this->crud->required_fields('state','school','name', 'age_range_start', 'age_range_end', 'class_size');
-        $this->crud->set_relation('teacher_id','users','{first_name} {last_name}');        
-        $this->crud->set_relation('course_id','courses', 'name');        
-        $this->crud->set_relation('group_id','groups', 'code');
-        $this->crud->change_field_type('group_id', 'readonly');
-        
-	         	            
-        $this->data['title'] = 'Classes';
-        $this->data['action'] = $action;
-                
-        if ($action == 'assign') {
-            $this->data['id'] = $id;
-            $this->data['title'] = 'Course Schedule';            
 
-            if ( $this->input->get('view') ) {
-              $this->data['sub_menu'] = 'Find';              
-              $this->crud->where('course_id IS NULL OR course_id != ', $id);
-              $this->crud->add_action('View', '', '', '', array($this,'view_class_from_course_link'));              
-              $this->crud->add_action('Assign', '', '', 'ui-icon-plus', array($this,'assign_or_remove_class_to_course_link'));
-            } 
-            
-            if ( !$this->input->get('view') ) {                
-                $this->data['sub_menu'] = 'Classes';
-                $this->crud->where('course_id', $id);
-                $this->crud->add_action('Partner', '', '', '', array($this,'partner_class_from_course_link'));                              
-                $this->crud->add_action('Remove', '', '', 'ui-icon-minus', array($this,'assign_or_remove_class_to_course_link'));
-            }
-                                
-            $this->crud->unset_add();
-            $this->crud->unset_edit();
-            $this->crud->unset_delete();  
-            
-    		$output = $this->crud->render();            
-            $this->render($output, 'admin/edit_course');
-            exit;            
-        }
-        
-        if ($action == 'edit' ) {
-            $this->data['id'] = $id;
-            $this->data['title'] = 'Classes';            
-            $this->data['sub_menu'] = 'View';                          
-            $output = $this->crud->render();            
-            $this->render($output, 'admin/edit_class');
-            exit;                		
-        }
-        
-        $output = $this->crud->render();		
-        $this->render($output);
-        
-	}
 
 	/**
 	 * Students and Penpals
@@ -268,9 +206,6 @@ class Dashboard extends CI_Controller {
         $this->data['sub_menu'] = 'PenPals';   
         $classes = Classroom::find_all_by_course_id(1);
         $this->data['classes'] = $classes;
-        foreach($classes as $class) {
-//            var_dump($class->users);exit;
-        }
         echo $this->blade->render('admin/edit_penpals', $this->data, TRUE);	                
 	}
 		
@@ -446,13 +381,17 @@ class Dashboard extends CI_Controller {
 	 * @return void
 	 * @author Jason Punzalan
 	 **/
-	public function assign_partnership_with_class($course_id = NULL, $classroom_id = NULL, $partnership_id)
-	{
+	public function assign_partnership_with_class($course_id = NULL, $classroom_id = NULL, $partnership_id = NULL)
+	{                                                                                       
+
         Partnership::transaction(function() use ($course_id, $classroom_id, $partnership_id) {
             $attributes = array('course_id' => $course_id, 'classroom_id' => $classroom_id, 'partnership_id' => $partnership_id);
             Partnership::create($attributes);
             $attributes = array('course_id' => $course_id, 'classroom_id' => $partnership_id, 'partnership_id' => $classroom_id);
-            Partnership::create($attributes);                        
+            $partnership = Partnership::create($attributes);
+            
+            // Only needed once
+            $partnership->create_penpal_relationships();
         });
 
         redirect( $this->agent->referrer() );                

@@ -26,12 +26,12 @@
 						<?php echo $group->name;?><br />
 	                <?php endforeach?>
 				</td>
-				<td><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, 'Active') : anchor("auth/activate/". $user->id, 'Inactive');?></td>
+				<td><?php echo ($user->active) ? anchor("account/deactivate/".$user->id, 'Active') : anchor("account/activate/". $user->id, 'Inactive');?></td>
 			</tr>
 		<?php endforeach;?>
 	</table>
 	
-	<p><a href="<?php echo site_url('auth/create_user');?>">Create a new user</a></p>
+	<p><a href="<?php echo site_url('account/create_user');?>">Create a new user</a></p>
 	
 </div>
 @endsection

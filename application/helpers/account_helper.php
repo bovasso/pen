@@ -8,4 +8,9 @@ function session() {
     }		
 }
 
+function logged_in() {
+    $ci =& get_instance();
+    return $ci->ion_auth->logged_in();
+}
+
 ?>

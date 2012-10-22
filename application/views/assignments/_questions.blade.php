@@ -11,10 +11,10 @@
 	@endif
     	
 	<ul class="w100">
-	    @foreach( $assignment->questions as $question)
+	    @foreach( $assignment->questions as $key => $question)
 		<li class="action w100">
 			<div class="article-qa left w100">
-				<h4>Question {{$question->position}}</h4>
+				<h4>Question {{$key + 1}}</h4>
 				<p>{{$question->title}}</p>
 			</div><!-- end Articla QA -->
 			

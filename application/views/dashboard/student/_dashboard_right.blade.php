@@ -13,8 +13,8 @@
 		<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
 	</div><!-- end Avatar -->
 	<div class="comment-form right w80">
-        <?php echo $this->formbuilder->open( '/student/dashboard/save_comment', array('id'=>'comment')) ?>
-            <?php echo $this->formbuilder->textarea( 'comment', '', '', array('class'=>'w100')) ?>
+        <?php echo $this->formbuilder->open( '/student/dashboard/save_message', array('id'=>'comment')) ?>
+            <?php echo $this->formbuilder->textarea( 'comment', '', '', array('class'=>'w100')) ?>        
             <!-- <p id="student_selector" class="left">
                 <span>Select a Student: </span>
                 <input type="radio" name="radiogroup" id="radio-1">
@@ -33,6 +33,12 @@
 <div id="assignment-feed">
 	<ul id="actions" class="w100">
         
+        @if ( empty($activities) )
+        <p class="instructions">
+    	    Welcome to Penpal News! Check back soon to meet your Penpal and start the exchange. 
+    	    In the meantime, introduce yourself in your <a href="/student/profile">profile</a>    
+        </p>			        	                    		    	
+        @endif
         @foreach( $activities as $activity)
 		<li class="action w100">
 			<div class="left avatar a70">
@@ -41,8 +47,8 @@
 			<div class="right w80">
 				<div class="action-details">
 					<div class="action-auth oring w80">
-						<div class="action-title left">{{$activity->user->first_name}} {{$activity->action}}</div>
-						<div class="action-date right">{{$activity->full_date}}</div>
+						<div class="action-title left">
+						@if($activity->belongsToUser )You @else {{$activity->user->first_name}} @endif<b>{{$activity->action}}</b> <small>{{$activity->time_ago}} ago</small></div>
 					</div> <!-- end Author and Date -->
                     
                     {{$activity->output}}

@@ -7,7 +7,7 @@
     <div class="pageTitleBorder"></div>
 	<p>Are you sure you want to deactivate the user '<?php echo $user->username; ?>'</p>
 	
-    <?php echo form_open("auth/deactivate/".$user->id);?>
+    <?php echo form_open("account/deactivate/".$user->id);?>
     	
       <p>
       	<label for="confirm">Yes:</label>

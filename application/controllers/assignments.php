@@ -138,12 +138,13 @@ class Assignments extends MY_Controller {
                     $answer->save();
                     
                 });   
-                
-                $homework = Homework::find_by_pk(array($homework_id), NULL);                
-                $homework->status = 'submitted';
-                $homework->save();
-                
+                                
             }
+            
+            $homework = Homework::find_by_pk(array($homework_id), NULL);                
+            $homework->answer = 1;
+            $homework->save();
+            
                         
         }
         

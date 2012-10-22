@@ -32,7 +32,7 @@ class Article extends ActiveRecord\Model {
      **/
     public function get_author()
     {
-        return $this->json->author;
+        return isset($this->json->author) ?: 'n/a';
     }
     
     /**
@@ -54,7 +54,7 @@ class Article extends ActiveRecord\Model {
      **/
     public function get_date()
     {
-        return $this->json->date;
+        return isset($this->json->date) ?: 'n/a';
     }
     
     /**
@@ -64,7 +64,7 @@ class Article extends ActiveRecord\Model {
      * @author Jason Punzalan
      **/
     public function get_primary_image()
-    {
+    {        
         return $this->json->media[0]->link;
     }
     /**

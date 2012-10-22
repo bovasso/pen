@@ -11,7 +11,7 @@ class Answer extends ActiveRecord\Model {
     
     static $delegate = array( 
         array('name', 'first_name', 'to' => 'user'),
-    );
+    );   
     
         
     /**
@@ -30,9 +30,7 @@ class Answer extends ActiveRecord\Model {
      *
      * @return void
      * @author Jason Punzalan
-     **/
-    // Book::find('all', array('conditions' => array('genre = ?', 'Romance')));
-     
+     **/     
     public function get_hasReplies()
     {
         $replies = Comment::find('all', array('conditions'=> array('parent_id = ?', $this->id) ));

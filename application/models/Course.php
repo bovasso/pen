@@ -42,5 +42,28 @@ class Course extends ActiveRecord\Model {
 
         return FALSE;
     }
-
+    
+    /**
+     * Register Deadline
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_register_deadline()
+    {                         
+        $date = $this->read_attribute('register_deadline');
+        return $date->format('l, F j');
+    }   
+    
+    /**
+     * Start Date
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_start_date()
+    {                         
+        $date = $this->read_attribute('start_date');
+        return $date->format('l, F j');
+    }
 }

@@ -5,7 +5,8 @@ class Activity extends ActiveRecord\Model {
      static $delegate = array( 
          array('name', 'action', 'to' => 'source'),
          array('name', 'hasReplies', 'to' => 'source'),
-         array('name', 'output', 'to' => 'source')
+         array('name', 'output', 'to' => 'source'),
+         array('name', 'belongsToUser', 'to' => 'source'),         
      );
 
      /**
@@ -17,7 +18,7 @@ class Activity extends ActiveRecord\Model {
      public function get_full_date()
      {
          $datetime = $this->read_attribute('created_at');
-         return $datetime->format('l, M d, Y');  # Thursday, Sept 6, 2012         
+         return $datetime->format('M d, Y');  # Thursday, Sept 6, 2012         
      }
      
      /**
@@ -30,7 +31,7 @@ class Activity extends ActiveRecord\Model {
       
      public function get_hasReplies()
      {
-         $replies = Comment::find('all', array('conditions'=> array('parent_id = ?', $this->id) ));
+         $replies = Reply::find('all', array('conditions'=> array('parent_id = ?', $this->id) ));
          return !empty($replies)? TRUE : FALSE;
      }
      
@@ -49,6 +50,16 @@ class Activity extends ActiveRecord\Model {
          $obj = $type::find_by_pk(array($source_id), NULL);
          return $obj;
      }
-     
+        
+     /**
+      * Time ago
+      *
+      * @return void
+      * @author Jason Punzalan
+      **/
+     public function get_time_ago()
+     {       
+         return array_shift(explode(',',timespan(strtotime($this->created_at->format('Y-m-d')))));
+     }
      
 }
