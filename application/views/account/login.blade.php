@@ -1,39 +1,49 @@
 @layout('layouts/main')
-@section('content')
-
-<div class='mainInfo'>
-
-	<div class="pageTitle">Login</div>
-    <div class="pageTitleBorder"></div>
-	<p>Please login with your email/username and password below.</p>
-	
-	<div id="infoMessage"><?php echo $message;?></div>
-	
-    <?php echo form_open("account/login");?>
-    	
-      <p>
-      	<label for="identity">Email/Username:</label>
-      	<?php echo form_input($identity);?>
-      </p>
-      
-      <p>
-      	<label for="password">Password:</label>
-      	<?php echo form_input($password);?>
-      </p>
-      
-      <p>
-	      <label for="remember">Remember Me:</label>
-	      <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
-	  </p>
-      
-      
-      <p><?php echo form_submit('submit', 'Login');?></p>
-
-      
-    <?php echo form_close();?>
-
-    <p><a href="forgot_password">Forgot your password?</a></p>
-
-</div>
-
+@section('scripts')
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $('#sign-up-tabs').tabs();
+  });  
+</script>
+@endsection
+@section('content')                    
+<?php echo form_open("account/login");?>    
+<?php echo $this->ci_alerts->display() ?>
+<div class="wrapper">
+    <!-- <h1>Login</h1>                      -->
+	<div id="sign-up-tabs" class="tabs">
+        <ul>
+            <li><a href="#sign-up-tab-1">Login</a></li>
+        </ul>
+		<div id="sign-up-tab-1" class="tab">            
+			<div class="tab-inner">                         
+				<fieldset>
+				    @if($message)
+                        <?php echo validation_errors('<div class="error">', '</div>'); ?>    
+                    @endif 
+        		    
+					<div class="left w100">
+						<label for="identity">Email/Username:</label>
+						<div class="field-box">   
+                  	        <?php echo form_input($identity);?>						
+                  	     </div>
+					</div>						
+					<div class="left w80">
+						<label for="password">Password:</label>
+						<div class="field-box">
+                  	        <?php echo form_input($password);?>
+                            <a href="/account/forgot_password"><small>Forgot your password?</small></a>  		      						
+                  	     </div>
+					</div>						
+					<div class="left w100">
+						<div class="field-box">
+                            <input type="submit" class="submit btn" name="submit" value="Login" />                            
+                  	     </div>
+					</div>
+				  </fieldset>      
+    		 </div>
+    	 </div>
+     </div>
+</div>  
+<?php echo form_close();?>             
 @endsection

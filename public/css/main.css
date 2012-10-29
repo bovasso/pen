@@ -553,7 +553,7 @@ li:not(#foo) > input[type='checkbox']:checked + label {
     padding-bottom: 0;
 }
 .tab fieldset > div {
-    min-height: 100px;
+/*    min-height: 100px;              */
     margin-bottom: 25px;
 }
 .tab fieldset > div input[type="text"], .tab fieldset > div input[type="email"], .tab fieldset > div input[type="password"] {

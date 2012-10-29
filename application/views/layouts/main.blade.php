@@ -6,7 +6,7 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<link rel="shortcut icon" type="image/png" href="<?php echo asset_url()?>favicon.ico">
-	<link type="text/css" rel="stylesheet" href="<?php echo asset_url()?>css/main.css" media="all">
+    <link type="text/css" rel="stylesheet" href="<?php echo asset_url()?>css/main.css" media="all">
     <link type="text/css" rel="stylesheet" href="/public/js/humane/themes/original.css" media="all">	    
 	@yield('stylesheets')
 	<!-- Boilerplate/Header JS & External HTTP Request Scripts -->

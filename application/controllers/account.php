@@ -61,8 +61,7 @@ class Account extends MY_Controller {
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
-		if ($this->form_validation->run() == true)
-		{ 
+		if ($this->form_validation->run() == true) { 
 			//check to see if the user is logging in
 			//check for "remember me"
 			$remember = (bool) $this->input->post('remember');
@@ -71,31 +70,43 @@ class Account extends MY_Controller {
 			{ 
 				//if the login is successful
 				//redirect them back to the home page
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
-			}
-			else
-			{ 
+				$user = $this->ion_auth->user();
+                if ($user instanceof Student){
+                    redirect('student/dashboard');
+                    exit;
+                }
+
+                if ($user instanceof Teacher){
+                    redirect('teacher/dashboard');
+                    exit;
+                }
+
+                if ($user->role->name = 'Admin'){
+                    redirect('admin/');
+                    exit;
+                }
+                
+			}else{ 
 				//if the login was un-successful
-				//redirect them back to the login page
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
+				//redirect them back to the login page   
+				$this->ci_alerts->set('info', $this->ion_auth->errors());               
 				redirect('account/login'); //use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
-		}
-		else
-		{  
+		} else {  
 			//the user is not logging in so display the login page
 			//set the flash data error message if there is one
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-
+            
 			$this->data['identity'] = array('name' => 'identity',
 				'id' => 'identity',
 				'type' => 'text',
 				'value' => $this->form_validation->set_value('identity'),
+				'class' => 'text clear-value',
 			);
 			$this->data['password'] = array('name' => 'password',
 				'id' => 'password',
-				'type' => 'password',
+				'type' => 'password',         
+				'class' => 'text clear-value',				
 			);
 
 			$this->blade->render('account/login', $this->data);
@@ -110,9 +121,9 @@ class Account extends MY_Controller {
 		//log the user out
 		$logout = $this->ion_auth->logout();
 
-		//redirect them to the login page
-		$this->session->set_flashdata('message', $this->ion_auth->messages());
-		redirect('account/login', 'refresh');
+		//redirect them to the login page  
+		$this->ci_alerts->set('info', $this->ion_auth->messages());               
+        redirect('account/login');
 	}
 
 	//change password
@@ -186,7 +197,8 @@ class Account extends MY_Controller {
 
 	//forgot password
 	function forgot_password()
-	{
+	{          
+	    $this->data['title'] = "Forgot Password";
 		$this->form_validation->set_rules('email', 'Email Address', 'required');
 		if ($this->form_validation->run() == false)
 		{

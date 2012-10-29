@@ -215,7 +215,7 @@ jQuery(document).ready(function($){
 
 	introPlayer.addEvent('ready', function(id) {
 		introPlayer.addEvent('finish', onFinish);
-		console.log('added event');
+        // console.log('added event');
 	});
 
 	function onFinish(id) {

@@ -5,7 +5,7 @@ class Register extends MY_Controller {
 	function __construct() {
 		parent::__construct();	
         $this->form_validation->set_error_delimiters('<span class="error">', '</span>');		
-        $this->user = User::session();
+        $this->user = Student::session();
 	}
 	
 	/**
@@ -49,26 +49,33 @@ class Register extends MY_Controller {
      * @author Jason Punzalan
      */
 	public function index() {
-        // if (is_null($group_code)) redirect('/student/register/group_code');exit;
+        if ( $group_code = $this->input->get('group_code') ) {
+            $this->formbuilder->defaults = array('group_code'=>$group_code);
+        }
 	    
-		$this->data['title'] = "Welcome to PenPal News";
+		$this->data['title'] = "PenPal News - Student Sign Up";                   
+        $this->form_validation->set_rules('group_code', 'Group Code', 'required|callback_group_code');		
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'required');        
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');                
+        $this->form_validation->set_rules('username', 'Username', 'required|s_unique[users.username]');                
+        $this->form_validation->set_rules('password', 'Password', 'required|matches[confirm_password]');         
+        $this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'required');                         
+        $this->form_validation->set_rules('agree', 'Terms & Conditions', 'required');
                 
         if ($this->form_validation->run() == TRUE) {
             Student::transaction(function() {
-                $teacher = new Teacher();
+                $teacher = new Student();
                 $teacher->first_name = $this->input->post('first_name');
                 $teacher->last_name = $this->input->post('last_name');            
                 $teacher->username = $this->input->post('username');                                    
                 $teacher->save();
-                           
-                $school = new School();
-                $school->teacher_id = $teacher->id;
-                $school->name = $this->input->post('school');
-                $school->state = $this->input->post('state');                
-                $school->area = $this->input->post('area');
-                $school->save();                
+                //            
+                // $school = new School();
+                // $school->teacher_id = $teacher->id;
+                // $school->name = $this->input->post('school');
+                // $school->state = $this->input->post('state');                
+                // $school->area = $this->input->post('area');
+                // $school->save();                
             });
             
             $teacher->login();
@@ -77,18 +84,25 @@ class Register extends MY_Controller {
 	    }
 	    
 		$this->blade->render('register/student/account', $this->data);
-	}
+	}  
 	
-	/**
-	 * Group code
-	 *
-	 * @return void
-	 * @author Jason Punzalan
-	 **/
-	public function group_code()
-	{
-	    $this->blade->render('register/student/group_code', $this->data);		
-	}
+    /**
+     * Validates entered Group code
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function group_code($group_code)
+    {               
+
+        if ( $group_code == 'AAAA') {
+            return TRUE;
+        }else{                 
+            $this->form_validation->set_message('group_code', "Hmm, it doesn't look like you have a valid %s");			
+            return FALSE;
+        }
+    }
+	
 	/**
 	 * Step : Add Classes
 	 *

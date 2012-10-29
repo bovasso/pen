@@ -2,6 +2,7 @@
 
 class Dashboard extends MY_Controller {
     private $teacher;
+    static $is_secure = TRUE;
     
 	function __construct() {
 		parent::__construct();	

@@ -4,5 +4,6 @@
 */cache/*
 */cache/!index.html
 .DS_Store
+*.log
 
 application/config/config.php

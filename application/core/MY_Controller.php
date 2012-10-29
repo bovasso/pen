@@ -18,6 +18,7 @@ class MY_Controller extends CI_Controller {
     protected $previous_action_name;    
     protected $save_previous_url = false; 
     protected $page_title;
+    static $is_secure = false;
    
     public function __construct() {
         parent::__construct();
@@ -30,6 +31,13 @@ class MY_Controller extends CI_Controller {
         //set the current controller and action name
         $this->controller_name = $this->router->fetch_directory() . $this->router->fetch_class();
         $this->action_name     = $this->router->fetch_method();
+
+        if ( static::$is_secure ) {
+            if ( $this->ion_auth->user == FALSE ){
+                redirect('account/login');
+                exit;
+            }
+        }   
         
         $this->data['content'] = '';
         $this->data['css']     = '';   
