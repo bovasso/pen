@@ -17,7 +17,8 @@
 <body <?php if(isset($onload)){echo "onload=$onload";}?>>
 	@include('partials/header')
 	<div id="sticky-wrapper">
-		<div class="sticky-wrapper">
+		<div class="sticky-wrapper">   
+		    <?php echo $this->ci_alerts->display() ?>            
 			<div id="content">
 				@yield('content')
 			</div>
@@ -29,10 +30,9 @@
 
 	<!-- jQuery & Related/Future Footer JS, to be compiled, minified/gzipped at launch -->
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
-	<script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>	
 	<script type="text/javascript" src="<?php echo asset_url() ?>js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="<?php echo asset_url() ?>js/jquery.customselect.js"></script>
-	<script type="text/javascript" src="<?php echo asset_url() ?>js/jquery.jeditable.mini.js"></script>	
 	@yield('scripts')
     <script type="text/javascript" src="/public/js/humane/humane.min.js"></script>
 </body>

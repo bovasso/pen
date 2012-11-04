@@ -65,7 +65,29 @@ class User extends ActiveRecord\Model {
         
         if (is_null($homework)) return new Homework();
         return $homework;
-    }    
+    } 
+    
+    /**
+     * Return Profile Link
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_profile_link()
+    {                     
+        return ($this instanceof Teacher )? '/teacher/profile' : '/student/profile';
+    }   
+
+    /**
+     * Return Dashboard Link
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_dashboard_link()
+    {                     
+        return ($this instanceof Teacher )? '/teacher/dashboard' : '/student/dashboard';
+    }   
     
     /**
      * Session

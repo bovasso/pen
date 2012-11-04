@@ -115,4 +115,4 @@ $autoload['model'] = array();
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
 
-$autoload['sparks'] = array('php-activerecord/0.0.2', 'state-helper/1.0.0', 'formbuilder/1.3.0', 'ci_alerts/1.1.7');
+$autoload['sparks'] = array('php-activerecord/0.0.2', 'state-helper/1.0.0', 'formbuilder/1.3.0', 'ci_alerts/1.1.7', 'curl/1.2.1');

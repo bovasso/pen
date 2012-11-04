@@ -10,7 +10,7 @@
 <div id="main_comments" class="comment-container w100">
 
 	<div class="left avatar a70 w10">
-		<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
+		<div class="image-wrap" style="background-image: url(<?php echo $student->avatar ?>);"></div>
 	</div><!-- end Avatar -->
 	<div class="comment-form right w80">
         <?php echo $this->formbuilder->open( '/student/dashboard/save_message', array('id'=>'comment')) ?>
@@ -42,7 +42,7 @@
         @foreach( $activities as $activity)
 		<li class="action w100">
 			<div class="left avatar a70">
-				<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
+				<div class="image-wrap" style="background-image: url(<?php echo $activity->user->avatar ?>);"></div>
 			</div><!-- end Avatar -->            
 			<div class="right w80">
 				<div class="action-details">

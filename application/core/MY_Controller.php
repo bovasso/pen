@@ -33,7 +33,7 @@ class MY_Controller extends CI_Controller {
         $this->action_name     = $this->router->fetch_method();
 
         if ( static::$is_secure ) {
-            if ( $this->ion_auth->user == FALSE ){
+            if ( $this->ion_auth->user() == FALSE ){
                 redirect('account/login');
                 exit;
             }

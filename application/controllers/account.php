@@ -71,6 +71,7 @@ class Account extends MY_Controller {
 				//if the login is successful
 				//redirect them back to the home page
 				$user = $this->ion_auth->user();
+
                 if ($user instanceof Student){
                     redirect('student/dashboard');
                     exit;
@@ -81,7 +82,7 @@ class Account extends MY_Controller {
                     exit;
                 }
 
-                if ($user->role->name = 'Admin'){
+                if ($user->role->name == 'Admin'){
                     redirect('admin/');
                     exit;
                 }
@@ -130,7 +131,6 @@ class Account extends MY_Controller {
 	function change_password()
 	{
 	    $this->data['title'] = "Change your password";		
-		$this->form_validation->set_rules('old', 'Old password', 'required');
 		$this->form_validation->set_rules('new', 'New Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
 		$this->form_validation->set_rules('new_confirm', 'Confirm New Password', 'required');
 
@@ -139,8 +139,7 @@ class Account extends MY_Controller {
 			redirect('account/login', 'refresh');
 		}
 
-		$user = $this->ion_auth->user()->row();
-
+		$user = $this->ion_auth->user();
 		if ($this->form_validation->run() == false)
 		{ 
 			//display the form
@@ -148,11 +147,7 @@ class Account extends MY_Controller {
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
 			$this->data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
-			$this->data['old_password'] = array(
-				'name' => 'old',
-				'id'   => 'old',
-				'type' => 'password',
-			);
+
 			$this->data['new_password'] = array(
 				'name' => 'new',
 				'id'   => 'new',
@@ -164,14 +159,10 @@ class Account extends MY_Controller {
 				'id'   => 'new_confirm',
 				'type' => 'password',
 				'pattern' => '^.{'.$this->data['min_password_length'].'}.*$',
-			);
-			$this->data['user_id'] = array(
-				'name'  => 'user_id',
-				'id'    => 'user_id',
-				'type'  => 'hidden',
-				'value' => $user->id,
-			);
-
+			);      
+			
+			$this->ci_alerts->set('info', validation_errors());               
+            
 			//render
 			$this->blade->render('account/change_password', $this->data);
 		}
@@ -185,7 +176,13 @@ class Account extends MY_Controller {
 			{ 
 				//if the password was successfully changed
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-                redirect($this->agent->referrer());
+    			$this->ci_alerts->set('info', $this->ion_auth->messages() );               
+                     
+                if ( $this->ion_auth->user() instanceof Student) {
+                    redirect('student/profile/edit');
+                }else{
+                    redirect('student/teacher/edit');
+                }
 			}
 			else
 			{
@@ -194,7 +191,38 @@ class Account extends MY_Controller {
 			}
 		}
 	}
+     
+    /**
+     * Change Name
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function edit_name()
+    {   
+        $this->data['title'] = "Edit Name";                                
+        $user = $this->ion_auth->user();
+		
+        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');                
+        $this->formbuilder->defaults = array('first_name'=>$user->first_name, 'last_name'=>$user->last_name);
+        
+        if ($this->form_validation->run() == TRUE) {
+            $user->first_name = $this->input->post('first_name');
+            $user->last_name = $this->input->post('last_name');
+            $user->save();           
+            $this->ci_alerts->set('info', 'Name Saved!');
+            if ($user instanceof Student){
+                redirect('student/profile/edit');
+            }else{
+                redirect('teacher/profile/edit');
+            }
 
+        }                                                    
+        
+        $this->blade->render('account/edit_name', $this->data);
+    }        
+    
 	//forgot password
 	function forgot_password()
 	{          

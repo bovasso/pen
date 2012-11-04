@@ -9,19 +9,19 @@
 				<h3>Info</h3>
 				<div id="profile-image" class="left w40">
 					<a href="#" class="avatar a144">
-						<span class="frame">&nbsp;</span>
-						<img src="" class="" alt="{{$user->first_name}}" title="{{$user->first_name}}" />
+						<span class="frame">&nbsp;</span> 
+						<img src="{{$user->avatar}}" class="" alt="{{$user->first_name}}" title="{{$user->first_name}}" />
 					</a>
 				</div>
 				<div class="right w60">
-					<ul>
+					<ul style="font-size:14px">
 						<li>
 							<label>School:</label>
 							<p>{{$user->school->name}}</p>
 						</li>
 						<li>
 							<label>Class:</label>
-							<p>Class Name</p>
+							<p>{{$user->classroom->name}}</p>
 						</li>
 					</ul>
 				</div>

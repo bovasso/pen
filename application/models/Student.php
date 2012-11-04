@@ -93,6 +93,27 @@ class Student extends User {
         $homework = Homework::find_by_user_id_and_assignment_id_and_course_id($this->id, 1, $this->classroom->course->id);
         if (is_null($homework)) $homework = new Homework();
         return $homework;
+    }          
+    
+    /**
+     * Returns avatar
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_avatar()
+    {                      
+        $cache_bust = rand(5, 15);
+        $avatar = $this->read_attribute('avatar');          
+        if ($avatar == 'custom') {
+            return '/public/profiles/' . $this->username . '/avatar.png?c=' . $cache_bust;
+        }
+                  
+        if ( empty($avatar) ) {
+            return '/public/images/default_avatars/default70.png';
+        }   
+        
+        return '/public/images/default_avatars/' . $avatar . '70.png';
     }
     
 }

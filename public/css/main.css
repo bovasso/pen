@@ -447,7 +447,7 @@ li:not(#foo) > input[type='checkbox']:checked + label {
     padding: 12px 0 0 0;
     right: 0;
     top: 0;
-    width: 10%;
+/*    width: 10%;      */
 }
 /* @end */
 
@@ -973,8 +973,8 @@ li:not(#foo) > input[type='checkbox']:checked + label {
 .profile-box label {
     font-family: 'Avenir LT W01 85 Heavy';
     float: left;
-    margin: 0 20px 0 0;
-    min-width: 80px;
+    margin: 0 10px 0 0;
+    min-width: 60px;
 }
 .profile-edit {
     font-size: 12px;
