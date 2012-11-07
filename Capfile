@@ -6,6 +6,7 @@ namespace :deploy do
   task :restart do
    run "rm -v #{current_path}/index.php" 
    run "cp #{current_path}/index.#{stage}.php #{current_path}/index.php"
+   run "ln -s #{shared_path}/uploads/profiles #{current_path}/public/profiles" 
    # run "rm -v #{current_path}/webapp/front/index.php" 
    # run "cp #{current_path}/webapp/front/index.php.#{stage}.php #{current_path}/webapp/front/index.php"       
    # run "mkdir -p #{current_path}/webapp/front/application/cache"       
