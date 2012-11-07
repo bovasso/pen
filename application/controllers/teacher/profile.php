@@ -10,7 +10,7 @@ class Profile extends MY_Controller {
 
 	function __construct() {
 		parent::__construct();	                      
-		$this->student = $this->ion_auth->user();
+		$this->teacher = $this->ion_auth->user();
 		$this->data['user'] = $this->ion_auth->user();
 		
 	}
@@ -24,8 +24,8 @@ class Profile extends MY_Controller {
 	function index($username = NULL) {
 		$this->data['title'] = "Profile";
 
-        if (is_null($username)) redirect('student/profile/edit');
-		$this->blade->render('profile/student/index', $this->data);
+        if (is_null($username)) redirect('teacher/profile/edit');
+		$this->blade->render('profile/teacher/index', $this->data);
 	}
 
     /**
@@ -34,9 +34,9 @@ class Profile extends MY_Controller {
      * @return void
      * @author Jason Punzalan
      */
-	function edit() {                
+	function edit() {      
 		$this->data['title'] = "Edit Profile";
-		$this->blade->render('profile/student/edit', $this->data);
+		$this->blade->render('profile/teacher/edit', $this->data);
 	}
 	    
     /**
@@ -47,18 +47,18 @@ class Profile extends MY_Controller {
      **/
     public function change_avatar()
     {                            
-        $path = $_SERVER['DOCUMENT_ROOT'] . '/public/profiles/' . $this->student->username;
+        $path = $_SERVER['DOCUMENT_ROOT'] . '/public/profiles/' . $this->teacher->username;
         $avatar = $this->input->get('avatar');        
         $custom = $this->input->get('custom');                
 
 	    if ( $custom == 'true' ) {               
 	        if ( !file_exists($path) ) mkdir($path, 0777, TRUE);
             file_put_contents($path . '/avatar.png', $this->curl->simple_get($avatar));
-            $this->student->avatar = 'custom';
-            $this->student->save();
+            $this->teacher->avatar = 'custom';
+            $this->teacher->save();
 	    }else{
-            $this->student->avatar = $avatar;
-            $this->student->save();	        
+            $this->teacher->avatar = $avatar;
+            $this->teacher->save();	        
 	    }        
     }
 	/**
@@ -69,14 +69,28 @@ class Profile extends MY_Controller {
 	 **/
 	public function save()
 	{            
-	    $student = $this->student;        
+	    $teacher = $this->teacher;        
 	    if ($this->input->post('about_me')) {
-            $student->about_me = $this->input->post('about_me');
-            $student->save();
+            $teacher->about_me = $this->input->post('about_me');
+            $teacher->save();
         }                         
 
         $this->ci_alerts->set('info', 'Profile Saved!');        
         redirect($this->agent->referrer());
-	}         
+	} 
+	
+	/**
+	 * Save Email Options function
+	 *
+	 * @return void
+	 * @author Jason Punzalan
+	 **/
+	public function set_email_preference()
+	{  
+	    $teacher = $this->teacher;                                     	    
+        $teacher->opt_in_email = (int)$this->input->get('opt_in_email');
+        $teacher->save();
+        $this->ci_alerts->set('info', 'Profile Saved!');        
+	}        
 	
 }
