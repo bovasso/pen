@@ -55,14 +55,16 @@ class Dashboard extends CI_Controller {
 
 		$this->crud->set_table('users');
 		$this->crud->set_subject('User');
-        $this->crud->unset_columns('password', 'suffix', 'classroom_id');
+        $this->crud->unset_columns('password', 'suffix', 'avatar', 'created_on', 'phone', 'about_me', 'classroom_id', 'ip_address', 'salt', 'activation_code', 'opt_in_email', 'forgotten_password_code', 'forgotten_password_time', 'remember_code', 'last_login');
         $this->crud->unset_fields('password','username', 'classroom_id');
                 
 	    $this->crud->set_relation('role_id','roles','name');        
 	    $this->crud->set_relation('classroom_id','classrooms','name');        
+	    $this->crud->set_relation('school_id','schools','name');        
 	            
 	    $this->crud->display_as('role_id', 'Role');     
 	    $this->crud->display_as('classroom_id', 'Class');     	       
+	    $this->crud->display_as('school_id', 'School');     	       
 	    $this->crud->display_as('is_registered', 'Registered');	    
 	    $this->crud->display_as('first_name', 'First');
         $this->crud->display_as('last_name', 'Last');        
