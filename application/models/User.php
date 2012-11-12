@@ -108,8 +108,12 @@ class User extends ActiveRecord\Model {
     public static function session()
     {       
         $ci =& get_instance();
-        
-        return $ci->ion_auth->user();
+        try {
+            $user = $ci->ion_auth->user();
+            return $user;
+        }catch( Exception $e) {
+            return false;
+        }
     } 
     
     /**

@@ -16,8 +16,10 @@ class Student extends User {
      * @author Jason Punzalan
      **/
     public function save_as_student()
-    {
-        $this->role_id = User::STUDENT_ROLE;
+    {                              
+        $role = Role::find_by_name('Student');
+        if (!$role) $this->show_error('Oops, something when wrong');
+        $this->role_id = $role->id;
     }
     
     /**

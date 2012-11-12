@@ -8,7 +8,8 @@
  */
 class Group extends ActiveRecord\Model {
     static $before_create = array('create_group_code'); # new records only
-                                                    
+    
+    static $belongs_to = array('classroom');                                               
     /**
      * Generate group code function
      *

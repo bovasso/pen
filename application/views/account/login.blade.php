@@ -8,7 +8,6 @@
 @endsection
 @section('content')                    
 <?php echo form_open("account/login");?>    
-<?php echo $this->ci_alerts->display() ?>
 <div class="wrapper">
     <!-- <h1>Login</h1>                      -->
 	<div id="sign-up-tabs" class="tabs">

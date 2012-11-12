@@ -62,25 +62,28 @@ class Register extends MY_Controller {
         $this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'required');                         
         $this->form_validation->set_rules('agree', 'Terms & Conditions', 'required');
                 
-        if ($this->form_validation->run() == TRUE) {
-            Student::transaction(function() {
-                $teacher = new Student();
-                $teacher->first_name = $this->input->post('first_name');
-                $teacher->last_name = $this->input->post('last_name');            
-                $teacher->username = $this->input->post('username');                                    
-                $teacher->save();
-                //            
-                // $school = new School();
-                // $school->teacher_id = $teacher->id;
-                // $school->name = $this->input->post('school');
-                // $school->state = $this->input->post('state');                
-                // $school->area = $this->input->post('area');
-                // $school->save();                
+        if ($this->form_validation->run() == TRUE) { 
+
+           Student::transaction(function() {
+                $ci =& get_instance();
+            
+                $student = new Student();
+                $student->active = 1;
+                $student->first_name = $ci->input->post('first_name');
+                $student->last_name = $ci->input->post('last_name');            
+                $student->username = $ci->input->post('username');                                    
+                $student->password = $ci->ion_auth->hash_password($ci->input->post('password'), FALSE);
+                
+                $group_code = Group::find_by_code($ci->input->post('group_code'));
+                if (empty($group_code)) return false;
+                $student->classroom_id = $group_code->classroom->id;
+                $student->school_id = $group_code->classroom->school->id;
+            
+                $student->save();
+                $student->login();
             });
             
-            $teacher->login();
-            
-            redirect('/student/register/classes');            
+            redirect('/student/register/complete');            
 	    }
 	    
 		$this->blade->render('register/student/account', $this->data);
@@ -94,8 +97,9 @@ class Register extends MY_Controller {
      **/
     public function group_code($group_code)
     {               
-
-        if ( $group_code == 'AAAA') {
+        $group_code = Group::find_by_code($group_code);
+        
+        if ($group_code) {
             return TRUE;
         }else{                 
             $this->form_validation->set_message('group_code', "Hmm, it doesn't look like you have a valid %s");			
@@ -111,8 +115,8 @@ class Register extends MY_Controller {
 	 **/
 	public function classes($id = NULL, $remove = FALSE)
 	{
-	    $teacher = Student::session();        
-        $this->data['classes'] = $teacher->classrooms;
+	    $student = Student::session();        
+        $this->data['classes'] = $student->classrooms;
 	   	$this->data['title'] = "Welcome to PenPal News";
         $this->form_validation->set_rules('name', 'Name', 'required');	   			 
         $this->form_validation->set_rules('age_range_start', 'Starting Age', 'required');
@@ -123,7 +127,7 @@ class Register extends MY_Controller {
          * Making sure there's at least one is present before continuing
          */
         if ( $this->input->post('submit') == 'Next Step' ) {
-            if ( count($teacher->classrooms) >= 1 ) {
+            if ( count($student->classrooms) >= 1 ) {
                 redirect('/student/register/course');   
                 exit;
             };
@@ -206,7 +210,7 @@ class Register extends MY_Controller {
 	public function complete()
 	{
 	    $this->data['title'] = "Thanks!";			    
-	    $this->data['teacher'] = Student::session();
+	    $this->data['student'] = Student::session();
 	    $this->blade->render('register/student/complete', $this->data);			    
 	}
 	

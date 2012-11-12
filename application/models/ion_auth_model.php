@@ -1261,13 +1261,13 @@ class Ion_auth_model extends CI_Model
 		//if no id was passed use the current users id
 		$id || $id = $this->session->userdata('user_id');
         if ( $id == FALSE ) return FALSE;
-        
-        $role_id = $this->session->userdata('role_id');
-        $role = Role::find_by_pk(array($role_id), NULL);
-        
-        $class = new $role->name();
 
+        $user = User::find_by_pk(array($id), NULL);
+        
+        $class = $user->role->name;
+                
         $user = $class::find_by_pk(array($id), NULL);
+
         return $user;
 	}
 
