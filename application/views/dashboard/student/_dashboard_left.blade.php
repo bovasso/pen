@@ -26,7 +26,7 @@
 	<ul>
         @foreach( $assignments as $assignment)
 		<li>
-			<p id="{{strtolower($assignment->topic)}}" class="category left"><a href=""><i class="{{strtolower($assignment->topic)}}"></i>{{strtoupper($assignment->topic)}}</a></p>  	
+			<p id="{{str_replace(' ', '_', strtolower($assignment->topic))}}" class="category left"><a href=""><i class="{{str_replace(' ', '_', strtolower($assignment->topic))}}"></i>{{strtoupper($assignment->topic)}}</a></p>  	
 			<ul class="student_actions right">
 				<li class="read"><a href="/assignments/{{$assignment->id}}"><i class="doc <?php echo display_progress($student->progress->read) ?>"></i></a></li>
 				<li class="answer"><a href="/assignments/{{$assignment->id}}"><i class="bubble <?php echo display_progress($student->progress->answer) ?>"></i></a></li>

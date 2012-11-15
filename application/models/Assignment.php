@@ -40,10 +40,21 @@ class Assignment extends ActiveRecord\Model {
       **/
      public function get_topic()
      {  
-        $topics = array( '1'=>'Economy', '2'=>'Health Care', '3'=>'Energy', '4'=>'Immigration', '5'=>'Education', '6'=>'Final');
+        $topics = self::topics();
         return $topics[$this->week];
      }
-     
+       
+     /**
+      * Topic
+      *
+      * @return void
+      * @author Jason Punzalan
+      **/
+     public static function topics()
+     {  
+        $topics = array( '1'=>'Economy', '2'=>'Health Care', '3'=>'Energy', '4'=>'Immigration', '5'=>'Education', '6'=>'Final');
+        return $topics;
+     }
      /**
       * Due Date
       *

@@ -482,8 +482,9 @@ class Dashboard extends CI_Controller {
 	 * @author Jason Punzalan
 	 **/
 	public function displayWeek($value, $row)
-	{
-	    return ' WK ' . $value;
+	{                            
+	    $topics = Assignment::topics();
+	    return ' WK ' . $value . ' : ' . $topics[$value];
 	}
 
 	/**
@@ -493,10 +494,13 @@ class Dashboard extends CI_Controller {
 	 * @author Jason Punzalan
 	 **/
 	public function displayAsDropdownWeek($value, $row)
-	{
-        $options = range('1','6');
-        $keys = range('1','6');
-        $options = array_combine($keys, $options);
+	{   
+	    $topics = Assignment::topics();	                          
+        $options = array();
+        foreach ($topics as $key => $value ) {
+            $options[$key] = $key . " : " . $value;
+        }   
+        
         return form_dropdown('week', $options, $value);	    	            
 	}
 	
