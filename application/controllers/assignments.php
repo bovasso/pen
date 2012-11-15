@@ -29,17 +29,25 @@ class Assignments extends MY_Controller {
      * @return void
      * @author Jason Punzalan
      */
-	function article($id = NULL) {
+	function article($id = NULL) { 
+	    if ( $id == 'none' ) {  
+	        $this->ci_alerts->set('info', "You didn't select an article yet.");
+	        redirect('assignments');
+	    }                           
+	    
 		$this->data['title'] = "Assignments";
 		$course = Course::find_by_pk(array(1), NULL);
 		$this->data['course'] = $course;
 		$this->data['assignment'] = $course->this_weeks_assignment;
 		
 		$homework = $this->user->homework;
+
         if ( $homework->is_new_record() ) {
             $homework->article_id = $id;
             $homework->user_id = $this->user->id;
             $homework->assignment_id = $course->this_weeks_assignment->id;
+            $homework->course_id = $course->id;
+            $homework->save_as_activity = FALSE;
             $homework->save();
         }
 
@@ -55,13 +63,20 @@ class Assignments extends MY_Controller {
 	 * @return void
 	 * @author Jason Punzalan
 	 **/
-	public function comment()
+	public function comment($id = NULL)
 	{
-	    $this->data['title'] = "Assignments";
+	    $this->data['title'] = "Assignments";        
 		$course = Course::find_by_pk(array(1), NULL);
 		$this->data['course'] = $course;
-		
+
+		if ( !$this->user->penpal_assignments ) {
+		    $this->ci_alerts->set('info', "Your penpal hasn't completed their assignment yet.");
+		    redirect('student/dashboard');
+		    exit;
+		}   
+
 		$this->data['assignments'] = $this->user->penpal_assignments;
+        
 		$this->blade->render('assignments/comment', $this->data);		
 	}
 	
@@ -148,7 +163,13 @@ class Assignments extends MY_Controller {
                         
         }
         
-        $this->ci_alerts->set('info', 'Great!');
+        if ( !$this->user->penpal_assignments ) {
+            $this->ci_alerts->set('info', "Great! You submitted shared your answers, but your penpal hasn't submitted theirs yet");
+            redirect('/student/dashboard');
+            exit;
+        }
+		
+        $this->ci_alerts->set('info', 'Great! You shared your answers');
 
         redirect( '/assignments/comment' );                        
      

@@ -4,6 +4,7 @@
 @layout('layouts/full')
 
 @section('content')
+<?php echo $this->ci_alerts->display() ?>            
 
 <div class="wrapper">
 

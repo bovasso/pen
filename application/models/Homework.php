@@ -3,7 +3,8 @@
 class Homework extends ActiveRecord\Model {
      static $table_name = 'student_assignments';
      static $after_save = array('create_activity'); 
-    
+     public $save_as_activity = TRUE;
+     
      static $belongs_to = array(
             array('assignment'),
             array('article'),            
@@ -23,12 +24,14 @@ class Homework extends ActiveRecord\Model {
       * @author Jason Punzalan
       **/
      public function create_activity()
-     {
-       $activity = new Activity();
-       $activity->user_id = $this->user_id;
-       $activity->type = 'homework';
-       $activity->source_id = $this->id;
-       $activity->save();
+     {     
+       if ($this->save_as_activity) {
+           $activity = new Activity();
+           $activity->user_id = $this->user_id;
+           $activity->type = 'homework';
+           $activity->source_id = $this->id;
+           $activity->save();
+       }
      }
           
      /**
@@ -104,7 +107,17 @@ class Homework extends ActiveRecord\Model {
          if (is_null($status)) $status = array();         
          $this->assign_attribute('status', implode(',',array_push($status, $value)));
      }   
-          
+     
+     /**
+      * Get Read
+      *
+      * @return void
+      * @author Jason Punzalan
+      **/
+     public function get_read()
+     {  
+         return (!is_null($this->article_id))? TRUE : FALSE;
+     }     
       /**
        * belongsToUser
        *

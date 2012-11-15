@@ -1,6 +1,5 @@
 @layout('layouts/main')
 @section('content')
-<?php echo $this->ci_alerts->display() ?>
 <div class="wrapper" id="assignments">
 	<h1>All Assignments</h1>
 	<div id="assignment-tabs" class="tabs">

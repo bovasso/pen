@@ -75,11 +75,16 @@ class Student extends User {
     {
         $penpals = $this->penpals;
         $ids = $assignment_ids = array();
+        if ( empty($penpals) ) return FALSE;
+        
         foreach($penpals as $penpal ){
             $ids[] = $penpal->penpal_id;
         }
+        
         $ids = array_values($ids);
         $assignments = Homework::find('all', array('conditions' => array('user_id IN (?)', $ids)));
+
+        if ( empty($assignments) ) return FALSE;
         
         return $assignments;
     }
@@ -91,11 +96,31 @@ class Student extends User {
      * @author Jason Punzalan
      **/
     public function get_progress()
-    {                    
+    {                              
+        //TODO::   
         $homework = Homework::find_by_user_id_and_assignment_id_and_course_id($this->id, 1, $this->classroom->course->id);
+        
         if (is_null($homework)) $homework = new Homework();
         return $homework;
     }          
     
+    /**
+     * Get Selected Assignment
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_selected_assignment_article_id()
+    {  
+        $assignment = $this->classroom->course->this_weeks_assignment;                                                                  
+
+        $homework = Homework::find_by_user_id_and_assignment_id_and_course_id($this->id, $assignment->id, $this->classroom->course->id);
+
+        if (isset($homework->article->id)) {
+            return $homework->article->id;
+        }                             
+        
+        return 'none';
+    }
 
 }
