@@ -11,7 +11,7 @@
 	    		<ul class="class_list">   
 	    		    @foreach($students as $student)
 	    			<li>
-	    				<div class="student_name"><a href="#">{{$student->full_name}}</a></div>
+	    				<div class="student_name"><a href="/teacher/dashboard/progress/answers/{{$student->username}}">{{$student->full_name}}</a></div>
 	    				<ul class="student_actions">
 			    			<li class="read"><a href=""><i class="doc <?php echo display_progress($student->progress->answer) ?>"></i></a></li>
 			    			@if( $student->hasMoreThanOnePenpal )
@@ -29,14 +29,14 @@
 	    	<td class="assignment_details">
 	    	
 	    	<div id="assignment-feed">
-                <center><h4>View {{$selected_student->full_name}}'s <a href="/teacher/dashboard/answers/{{$selected_student->username}}/">Answers</a> | <a href="/teacher/dashboard/comments/{{$selected_student->username}}">Comments</a></h4></center>
+                <center><h4>View {{$selected_student->full_name}}'s <a href="/teacher/dashboard/progress/answers/{{$selected_student->username}}/">Answers</a> | <a href="/teacher/dashboard/progress/comments/{{$selected_student->username}}">Comments</a></h4></center>
                 <br/>
                 @if($selected_student->progress->hasAnswers)
 				<ul id="actions" class="w100">
 
 					<li class="action w100">
     					<div class="left avatar a70">
-    						<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink70.png'?>);"></div>
+    						<div class="image-wrap" style="background-image: url(<?php echo $selected_student->avatar ?>);"></div>
     					</div><!-- end Avatar -->
                         
     					<div class="right">
@@ -64,7 +64,7 @@
                                 @endforeach 
                                 <div class="comment-container left w100">
                         			<div class="left avatar a55 w10">
-                        					<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
+                        					<div class="image-wrap" style="background-image: url(<?php echo $teacher->avatar ?>);"></div>
                         			</div><!-- end Avatar -->
                                 
         							<div class="comment-form w80" style="float:right">

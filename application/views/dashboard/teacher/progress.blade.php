@@ -34,7 +34,8 @@
 
 @endsection
 
-@section('scripts')
+@section('scripts')                
+<script type="text/javascript" src="/public/js/jquery.jeditable.mini.js" charset="utf-8"></script>
 <script type="text/javascript">    
 $(document).ready(function() {
     $('.field-box select').customSelect({

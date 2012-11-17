@@ -6,7 +6,8 @@ class Dashboard extends MY_Controller {
     
 	function __construct() {
 		parent::__construct();	
-        $this->teacher = Teacher::session();     
+        $this->teacher = Teacher::session();   
+        $this->data['teacher'] = $this->teacher;  
     }
 
 	/**
@@ -30,15 +31,16 @@ class Dashboard extends MY_Controller {
         $this->blade->render('dashboard/teacher/dashboard', $this->data);
 	}  
 	
-	public function progress($action = 'article', $username = NULL)
+	public function progress($action = 'answers', $username = NULL)
 	{                                                                   
 	    $this->data['title'] = "Classroom Progress";                      
 	    $this->data['classrooms'] = $this->teacher->classrooms;    
 	    $this->data['course'] = $this->teacher->classroom->course;
         $this->data['assignments'] = $this->teacher->classroom->course->assignments;                                 
-        $this->data['students'] = $this->teacher->classroom->students_sorted_by_name;
-        $this->data['selected_student'] = current($this->data['students']);
-        $this->data['action'] = $action; 
+        $this->data['students'] = $this->teacher->classroom->students_sorted_by_name;        
+        $this->data['selected_student'] = (is_null($username))? current($this->data['students']) : Student::find_by_username($username); 
+        $this->data['action'] = $action;    
+
 	    $this->blade->render('dashboard/teacher/progress', $this->data);        
 	}   
 	

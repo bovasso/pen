@@ -13,6 +13,16 @@ class Classroom extends ActiveRecord\Model {
     );    
         
     /**
+     * Register
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_registered()
+    {
+        return count($this->students);
+    }    
+    /**
      * Partner
      *
      * @return void

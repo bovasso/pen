@@ -4,10 +4,12 @@
 
 	<ul id="students_registered">
 	    @foreach( $classrooms as $classroom)
-		<li class="left w90">
+		<li class="left w90">               
+		    <a href="/teacher/dashboard/progress">		    
 			<span class="w30 left">{{$classroom->name}}</span>
-			<span class="w60 left">0 of {{$classroom->class_size}} Registered</span>
+			<span class="w60 left">{{$classroom->registered}} of {{$classroom->class_size}} Registered</span>
 			<span class="arrow-right right"></span>
+			</a>
 		</li>
         @endforeach
 	</ul>

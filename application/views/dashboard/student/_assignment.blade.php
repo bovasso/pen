@@ -16,7 +16,7 @@
         @foreach( $answer->replies as $reply)
         <div class="comment-container left w100">
 			<div class="left avatar a55 w10">
-					<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
+					<div class="image-wrap" style="background-image: url(<?php echo $reply->user->avatar ?>);"></div>
 			</div><!-- end Avatar -->
 		    <div class="comment-form right w80">            					
             <p>
@@ -31,7 +31,7 @@
         @if ($answer->user->id !== $student->id )        
         <div class="comment-container left w100">
 			<div class="left avatar a55 w10">
-					<div class="image-wrap" style="background-image: url(<?php echo asset_url().'images/default_avatars/pink55.png'?>);"></div>
+					<div class="image-wrap" style="background-image: url(<?php echo $student->avatar ?>"></div>
 			</div><!-- end Avatar -->
 			
 			<div class="comment-form right w80">
