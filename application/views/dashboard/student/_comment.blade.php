@@ -2,7 +2,7 @@
     <p><b>{{$comment->answer->question->title}}</b></p>
     <p>
         {{$comment->answer->content}} <br/>
-        <small>{{$comment->answer->created_at}}</small>
+        <small>{{$comment->answer->time_ago}} ago</small>
     </p>
 	<div class="comment-container left w100">
 	    <div class="left avatar a55 w10">       
@@ -21,7 +21,7 @@
             <p>
                 {{$reply->first_name}} wrote <br/>
                 {{$reply->value}} <br/>
-                <small>{{$reply->created_at}}</small>
+                <small>{{$reply->time_ago}} ago</small>
             </p>
 			</div>                                
         </div>

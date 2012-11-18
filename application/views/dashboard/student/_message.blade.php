@@ -22,7 +22,7 @@
             <p>
                 {{$reply->first_name}} wrote <br/>
                 {{$reply->value}} <br/>
-                <small>{{$reply->created_at}}</small>
+                <small>{{$reply->time_ago}}</small>
             </p>
 			</div>                                
         </div>

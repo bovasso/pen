@@ -98,6 +98,16 @@ class Comment extends ActiveRecord\Model {
         $data['comment'] = $this;
         echo $ci->blade->render('dashboard/student/_comment', $data, TRUE);         
     }
-    
+
+    /**
+     * Time ago
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_time_ago()
+    {       
+        return array_shift(explode(',',timespan(strtotime($this->created_at->format('Y-m-d')))));
+    }    
     
 }

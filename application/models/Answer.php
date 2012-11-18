@@ -47,5 +47,16 @@ class Answer extends ActiveRecord\Model {
     {
         $replies = Comment::find('all', array('conditions'=> array('parent_id = ?', $this->id) ));
         return $replies;
+    } 
+    
+    /**
+     * Time ago
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_time_ago()
+    {       
+        return array_shift(explode(',',timespan(strtotime($this->created_at->format('Y-m-d')))));
     }
 }
