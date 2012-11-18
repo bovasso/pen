@@ -74,8 +74,12 @@ class Article extends ActiveRecord\Model {
      * @author Jason Punzalan
      **/
     public function get_content()
-    {
-        return $this->ci->typography->auto_typography($this->json->text);
+    {                                        
+        if ( !empty($this->custom_article_content) ) {
+            return html_purify($this->custom_article_content, 'comment');
+        };
+
+        return html_purify($this->json->html, 'comment');
     }
     
     /**

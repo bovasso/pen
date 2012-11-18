@@ -22,7 +22,7 @@ class Diffbot extends \Diffbot\Client
      **/
     public function __construct()
     {
-        parent::__construct('e753df45cd569328eb30f00b34bb0093');
+        parent::__construct('e753df45cd569328eb30f00b34bb0093', array('html'=>'true'));
     }
     
 } // END public class 

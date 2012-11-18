@@ -94,7 +94,7 @@ class Client
 
     protected function getPage($url, $type)
     {
-        $targetUrl = $this->prepareUrl($url, $type);
+        $targetUrl = $this->prepareUrl($url, $type);  
         return $this->getHttpClient()->get($targetUrl);
     }
 

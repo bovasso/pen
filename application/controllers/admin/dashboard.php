@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once( APPPATH . 'helpers/htmlpurifier_helper.php');
+
 class Dashboard extends CI_Controller {
 
 	public function __construct()
@@ -26,9 +28,9 @@ class Dashboard extends CI_Controller {
 	
 	public function render($output = NULL, $template = "admin/base", $only_jquery = FALSE)
 	{   
-        $this->data['output'] = $output->output;
+        $this->data['output'] = $output->output;       
         if ( $only_jquery ) {
-            $this->data['js_files'] = array('/assets/grocery_crud/js/jquery-1.8.1.min.js', '/assets/grocery_crud/js/jquery_plugins/ui/jquery-ui-1.8.23.custom.min.js');            
+            $this->data['js_files'] = array('/assets/grocery_crud/js/jquery-1.8.2.min.js', '/assets/grocery_crud/js/jquery_plugins/ui/jquery-ui-1.9.0.custom.min.js');            
         }else{
             $this->data['js_files'] = $output->js_files;
         }
@@ -192,7 +194,22 @@ class Dashboard extends CI_Controller {
         echo $this->blade->render('admin/_paypals_list', $this->data, TRUE);
 	}
 	
-
+    /**
+     * Preview
+     *
+     * @deprecated NOT IN USE 
+     * @return void    
+     * @author Jason Punzalan
+     **/
+    public function preview($id=NULL) 
+    {       
+          
+        if ( !is_null($id) ) {      
+        	$this->data['title'] = "View Article";
+            $this->data['article'] = Article::find_by_pk(array($id), NULL);
+            echo $this->blade->render('admin/_preview_article', $this->data, TRUE);            
+        }
+    }
 
 	/**
 	 * Students and Penpals
@@ -282,11 +299,18 @@ class Dashboard extends CI_Controller {
 		$this->crud->set_table('articles');
 		$this->crud->set_subject('Article');	    
         $this->crud->change_field_type('video', 'text');
-        $this->crud->unset_columns('assignment_id', 'content');
-        $this->crud->unset_fields('assignment_id');        
-        $this->crud->callback_column('video', array($this,'displayHasVideo'));                                    
-        $this->crud->unset_texteditor('video');
-        $this->crud->required_fields('title','content','source');
+        $this->crud->unset_columns('assignment_id', 'content', 'json', 'custom_article_content');
+        $this->crud->unset_fields('assignment_id', 'json');    
+        $this->crud->change_field_type('json', 'hidden');
+        $this->crud->display_as('custom_article_content', 'Content'); 
+        $this->crud->display_as('content', 'Abstract');         
+        $this->crud->callback_column('video', array($this,'displayHasVideo'));
+        $this->crud->callback_column('source', array($this,'displaySourceLink'));
+        $this->crud->unset_texteditor('video');   
+        $this->crud->required_fields('title','content','source');    
+        // $this->crud->add_action('View Format', '', '','ui-icon-image',array($this,'displayArticlePopupPreviewLink'));
+        $this->crud->callback_before_insert(array($this, '_onSaveSetJSONArticleContentViaAPI'));
+        $this->crud->callback_before_update(array($this, '_onSaveSetJSONArticleContentViaAPI'));
         $this->data['title'] = 'Articles';
         $this->data['action'] = $action;
             
@@ -420,6 +444,17 @@ class Dashboard extends CI_Controller {
 
         redirect( $this->agent->referrer() );                
 	}
+	  
+	/**
+	 * displaySourceLink function
+	 *
+	 * @return void
+	 * @author Jason Punzalan
+	 **/
+	public function displaySourceLink($value, $row )
+	{     
+	    return anchor($value, "View Source Link", 'target="_blank"');
+	}
 	
 	/**
 	 * displayTimestampsAsDates function
@@ -539,7 +574,8 @@ class Dashboard extends CI_Controller {
         $options = array(0 => 'disabled', 1 => 'enabled');
         return form_dropdown('status', $options, $value);	    	    
 	}
-	
+	 
+
 	/**
      * format Date function
      *
@@ -599,7 +635,7 @@ class Dashboard extends CI_Controller {
     }
     
     /**
-     * undocumented function
+     * createArticleWithAssignment function
      *
      * @return void
      * @author Jason Punzalan
@@ -618,10 +654,40 @@ class Dashboard extends CI_Controller {
      * @return void
      * @author Jason Punzalan
      **/
-// $this->crud->callback_field('assignment_id', array($this,'add_assignment_id_as_hidden_field'));                 
     public function add_assignment_id_as_hidden_field($value = '', $primary_key = null)
     {
         return form_hidden('assignment_id', $this->data['id']);        
+    }   
+    
+    /**
+     * onSaveSetJSONArticleContentViaAPI - using Diff API
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function _onSaveSetJSONArticleContentViaAPI($post_array)
+    {                                                
+        $ci =& get_instance();  
+             
+        $json = $ci->diffbot->getArticle($post_array['source']);      
+        $content = json_decode($json->content);
+
+        if (empty($post_array['custom_article_content'])){
+            $post_array['custom_article_content'] = html_purify($content->html, 'comment');            
+        }
+        
+        return $post_array;
+    }    
+    
+    /**
+     * displayArticlePopupPreviewLink
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function displayArticlePopupPreviewLink($primary_key, $row)
+    { 
+        return '/admin/preview/' . $primary_key; 
     }
 }	
 
