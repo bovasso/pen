@@ -13,6 +13,18 @@ class Classroom extends ActiveRecord\Model {
     );    
         
     /**
+     * All penpals for classroom function
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_penpals_in_classroom()
+    {
+        $penpals = Penpal::find('all', array('conditions' => array('classroom_id = ?', $this->id)));
+        return $penpals;
+    }
+        
+    /**
      * Register
      *
      * @return void

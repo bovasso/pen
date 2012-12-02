@@ -16,13 +16,17 @@
         @foreach( $message->replies as $reply)
         <div class="comment-container left w100">
 			<div class="left avatar a55 w10">
-					<div class="image-wrap" style="background-image: url(<?php $reply->avatar ?>);"></div>
+					<div class="image-wrap" style="background-image: url(<?php echo $reply->user->avatar ?>);"></div>
 			</div><!-- end Avatar -->
 		    <div class="comment-form right w80">            					
-            <p>
-                {{$reply->first_name}} wrote <br/>
+            <p> 
+                @if ($reply->user->id !== $student->id ) {
+                    {{$reply->first_name}} wrote <br/>
+                @else
+                    you replied <br/>
+                @endif
                 {{$reply->value}} <br/>
-                <small>{{$reply->time_ago}}</small>
+                <small>{{$reply->time_ago}} ago</small>
             </p>
 			</div>                                
         </div>

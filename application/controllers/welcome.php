@@ -10,4 +10,5 @@ class Welcome extends MY_Controller {
 		$this->data['title'] = "Welcome to PenPal News";
 		$this->blade->render('welcome/index', $this->data);
 	}
+	
 }

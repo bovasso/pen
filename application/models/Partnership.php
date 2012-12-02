@@ -51,8 +51,8 @@ class Partnership extends ActiveRecord\Model {
         // First Pass
         foreach($students as $key => $student) {
             foreach($checklist as $matched => $obj){                
-                // Student not in class then pair up!
-                if ( $obj->classroom_id !== $student->classroom_id) {                    
+                // Student not in class and same gender then pair up!
+                if ( $obj->classroom_id !== $student->classroom_id && $obj->gender == $student->gender) {                    
                     $penpals[] = array($student, $obj);
                     array_splice($checklist, $matched, 1); // Checkoff student from list
                     break;
@@ -60,11 +60,11 @@ class Partnership extends ActiveRecord\Model {
             }
         }                
 
-        // If we have extra students left over, match again
+        // If we have extra students left over, run the match again with same criteria
         if ( count($checklist) > 0 ) {
             foreach($checklist as $obj ) { 
-                foreach($students as $key => $student){                     
-                    if ( $obj->classroom_id !== $student->classroom_id) {   
+                foreach($students as $key => $student ){                     
+                    if ( $obj->classroom_id !== $student->classroom_id && $obj->gender == $student->gender) {   
                        $penpals[] = array($obj, $student);
                        array_splice($students, $key, 1);
                        break;                 

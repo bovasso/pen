@@ -18,7 +18,6 @@
 <div id="breadcrumb">
  <?php echo set_breadcrumb(); ?>
 </div>
-
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -27,7 +26,8 @@
 			<div class="widget-title">			
 				<h5></h5>
 			</div>
-			<div class="widget-content nopadding">
+			<div class="widget-content nopadding">      
+			    
                 {{$output}}
 			</div>
 		</div>

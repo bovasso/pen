@@ -38,7 +38,8 @@
 		<div id="sidebar">
 			<a href="/admin" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
 			<ul>
-				<li @if ( $title == 'Dashboard' ) class="active" @endif><a href="/admin"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+				<li @if ( $title == 'Dashboard' ) class="active" @endif><a href="/admin"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>                             
+				<li @if ( $title == 'Topics' ) class="active" @endif><a href="/admin/topics"><i class="icon icon-book"></i> <span>Topics</span></a></li>								
 				<li @if ( $title == 'Course Schedule' ) class="active" @endif><a href="/admin/courses"><i class="icon icon-globe"></i> <span>Courses</span></a></li>				
 				<li @if ( $title == 'Assignments' ) class="active" @endif><a href="/admin/assignments"><i class="icon icon-file"></i> <span>Assignments</span></a></li>								
 				<li @if ( $title == 'Classes' ) class="active" @endif><a href="/admin/classes"><i class="icon icon-pencil"></i> <span>Classes</span></a></li>				
@@ -48,8 +49,8 @@
 		
 		</div>		
 		
-		<div id="content">
-		    @yield('content-header')
+		<div id="content">            
+		    @yield('content-header')  
             @yield('content')		
 		</div>
 		<div class="row-fluid">

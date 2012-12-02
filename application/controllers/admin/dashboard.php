@@ -57,7 +57,7 @@ class Dashboard extends CI_Controller {
 
 		$this->crud->set_table('users');
 		$this->crud->set_subject('User');
-        $this->crud->unset_columns('password', 'suffix', 'avatar', 'created_on', 'phone', 'about_me', 'classroom_id', 'ip_address', 'salt', 'activation_code', 'opt_in_email', 'forgotten_password_code', 'forgotten_password_time', 'remember_code', 'last_login');
+        $this->crud->unset_columns('password', 'suffix', 'email', 'avatar', 'created_on', 'phone', 'about_me', 'classroom_id', 'ip_address', 'salt', 'activation_code', 'opt_in_email', 'forgotten_password_code', 'forgotten_password_time', 'remember_code', 'last_login');
         $this->crud->unset_fields('password','username', 'classroom_id');
                 
 	    $this->crud->set_relation('role_id','roles','name');        
@@ -85,12 +85,26 @@ class Dashboard extends CI_Controller {
             $this->render($output, 'admin/edit_class');
             exit;
         }
+
+        if ( $action == 'penpals' ) {
+            $this->data['id'] = $id;
+            $this->data['sub_menu'] = 'Penpals';
+            $this->data['title'] = 'Classes';     
+            
+            $classroom = Classroom::find_by_pk(array($id), NULL);	    
+            $this->data['students'] = $classroom->students_sorted_by_name;   
+            $this->data['available_penpals'] = $classroom->penpals_in_classroom;
+    		$output = $this->crud->render();		                        
+            $this->render($output, 'admin/edit_penpals', $only_jquery = TRUE);
+            exit;
+        }
         
         $this->data['title'] = 'Users';
 		$output = $this->crud->render();		
         $this->render($output); 
 	}
-
+    
+    
 	public function courses($action = NULL, $id = NULL) 
 	{
 
@@ -180,6 +194,22 @@ class Dashboard extends CI_Controller {
         $this->render($output);
         
 	}
+
+	/**
+	 * Topics
+	 *
+	 * @return void
+	 * @author Jason Punzalan
+	 **/
+	public function topics()
+	{        
+	    $this->crud->set_table('topics');
+		$this->crud->set_subject('Topic');	
+        $this->data['title'] = 'Topics';            		    
+		$output = $this->crud->render();		
+        $this->render($output);        
+	    
+	}   
 	
 	/**
 	 * Students and Penpals
@@ -261,9 +291,11 @@ class Dashboard extends CI_Controller {
         $this->crud->callback_column('week',array($this,'displayWeek'));                        
         $this->crud->change_field_type('video', 'text');
         $this->crud->unset_texteditor('video');
-        $this->crud->required_fields('week','name','description');
+        $this->crud->required_fields('week','name','description','topic_id');
         $this->crud->set_relation('course_id','courses','name');
-        
+        $this->crud->set_relation('topic_id','topics','name');  
+        $this->crud->display_as('topic_id', 'Topic'); 
+                
         $this->data['title'] = 'Assignments';
         $this->data['action'] = $action;
         		
@@ -374,7 +406,23 @@ class Dashboard extends CI_Controller {
 		$this->data['sub_menu'] = 'Questions';	    
 		$this->data['title'] = 'Questions';
 	    echo $this->blade->render('admin/pick_partner_class', $this->data, TRUE);	                
-	}
+	} 
+	
+	/**
+	 * Update penpal assign for student function
+	 *
+	 * @return void
+	 * @author Jason Punzalan
+	 **/
+	public function assign_student_to_penpal($student_id = NULL, $penpal_id = NULL)
+	{                                                                             
+	    $sql  = 'UPDATE penpals SET penpal_id = ? WHERE user_id = ?;';
+        $this->db->query($sql, array($penpal_id, $student_id));                    	    
+        
+	    $sql  = 'UPDATE penpals SET penpal_id = ? WHERE user_id = ?;';
+        $this->db->query($sql, array($student_id, $penpal_id));                    	    
+	}   
+	
 	/**
 	 * Assign Class to Course
 	 *
@@ -519,7 +567,7 @@ class Dashboard extends CI_Controller {
 	public function displayWeek($value, $row)
 	{                            
 	    $topics = Assignment::topics();
-	    return ' WK ' . $value . ' : ' . $topics[$value];
+	    return ' WK ' . $value;
 	}
 
 	/**
@@ -530,12 +578,9 @@ class Dashboard extends CI_Controller {
 	 **/
 	public function displayAsDropdownWeek($value, $row)
 	{   
-	    $topics = Assignment::topics();	                          
-        $options = array();
-        foreach ($topics as $key => $value ) {
-            $options[$key] = $key . " : " . $value;
-        }   
-        
+        $options = range(1,6);
+        $keys = range(1,6);
+        $options = array_combine($keys, $options);
         return form_dropdown('week', $options, $value);	    	            
 	}
 	

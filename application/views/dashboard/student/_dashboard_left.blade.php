@@ -24,13 +24,19 @@
 
 <div id="assigment_weeks" class="w80">
 	<ul>
-        @foreach( $assignments as $assignment)
+        @foreach( $assignments as $assignment_week)
 		<li>
-			<p id="{{str_replace(' ', '_', strtolower($assignment->topic))}}" class="category left"><a href=""><i class="{{str_replace(' ', '_', strtolower($assignment->topic))}}"></i>{{strtoupper($assignment->topic)}}</a></p>  	
+			<p id="{{str_replace(' ', '_', strtolower($assignment_week->topic))}}" class="category left"><a href=""><i class="{{str_replace(' ', '_', strtolower($assignment_week->topic))}}"></i>{{strtoupper($assignment_week->topic)}}</a></p>  	
 			<ul class="student_actions right">
-				<li class="read"><a href="/assignments/{{$assignment->id}}"><i class="doc <?php echo display_progress($student->progress->read) ?>"></i></a></li>
-				<li class="answer"><a href="/assignments/{{$assignment->id}}"><i class="bubble <?php echo display_progress($student->progress->answer) ?>"></i></a></li>
-				<li class="comment"><a href="/assignments/{{$assignment->id}}"><i class="bubble <?php echo display_progress($student->progress->comment) ?>"></i></a></li>
+			@if($assignment_week->week == $assignment->week )     
+				<li class="read"><a href="/assignments/{{$assignment_week->id}}"><i class="doc <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->read) ?>"></i></a></li>
+				<li class="answer"><a href="/assignments/{{$assignment_week->id}}"><i class="bubble <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->answer) ?>"></i></a></li>
+				<li class="comment"><a href="/assignments/{{$assignment_week->id}}"><i class="bubble <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->comment) ?>"></i></a></li>
+			@else
+    			<li class="read"><i class="doc <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->read) ?>"></i></li>
+    			<li class="answer"><i class="bubble <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->answer) ?>"></i></li>
+    			<li class="comment"><i class="bubble <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->comment) ?>"></i></li>			
+			@endif
 			</ul>
 		</li>
 		@endforeach

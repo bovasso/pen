@@ -14031,7 +14031,7 @@ class HTMLPurifier_Injector_AutoParagraph extends HTMLPurifier_Injector
         $text = $token->data;
         // Does the current parent allow <p> tags?
         if ($this->allowsElement('p')) {
-            if (empty($this->currentNesting) || strpos($text, "\n") !== false) {
+            if (empty($this->currentNesting) || strpos($text, "\n\n") !== false) {
                 // Note that we have differing behavior when dealing with text
                 // in the anonymous root node, or a node inside the document.
                 // If the text as a double-newline, the treatment is the same;

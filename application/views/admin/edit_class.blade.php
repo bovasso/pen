@@ -30,6 +30,7 @@
 			<ul class="nav nav-tabs">
               <li @if ( $sub_menu == 'View' ) class="active" @endif><a href="/admin/classes/edit/{{$id}}">View</a></li>
               <li @if ( $sub_menu == 'Students' ) class="active" @endif><a href="/admin/users/class/{{$id}}">Students</a></li>
+              <li @if ( $sub_menu == 'Penpals' ) class="active" @endif><a href="/admin/users/penpals/{{$id}}">Penpals</a></li>              
             </ul>
 			<div class="widget-content nopadding">
                 {{$output}}

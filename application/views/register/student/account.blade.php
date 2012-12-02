@@ -16,7 +16,13 @@
 							<div class="field-box">
                                 <?php echo $this->formbuilder->text( 'group_code', '', '', array('class'=>'text clear-value')) ?>
 							</div>
-						</div>						
+						</div>				  
+						<div class="left w100">
+							<label class="question" for="gender">Gender</label>
+							<div class="field-box">
+                                <?php echo $this->formbuilder->drop_down( 'gender', '', array('M'=>'Male', 'F'=>'Female'), 'M', '', array('class'=>'gender')) ?>
+							</div>
+						</div>												  	
 						<div class="left w40">
 							<label class="question" for="first-name">First Name</label>
 							<div class="field-box">

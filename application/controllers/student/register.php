@@ -70,7 +70,8 @@ class Register extends MY_Controller {
                 $student = new Student();
                 $student->active = 1;
                 $student->first_name = $ci->input->post('first_name');
-                $student->last_name = $ci->input->post('last_name');            
+                $student->last_name = $ci->input->post('last_name');                                  
+                $student->gender = $ci->input->post('gender');                                    
                 $student->username = $ci->input->post('username');                                    
                 $student->password = $ci->ion_auth->hash_password($ci->input->post('password'), FALSE);
                 

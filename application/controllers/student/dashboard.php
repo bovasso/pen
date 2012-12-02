@@ -15,6 +15,7 @@ class Dashboard extends MY_Controller {
         $this->data['course'] = $this->student->classroom->course;		
         $this->data['activities'] = $this->student->penpal_activity;
         // var_dump($this->student->penpal_activity);exit;
+
         $this->data['teacher'] = $this->student->classroom->teacher;		
         $this->data['assignment'] = $this->student->classroom->course->this_weeks_assignment;
         $this->data['assignments'] = $this->student->classroom->course->assignments;		

@@ -1,8 +1,11 @@
 <?php
 
 class Assignment extends ActiveRecord\Model {
-     static $belongs_to = array('course');   
-     
+     static $belongs_to = array(
+         array('course'),
+         array('topic')
+     );   
+
      static $has_many = array(
          'questions',
          'answers',
@@ -39,9 +42,8 @@ class Assignment extends ActiveRecord\Model {
       * @author Jason Punzalan
       **/
      public function get_topic()
-     {  
-        $topics = self::topics();
-        return $topics[$this->week];
+     {          
+        return $this->topics[$this->week];
      }
        
      /**
@@ -66,4 +68,5 @@ class Assignment extends ActiveRecord\Model {
          $date = $this->read_attribute('due_date');
          return $date->format('l, F j');
      }
+     
 }

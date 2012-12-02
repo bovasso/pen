@@ -15,7 +15,11 @@ s@layout('layouts/admin')
     .table .info {
         background-color: #BAEEED;
     }
-    
+
+    #view_students_modal {
+        width:80%;
+        margin: -20% 0 0 -40%;        
+    }
 </style>		
 @foreach ($css_files as $css)
 <link rel="stylesheet" href="{{$css}}"/>
@@ -40,6 +44,7 @@ s@layout('layouts/admin')
                 $("#view_students_modal").modal('show');
             });            
         });
+                
         $('.assign_class').on('click', function(event){
             event.preventDefault();
             class_id =  $(this).data('classroom');
@@ -111,7 +116,7 @@ s@layout('layouts/admin')
 <div id="view_students_modal" class="modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Students</h3>
+    <h3>Penpals</h3>
   </div>
   <div class="modal-body">
       <table class="table table-bordered">
@@ -120,7 +125,8 @@ s@layout('layouts/admin')
               <th>Class</th>
               <th>Name</th>
               <th>&nbsp;</th>                            
-              <th>Penpals</th>
+              <th>Class</th>
+              <th>Penpal</th> 
           </tr>
           </thead>
           <tbody id="penpals_list">
@@ -162,7 +168,10 @@ s@layout('layouts/admin')
                         @if( $classroom->partnerships )                                       
                         <tbody>                        
                             <tr rowspan="2">
-                                <td>{{$classroom->seats_available}}</td><td>{{$classroom->school->name}}</td><td>{{$classroom->name}}</td><td>{{$classroom->school->state}}</td><td>{{$classroom->class_size}}</td><td><a href="#" data-row="#row_{{$key}}" class="show_hide_partner btn">View Partners</a>&nbsp;<a href="#" data-classroom="{{$classroom->id}}" class="view_students_button btn">View Students</a></td>
+                                <td>{{$classroom->seats_available}}</td><td>{{$classroom->school->name}}</td><td>{{$classroom->name}}</td>
+                                <td>{{$classroom->school->state}}</td><td>{{$classroom->class_size}}</td><td><a href="#" data-row="#row_{{$key}}" class="show_hide_partner btn">View Partners</a>
+                                    &nbsp;<a href="#" data-classroom="{{$classroom->id}}" class="view_students_button btn">View Students</a>
+                                </td>
                             </tr>
                         </tbody>                                                                                                                                
                         <tbody class="hide" id="row_{{$key}}"> 

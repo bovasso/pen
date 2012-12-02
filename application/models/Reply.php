@@ -7,10 +7,15 @@
  * @author Jason Punzalan
  */
 class Reply extends ActiveRecord\Model {
-    static $after_create = array('create_activity'); # new records only
+    // static $after_create = array('create_activity'); # new records only
     static $belongs_to = array(
         array('user'),
     );   
+     
+    static $delegate = array( 
+        array('name', 'first_name', 'to' => 'user'),
+    );
+    
     
     /**
      * Create Activity
@@ -26,6 +31,41 @@ class Reply extends ActiveRecord\Model {
       $activity->source_id = $this->id;
       $activity->save();      
     }  
+
+    /**
+     * Get Action
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_action()
+    {
+        return ' dd on your response ';
+    }        
+    
+    /**
+     * Output
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_output()
+    {
+        $ci =& get_instance();   
+        $data['comment'] = $this;
+        echo $ci->blade->render('dashboard/student/_comment', $data, TRUE);         
+    }
+    
+    /**
+     * Time ago
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_time_ago()
+    {       
+        return array_shift(explode(',',timespan(strtotime($this->created_at->format('Y-m-d')))));
+    }
     
     /**
      * belongsToUser

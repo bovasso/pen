@@ -14,11 +14,21 @@ class Assignments extends MY_Controller {
 	 * @return void
 	 * @author Jason Punzalan
 	 */
-	function index() {
+	function index($id = NULL) {
 		$this->data['title'] = "Assignments";
 		$course = Course::find_by_pk(array(1), NULL);
-		$this->data['course'] = $course;
-		$this->data['assignment'] = $course->this_weeks_assignment;
+		$this->data['course'] = $course;                           
+				
+        if (!is_null($id)) {
+            $assignment = Assignment::find_by_pk(array($id), NULL);
+        }else{
+            $assignment = $course->this_weeks_assignment;
+        }                                                                        
+        
+        // Students should only access assignments that have started
+        if ( $assignment->id !== $course->this_weeks_assignment->id ) show_404();
+        
+        $this->data['assignment'] = $assignment;
 		$this->blade->render('assignments/overview', $this->data);
 	}
 

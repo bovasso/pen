@@ -1,6 +1,8 @@
 <?php
 
 class Student extends User {
+    protected $homework = NULL;
+    
     static $table_name = 'users';    
     static $belongs_to = array(
         array('school'),
@@ -102,7 +104,27 @@ class Student extends User {
         
         if (is_null($homework)) $homework = new Homework();
         return $homework;
-    }          
+    }                  
+    
+    /**
+     * Find Progress For Assignment function
+     *
+     * @return Homework
+     * @author Jason Punzalan
+     **/
+    public function find_progress_by_assignment_id($id = NULL)
+    {                                                        
+        if ( is_null($this->homework) ) {
+            $this->homework = Homework::find_all_by_user_id_and_course_id($this->id, $this->classroom->course->id);
+        }
+
+        foreach( $this->homework as $key => $obj) {
+            if  ($obj->assignment_id == $id ) return $obj;
+        }
+
+        //  Return Empty Homework
+        return new Homework();
+    }
     
     /**
      * Get Selected Assignment
@@ -113,7 +135,7 @@ class Student extends User {
     public function get_selected_assignment_article_id()
     {  
         $assignment = $this->classroom->course->this_weeks_assignment;                                                                  
-
+        
         $homework = Homework::find_by_user_id_and_assignment_id_and_course_id($this->id, $assignment->id, $this->classroom->course->id);
 
         if (isset($homework->article->id)) {
@@ -121,6 +143,5 @@ class Student extends User {
         }                             
         
         return 'none';
-    }
-
+    }    
 }
