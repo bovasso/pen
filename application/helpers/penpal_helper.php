@@ -67,5 +67,31 @@ function penpals_as_dropdown_options($value)
         $options[$option->student->id] = '(' . $option->student->gender .')&nbsp;' . $option->student->full_name;
     }                                              
     return $options;
+}   
+
+/**
+ * display_progress_bar function
+ *
+ * @return void
+ * @author Jason Punzalan
+ **/
+function display_progress_bar($value)
+{       
+    $progress_bar = 0;
+    
+    if ( $value->read ) {
+        $progress_bar = 33;
+    }     
+    
+    if ( $value->answer ) {
+        $progress_bar = 66;
+    }
+    
+    if ( $value->comment ) {
+        $progress_bar = 100;
+    }                     
+    
+    return $progress_bar;
+
 }
 ?>

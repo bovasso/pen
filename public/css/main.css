@@ -220,8 +220,26 @@ input[type="submit"], button, label {
     padding: 0;
     position: relative;
     width: 132px;
-    height: 35px;
+    height: 35px;     
+} 
+
+.field-box .gender {
+    background: #fafafa;
+    -webkit-box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,.25);
+    box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,.25);
+    cursor: pointer;
+    font-size: 13px;
+    font-family: "Avenir LT W01 45 Book",Arial,sans-serif;
+    margin: 0 0 6px;
+		text-align: center!important;
+		line-height:30px;    
+		padding-top: 5px;    
+    position: relative;
+    width: 132px;
+    height: 30px; 
+
 }
+
 .student_progress_header .field-box .mySelect {
     width: 162px;
 }
@@ -1500,4 +1518,4 @@ body.fluid {
         -moz-border-radius-bottomright: 6px;
         border-top-right-radius: 6px;
         border-bottom-right-radius: 6px;
-    }
+    }            

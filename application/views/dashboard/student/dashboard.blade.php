@@ -24,7 +24,7 @@
 	<script>
 		$(function() {
 			$( "#progressbar" ).progressbar({
-				value: 37
+				value: <?php echo display_progress_bar($this->student->progress) ?>
 			});
 		});
 	</script>

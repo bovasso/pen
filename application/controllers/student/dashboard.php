@@ -19,7 +19,9 @@ class Dashboard extends MY_Controller {
         $this->data['teacher'] = $this->student->classroom->teacher;		
         $this->data['assignment'] = $this->student->classroom->course->this_weeks_assignment;
         $this->data['assignments'] = $this->student->classroom->course->assignments;		
+        
         $this->blade->render('dashboard/student/dashboard', $this->data);
+        
 	}   
 	
     

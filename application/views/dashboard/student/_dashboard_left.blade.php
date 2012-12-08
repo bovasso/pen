@@ -12,9 +12,9 @@
 <div id="assignment_status">
 	<h4>Assignment Status</h4>
 
-    <!-- <div class="progress">
+    <div class="progress">
         <div id="progressbar"></div>
-    </div> -->
+    </div>
     <!-- End demo -->
 	<p class="due_date">{{$assignment->due_date}}</p>
 
@@ -26,7 +26,8 @@
 	<ul>
         @foreach( $assignments as $assignment_week)
 		<li>
-			<p id="{{str_replace(' ', '_', strtolower($assignment_week->topic))}}" class="category left"><a href=""><i class="{{str_replace(' ', '_', strtolower($assignment_week->topic))}}"></i>{{strtoupper($assignment_week->topic)}}</a></p>  	
+
+			<p id="{{str_replace(' ', '_', strtolower($assignment_week->topic->name))}}" class="category left"><a href=""><i class="{{str_replace(' ', '_', strtolower($assignment_week->topic->name))}}"></i>{{strtoupper($assignment_week->topic->name)}}</a></p>  	
 			<ul class="student_actions right">
 			@if($assignment_week->week == $assignment->week )     
 				<li class="read"><a href="/assignments/{{$assignment_week->id}}"><i class="doc <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->read) ?>"></i></a></li>
