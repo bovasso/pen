@@ -20,7 +20,7 @@ class Dashboard extends CI_Controller {
         $this->displayTimestampsAsDates();                
 	}
 	
-	public function set_timestamps($post_array, $primary_key){
+	public function set_timestamps($post_array){        
         if( empty($post_array['created_at']) ) $post_array['created_at'] = date('Y-m-d');
         $post_array['updated_at'] = date('Y-m-d');
         return $post_array;
@@ -113,6 +113,10 @@ class Dashboard extends CI_Controller {
         $this->crud->order_by('start_date','desc');
         $this->data['title'] = 'Course Schedule';
         $this->data['action'] = $action;
+        $this->crud->callback_column('start_date',array($this,'formatDate'));                
+        $this->crud->callback_column('end_date',array($this,'formatDate'));                        
+        $this->crud->callback_column('register_deadline',array($this,'formatDate'));                
+        $this->crud->display_as('register_deadline', 'Deadline');
         
 		$output = $this->crud->render();
         
@@ -125,7 +129,28 @@ class Dashboard extends CI_Controller {
         }    
         
         
-	}
+	}    
+	
+	/**
+	 * Schools
+	 *
+	 * @return void
+	 * @author Jason Punzalan
+	 **/
+	public function schools()
+	{ 
+		$this->crud->set_table('schools');
+		$this->crud->set_subject('School');
+        $this->crud->order_by('created_at','desc');
+        $this->crud->display_as('teacher_id', 'Teacher');   
+        $this->crud->callback_field('state',array($this,'displayStateDropdown'));
+        $this->crud->required_fields('state','school','name');
+        $this->crud->set_relation('teacher_id','users','{first_name} {last_name}');        
+        $this->data['title'] = 'Schools';
+        $output = $this->crud->render();		
+        $this->render($output);        		        
+	}         
+	
     public function classes($action = NULL, $id = NULL) 
     {
 		$this->crud->set_table('classrooms');
@@ -207,8 +232,7 @@ class Dashboard extends CI_Controller {
 		$this->crud->set_subject('Topic');	
         $this->data['title'] = 'Topics';            		    
 		$output = $this->crud->render();		
-        $this->render($output);        
-	    
+        $this->render($output);        	    
 	}   
 	
 	/**
@@ -289,18 +313,21 @@ class Dashboard extends CI_Controller {
         $this->crud->unset_columns('description', 'video');		
         $this->crud->callback_field('week', array($this,'displayAsDropdownWeek'));
         $this->crud->callback_column('week',array($this,'displayWeek'));                        
+        $this->crud->callback_column('due_date',array($this,'formatDate'));                        
         $this->crud->change_field_type('video', 'text');
         $this->crud->unset_texteditor('video');
         $this->crud->required_fields('week','name','description','topic_id');
         $this->crud->set_relation('course_id','courses','name');
         $this->crud->set_relation('topic_id','topics','name');  
         $this->crud->display_as('topic_id', 'Topic'); 
+        $this->crud->display_as('course_id', 'Course');         
                 
         $this->data['title'] = 'Assignments';
         $this->data['action'] = $action;
         		
 		if ($action == 'edit') {
-            $this->data['id'] = $id;
+            $this->data['id'] = $id;  
+            $this->data['sub_menu'] = 'View';            
     		$output = $this->crud->render();            
             $this->render($output, 'admin/edit_assignment');
             exit;
@@ -332,7 +359,7 @@ class Dashboard extends CI_Controller {
 		$this->crud->set_subject('Article');	    
         $this->crud->change_field_type('video', 'text');
         $this->crud->unset_columns('assignment_id', 'content', 'json', 'custom_article_content');
-        $this->crud->unset_fields('assignment_id', 'json');    
+        $this->crud->unset_fields('json');    
         $this->crud->change_field_type('json', 'hidden');
         $this->crud->display_as('custom_article_content', 'Content'); 
         $this->crud->display_as('content', 'Abstract');         
@@ -340,7 +367,6 @@ class Dashboard extends CI_Controller {
         $this->crud->callback_column('source', array($this,'displaySourceLink'));
         $this->crud->unset_texteditor('video');   
         $this->crud->required_fields('title','content','source');    
-        // $this->crud->add_action('View Format', '', '','ui-icon-image',array($this,'displayArticlePopupPreviewLink'));
         $this->crud->callback_before_insert(array($this, '_onSaveSetJSONArticleContentViaAPI'));
         $this->crud->callback_before_update(array($this, '_onSaveSetJSONArticleContentViaAPI'));
         $this->data['title'] = 'Articles';
@@ -349,7 +375,12 @@ class Dashboard extends CI_Controller {
         if ( $id ) $this->crud->where('assignment_id',$id);
     		
 		if ($action == 'assign') {
-            $this->data['id'] = $id;	
+            $this->data['id'] = $id; 
+            $this->data['title'] = "Assignments";                            
+            $this->data['sub_menu'] = "Articles";  
+            if (in_array($this->crud->getState(), array('edit', 'add'))) {
+                $this->data['notice_info'] = "If you wish to edit the article content, you must first save the article. Article content is parsed from the link provided on save.";                
+            }
             $this->crud->change_field_type('assignment_id', 'hidden', $id);
             $output = $this->crud->render();
             $this->render($output, 'admin/edit_assignment');
@@ -382,6 +413,8 @@ class Dashboard extends CI_Controller {
         
         if ($action == 'assign') {
             $this->data['id'] = $id;	
+            $this->data['title'] = "Assignments";
+            $this->data['sub_menu'] = 'Questions';
             $this->crud->unset_columns('assignment_id');
             $this->crud->change_field_type('assignment_id', 'hidden', $id);
             $this->crud->change_field_type('title', 'text');            
@@ -566,7 +599,6 @@ class Dashboard extends CI_Controller {
 	 **/
 	public function displayWeek($value, $row)
 	{                            
-	    $topics = Assignment::topics();
 	    return ' WK ' . $value;
 	}
 
@@ -713,7 +745,8 @@ class Dashboard extends CI_Controller {
     public function _onSaveSetJSONArticleContentViaAPI($post_array)
     {                                                
         $ci =& get_instance();  
-             
+        
+        $post_array = $this->set_timestamps($post_array);     
         $json = $ci->diffbot->getArticle($post_array['source']);      
         $content = json_decode($json->content);
 

@@ -1,7 +1,9 @@
 <?php
 
 class User extends ActiveRecord\Model {
-    
+    const TEACHER_ROLE = 1;
+    const STUDENT_ROLE = 2;    
+
     static $belongs_to = array(
         array('classroom'),
         array('role')
@@ -59,8 +61,10 @@ class User extends ActiveRecord\Model {
      **/
     public function login()
     {
-        $ci =& get_instance();
-        return $ci->session->set_userdata('user_id', $this->id);
+        $ci =& get_instance();             
+        $identity = $ci->config->item('identity', 'ion_auth');     
+        
+        return $ci->session->set_userdata($identity, $this->{$identity});
     }
     
     /**
@@ -107,25 +111,14 @@ class User extends ActiveRecord\Model {
      **/
     public static function session()
     {       
-        $ci =& get_instance();
+        $ci =& get_instance();            
+            $user = $ci->ion_auth->user();            
         try {
-            $user = $ci->ion_auth->user();
+            $user = $ci->ion_auth->user();            
             return $user;
-        }catch( Exception $e) {
+        }catch( Exception $e) {           
             return false;
         }
     } 
-    
-    /**
-     * Override find_by_pk
-     *
-     * @return void
-     * @author Jason Punzalan
-     **/
-    // public static function find_by_pk( $id )
-    // {       
-    //     $user = ActiveRecord\Model::find_by_sql(array($id), NULL);
-    //     var_dump($user);exit;
-    // }
-    
+        
 }

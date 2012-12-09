@@ -24,15 +24,18 @@
 			<li class="sign-up-step3"><a href="#"><span>3.</span>Pick Your Session<span class="tab_checkmark"></span></a></li>
 		</ul>
 		<div id="sign-up-classes" class="tab">		    
-			<div class="tab-inner">
-			    @if( $classes )
-			        <ol>
+			<div class="tab-inner">                  
+			    @if($classes)
+			    <div>
+			        <p style="text-align: center"><b>Classes Registered</b></p>
+    		        <ol style="margin-left: 50px">
     			    @foreach ($classes as $class )
-                        <li>{{$class->name}} <a href="/register/classes/{{$class->id}}"> edit </a> | <a href="/register/classes/{{$class->id}}/remove" class="remove">remove</a></li>
+                        <li>&bullet;&nbsp;{{$class->name}} &nbsp; <a href="/teacher/register/classes/{{$class->id}}"> edit </a> | <a href="/teacher/register/classes/{{$class->id}}/remove" class="remove">remove</a></li>
                     @endforeach                
-                    </ol>
-			    @endif
-			    
+                    </ol>			    
+                </div>      
+                @endif
+                <br/>
 			    <?php echo $this->formbuilder->open( NULL, FALSE, array('id' => 'sign-up-class-form') ) ?>
 			        @if( isset($class) )
 			        <?php echo $this->formbuilder->hidden( 'id', $class->id ) ?>
@@ -60,10 +63,7 @@
                                     <?php echo $this->formbuilder->text( 'class_size', '', '', array('size'=>2, 'maxlength'=>2, 'class'=>'text clear-value inline-input') ) ?>
 								</div>
 							</div>							
-							<input type="submit" class="submit" name="submit" value="+&nbsp;Save & Add Another Class" />
-                            <!--
-							<a href="#" id="remove-session-class">–&nbsp;Remove This Class</a>
-						    -->
+							<input type="submit" class="submit" name="submit" value="+&nbsp;Save & Add Another Class" />                            
 						</fieldset>
 
 					</fieldset>

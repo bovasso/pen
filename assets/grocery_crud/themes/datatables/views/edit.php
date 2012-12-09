@@ -13,7 +13,7 @@
 		</div> 		
 		<div class='clear'></div>
 	</h3>
-<div class='form-content form-div'>
+<div class='form-content form-div'>     
 	<?php echo form_open( $update_url, 'method="post" id="crudForm" autocomplete="off" enctype="multipart/form-data"'); ?>
 		<div>
 		<?php

@@ -8,7 +8,8 @@
 	<tbody> 
 	    <tr>
 	    	<td class="student_left">
-	    		<ul class="class_list">   
+	    		<ul class="class_list">  
+	    		     
 	    		    @foreach($students as $student)
 	    			<li>
 	    				<div class="student_name"><a href="/teacher/dashboard/progress/answers/{{$student->username}}">{{$student->full_name}}</a></div>
@@ -22,12 +23,11 @@
 			    			@endif
 			    		</ul>
 	    			</li>                         
-	    			@endforeach
-
+	    			@endforeach  
 	    		</ul>
 	    	</td>
-	    	<td class="assignment_details">
-	    	
+	    	<td class="assignment_details">	    	
+	    	@if(!empty($selected_student))
 	    	<div id="assignment-feed">
                 <center><h4>View {{$selected_student->full_name}}'s <a href="/teacher/dashboard/progress/answers/{{$selected_student->username}}/">Answers</a> | <a href="/teacher/dashboard/progress/comments/{{$selected_student->username}}">Comments</a></h4></center>
                 <br/>
@@ -87,7 +87,14 @@
 				<p>No work has been submitted</p>
                 @endif
 			</div>
-	    	</td>
+			@endif  
+			@if(empty($selected_student))                
+			    <div class="alert" style="text-align:center">
+					<p class="heavy">Important: Deadline for Student Registration: {{$course->register_deadline}}</p>
+					<p>There are no students have registered yet</p>
+                </div>
+	    	@endif	    	
+	    	</td>   
 	   	</tr>
 	</tbody>
 </table>

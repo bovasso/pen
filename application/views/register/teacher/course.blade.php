@@ -18,14 +18,13 @@
                                 @foreach( $courses as $course )
 									<li>
 									    <?php echo $this->formbuilder->radio( 'course_id', '', $course->id, FALSE, NULL, array('id'=>'session_' . $course->id) ); ?>
-                                        <label for="session_{{$course->id}}">{{$course->start_date}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$course->end_date}}</label>
+                                        <label for="session_{{$course->id}}">{{$course->start_date}}&nbsp;&nbsp;to&nbsp;&nbsp;{{$course->end_date}}</label>
 									</li>
 								@endforeach
 							</ul>
 						</div>
 					</fieldset>
 					<div class="btn-wrapper">
-						<!-- <a href="" class="btn" id="val-sign-up-fieldset-1">Next Step</a> -->
 						<input type="submit" class="submit btn" name="submit" value="Next Step" />
 					</div>
 				</form>

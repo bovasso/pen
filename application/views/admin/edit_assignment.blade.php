@@ -25,12 +25,18 @@
 @endsection
 @section('content')
 <div class="container-fluid">
-	<div class="row-fluid">
+	<div class="row-fluid">            
+	    @if( isset($notice_info) )
+	    <div class="alert alert-info">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <center><strong>Heads up!</strong>&nbsp;{{$notice_info}}</center>
+        </div>            
+        @endif
 		<div class="widget-box">
 			<ul class="nav nav-tabs">
-              <li @if ( $title == 'View' ) class="active" @endif><a href="/admin/assignments/edit/{{$id}}">View</a></li>
-              <li @if ( $title == 'Articles' ) class="active" @endif><a href="/admin/articles/assign/{{$id}}">Articles</a></li>
-              <li @if ( $title == 'Questions' ) class="active" @endif><a href="/admin/questions/assign/{{$id}}">Questions</a></li>
+              <li @if ( $sub_menu == 'View' ) class="active" @endif><a href="/admin/assignments/edit/{{$id}}">View</a></li>
+              <li @if ( $sub_menu == 'Articles' ) class="active" @endif><a href="/admin/articles/assign/{{$id}}">Articles</a></li>
+              <li @if ( $sub_menu == 'Questions' ) class="active" @endif><a href="/admin/questions/assign/{{$id}}">Questions</a></li>
             </ul>
 			<div class="widget-content nopadding">
                 {{$output}}

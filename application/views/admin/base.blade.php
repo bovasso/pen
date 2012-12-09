@@ -26,8 +26,7 @@
 			<div class="widget-title">			
 				<h5></h5>
 			</div>
-			<div class="widget-content nopadding">      
-			    
+			<div class="widget-content nopadding">      			    
                 {{$output}}
 			</div>
 		</div>

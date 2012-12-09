@@ -1259,15 +1259,19 @@ class Ion_auth_model extends CI_Model
 		$this->trigger_events('user');
 
 		//if no id was passed use the current users id
-		$id || $id = $this->session->userdata('user_id');
+		$identity = $this->config->item('identity', 'ion_auth');
+
+		$id || $id = $this->session->userdata($identity);
+
         if ( $id == FALSE ) return FALSE;
 
-        $user = User::find_by_pk(array($id), NULL);
-        
-        $class = $user->role->name;
-                
-        $user = $class::find_by_pk(array($id), NULL);
-
+        try {
+            $user = User::find_by_username($id);
+            $class = $user->role->name;         
+            $user = $class::find_by_username($id);
+        } catch ( Exception $e ) {
+            return FALSE;
+        }
         return $user;
 	}
 

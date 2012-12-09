@@ -14,7 +14,7 @@ class Teacher extends User {
      **/
     public function get_course()
     {
-        $classroom = Classroom::find_by_teacher_id($this->id);
+        $classroom = Classroom::find_by_teacher_id($this->id,  array('limit'=>1));
         return $classroom->course;
     }
     
@@ -29,15 +29,5 @@ class Teacher extends User {
         $this->role_id = User::TEACHER_ROLE;
     }
     
-    /**
-     * Get Students
-     *
-     * @return void
-     * @author Jason Punzalan
-     **/
-    public function get_students()
-    {
-        
-    }
             
 }

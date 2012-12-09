@@ -5,8 +5,9 @@
 			<a href="/"><img src="<?php echo asset_url()?>images/logo.png" alt="Penpal News" title="Return to Penpal News Home" width="170" /></a>
 		</h1>
         
-        @if ( !logged_in() )   
-		<form id="join" method="GET" action="/student/register">
+        @if ( !logged_in() )                                    
+
+		<form id="join" method="GET" action="/student/register">		    
 			<label for="group-code">Students</label>
 			<input type="text" class="text clear-value" name="group_code" id="group-code" placeholder="Enter Group Code" />
 			<div class="btn-wrapper"><input type="submit" class="submit btn" value="Join" /></div>
@@ -15,9 +16,9 @@
         
 		<div id="login" class="is-logged-out">
 		    @if(logged_in()) 
-            <a href="{{session()->dashboard_link}}" class="toggle">Dashboard</a> |		    
-            <a href="#" class="toggle">Help</a>	|              
-            <a href="{{session()->profile_link}}" class="toggle">{{session()->full_name}}</a> |
+                <a href="{{session()->dashboard_link}}" class="toggle">Dashboard</a> |		      
+                <a href="{{session()->profile_link}}" class="toggle">{{session()->full_name}}</a> |
+                <a href="#" class="toggle">Help</a>	|            
             @endif
             
             @if ( !logged_in() )

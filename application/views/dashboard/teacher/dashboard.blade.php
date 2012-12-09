@@ -17,9 +17,6 @@
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {       	
         $("#assignment-tabs").tabs();
-        // $('.field-box select').customSelect({
-        //  fixedWidth: true
-        // });        
     });
 </script>      
 @endsection

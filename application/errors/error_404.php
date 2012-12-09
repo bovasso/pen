@@ -5,10 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="shortcut icon" type="image/png" href="<?php echo asset_url()?>favicon.ico">
-    <link type="text/css" rel="stylesheet" href="<?php echo asset_url()?>css/main.css" media="all">
+	<link rel="shortcut icon" type="image/png" href="/public/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/public/css/main.css" media="all">
     <link type="text/css" rel="stylesheet" href="/public/js/humane/themes/original.css" media="all">	    
-	<script type="text/javascript" src="<?php echo asset_url() ?>js/modernizr.js"></script>
 	<script type="text/javascript" src="http://fast.fonts.com/jsapi/54aa4dbe-b544-446f-8b71-2ac8fa086982.js"></script>
     <style type="text/css" media="screen">
         /* === ERROR 404 === */

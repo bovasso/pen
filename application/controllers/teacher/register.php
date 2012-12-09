@@ -5,7 +5,6 @@ class Register extends MY_Controller {
 	function __construct() {
 		parent::__construct();	
         $this->form_validation->set_error_delimiters('<span class="error">', '</span>');		
-        $this->user = User::session();
 	}
 	
 	/**
@@ -55,23 +54,26 @@ class Register extends MY_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('school', 'School', 'required');
         $this->form_validation->set_rules('state', 'State', 'required');
-        
                 
         if ($this->form_validation->run() == TRUE) {
-            Teacher::transaction(function() {
-                $teacher = new Teacher();
-                $teacher->first_name = $this->input->post('first_name');
-                $teacher->last_name = $this->input->post('last_name');            
-                $teacher->username = $this->input->post('username');                                    
-                $teacher->save();
-                           
-                $school = new School();
-                $school->teacher_id = $teacher->id;
-                $school->name = $this->input->post('school');
-                $school->state = $this->input->post('state');                
-                $school->area = $this->input->post('area');
-                $school->save();                
-            });
+
+            $teacher = new Teacher();
+            $teacher->first_name = $this->input->post('first_name');
+            $teacher->last_name = $this->input->post('last_name');            
+            $teacher->username = $this->input->post('username'); 
+            $teacher->phone = $this->input->post('phone');                 
+            $teacher->email = $this->input->post('email'); 
+            $teacher->save();                        
+            
+            $school = new School();
+            $school->teacher_id = $teacher->id;
+            $school->name = $this->input->post('school');
+            $school->state = $this->input->post('state');                
+            $school->area = $this->input->post('area');
+            $school->save();                 
+
+            $teacher->school_id = $school->id;
+            $teacher->save();               
             
             $teacher->login();
             
@@ -90,7 +92,8 @@ class Register extends MY_Controller {
 	 **/
 	public function classes($id = NULL, $remove = FALSE)
 	{
-	    $teacher = Teacher::session();        
+	    $teacher = Teacher::session();  
+
         $this->data['classes'] = $teacher->classrooms;
 	   	$this->data['title'] = "Welcome to PenPal News";
         $this->form_validation->set_rules('name', 'Name', 'required');	   			 
@@ -113,6 +116,7 @@ class Register extends MY_Controller {
          */
         if ( !is_null($id) ) {
             $classroom = Classroom::find_by_id_and_teacher_id($id, $teacher->id);               
+
             if ($remove == 'remove') {
                 Classroom::transaction(function() use ($classroom){
                     $classroom->delete();                
@@ -127,7 +131,7 @@ class Register extends MY_Controller {
          * Create Classroom if form is valid
          */                
         if ($this->form_validation->run() == TRUE) {
-            $classroom = (is_null($classroom))? new Classroom() : $classroom;    
+            $classroom = (empty($classroom))? new Classroom() : $classroom;   
             $classroom->teacher_id = $teacher->id;
             $classroom->school_id = $teacher->school->id;
             $classroom->name = $this->input->post('name');
@@ -160,8 +164,10 @@ class Register extends MY_Controller {
         
         if ($this->form_validation->run() == TRUE) {
             $teacher = Teacher::session();
-            $teacher->course_id = $this->input->post('course_id');
-            $teacher->save();
+            foreach( $teacher->classrooms as $classroom ) {
+                $classroom->course_id = $this->input->post('course_id');
+                $classroom->save();
+            }
             redirect('/teacher/register/complete');                        
         }
         

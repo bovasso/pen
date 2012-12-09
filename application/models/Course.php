@@ -65,5 +65,17 @@ class Course extends ActiveRecord\Model {
     {                         
         $date = $this->read_attribute('start_date');
         return $date->format('l, F j');
+    }     
+    
+    /**
+     * End Date
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_end_date()
+    {                         
+        $date = $this->read_attribute('end_date');
+        return $date->format('l, F j');
     }
 }

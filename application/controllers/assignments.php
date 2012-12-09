@@ -4,7 +4,7 @@ class Assignments extends MY_Controller {
     protected $user = NULL;
     static $is_secure = TRUE;
 	function __construct() {
-		parent::__construct();	
+		parent::__construct();	 
 		$this->user = Student::session();
     }
 	

@@ -2,7 +2,7 @@
 @section('content')
 <div class="wrapper">
 	<div>
-		<h1>Thank You</h1>
+		<h1 style="padding-left:0px">Thank You</h1>
 		<p>We sent you a confirmation email with instructions on how to get started</p>
 		<h2>Please check your email:</h2>
 		<h3>{{$teacher->email}}</h3>
