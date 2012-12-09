@@ -1,6 +1,9 @@
 <?php
 
 class Classroom extends ActiveRecord\Model {
+    
+    static $before_create = array('create_group'); # new records only
+    
     static $has_many = array(
         array('students', 'class'=>'Student', 'conditions'=>'role_id = 2'),
         array('students_sorted_by_name', 'class'=>'Student', 'conditions'=>'role_id = 2', 'order'=>'first_name ASC'),        
@@ -9,9 +12,23 @@ class Classroom extends ActiveRecord\Model {
     static $belongs_to = array(
         array('course'),
         array('school'),
-        array('teacher')
+        array('teacher'),
+        array('group')
     );    
+
+    /**
+     * Create Group code on save of class function
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function create_group()
+    {                           
+        $group = new Group();
+        $group->save();
+        $this->group_id = $group->id;
         
+    }
     /**
      * All penpals for classroom function
      *
@@ -69,19 +86,4 @@ class Classroom extends ActiveRecord\Model {
         return $total_size;
     }
     
-    /**
-     * Get Group 
-     *
-     * @return void
-     * @author Jason Punzalan
-     **/
-    public function get_group()
-    {       
-        if ( isset($this->group) ) return $this->group;
-        
-        $group = new Group();
-        $group->classroom_id = $this->id;
-        $group->save();
-        return $group;
-    }
 }

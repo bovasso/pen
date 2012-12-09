@@ -53,10 +53,10 @@
 		<script src="/public/admin/js/bootstrap.min.js"></script>	
 		<script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
-                $("#save-and-go-back-button").on('click', function(event) {
-                    event.preventDefault();
-                    history.back();
-                });
+                // $("#save-and-go-back-button").on('click', function(event) {
+                //     event.preventDefault();
+                //     history.back();
+                // });
             });
         </script>	
 	</body>

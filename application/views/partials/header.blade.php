@@ -15,10 +15,10 @@
         @endif
         
 		<div id="login" class="is-logged-out">
-		    @if(logged_in()) 
+		    @if(logged_in())                  
+		        <a href="#" class="toggle">Help</a>	|                        
                 <a href="{{session()->dashboard_link}}" class="toggle">Dashboard</a> |		      
                 <a href="{{session()->profile_link}}" class="toggle">{{session()->full_name}}</a> |
-                <a href="#" class="toggle">Help</a>	|            
             @endif
             
             @if ( !logged_in() )

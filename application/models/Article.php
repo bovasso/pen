@@ -20,8 +20,10 @@ class Article extends ActiveRecord\Model {
      * @author Jason Punzalan
      **/
     public function get_title()
-    {
-        return $this->json->title;
+    {   
+        if ( $this->read_attribute('title') ) return $this->read_attribute('title');
+        
+        return isset($this->json->title) ? $this->json->title : 'n/a';
     }
     
     /**
@@ -32,7 +34,7 @@ class Article extends ActiveRecord\Model {
      **/
     public function get_author()
     {
-        return isset($this->json->author) ?: 'n/a';
+        return isset($this->json->author) ? $this->json->author : 'n/a';
     }
     
     /**
@@ -54,7 +56,7 @@ class Article extends ActiveRecord\Model {
      **/
     public function get_date()
     {
-        return isset($this->json->date) ?: 'n/a';
+        return isset($this->json->date) ? date('m/d/Y', strtotime($this->json->date) ) : 'n/a';
     }
     
     /**
@@ -64,8 +66,23 @@ class Article extends ActiveRecord\Model {
      * @author Jason Punzalan
      **/
     public function get_primary_image()
-    {        
-        return $this->json->media[0]->link;
+    {   
+        if ( $this->custom_image ) return FALSE; // Has override so don't display default
+             
+        if ( isset( $this->json->media[0]->link ) ) return $this->json->media[0]->link;        
+        return FALSE;
+    } 
+    
+    /**
+     * Checks for if Article has image
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_hasNoImage()
+    {                             
+        if ( $this->primary_image == NULL && $this->custom_image == NULL ) return TRUE;
+        return FALSE;
     }
     /**
      * Content

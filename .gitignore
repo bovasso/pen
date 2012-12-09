@@ -6,5 +6,5 @@
 .DS_Store
 *.log
 public/profiles/*
-
+public/articles/*
 application/config/config.php

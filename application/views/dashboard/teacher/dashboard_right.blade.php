@@ -58,10 +58,12 @@
 				<h3 class="heavy">1. Watch the Video<br />{{$assignment->name}}</h3>
 				<div class="featured-topic w100">
 					<div class="img-wrapper left "> 
-                        {{$assignment->video}}
+                        {{$assignment->video}}                        
+                        @if ( !$assignment->video )
+                            <img src="http://placehold.it/260x150/C0C0C0/E3EEFF&text=video+coming+soon">
+                        @endif
 					</div>
 					<div class="right">
-						<a href="#">{{$assignment->name}}</a>
 						<p>{{$assignment->description}}</p> 
 					</div>
 				</div><!-- end Featured Assignment Topic -->
@@ -72,13 +74,23 @@
                     <ul class="assignments-list">
                         @foreach( $assignment->articles as $article)					    
                 		<li>
-                			<div class="left w30">
-                				<a href="/assignments/article/{{$article->id}}"><img src="http://src.sencha.io/180/194/{{$article->primary_image}}"/></a>	
+                			<div class="left w30">                                                                                              
+                			    @if( $article->primary_image )
+                				    <a href="/teacher/dashboard/article/{{$article->id}}"><img src="http://src.sencha.io/180/194/{{$article->primary_image}}"/></a>	
+                				@endif
+                				
+                				@if( $article->custom_image )
+                				    <a href="/teacher/dashboard/article/{{$article->id}}"><img src="/public/articles/small/{{$article->custom_image}}"/></a>	                				
+                				@endif
+                				
+                				@if( $article->hasNoImage )
+                                    <a href="/teacher/dashboard/article/{{$article->id}}"><img src="/public/images/default_article_image.png"/></a>	                				    
+                				@endif                                                                                                                                          				
                 			</div>
                 			<div class="right w70">
-                				<h4><a href="/assignments/article/{{$article->id}}">{{$article->title}}</a></h4>
+                				<h4><a href="/teacher/dashboard/article/{{$article->id}}">{{$article->title}}</a></h4>
                                 <p>{{$article->abstract}}</p>
-                				<p class="read-more"><a href="/assignments/article/{{$article->id}}">Read More...</a></p>
+                				<p class="read-more"><a href="/teacher/dashboard/article/{{$article->id}}">Read More...</a></p>
                 			</div><!-- end Featured Assignment Topic -->
                 		</li>
                 		@endforeach

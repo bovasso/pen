@@ -29,6 +29,31 @@ class Dashboard extends MY_Controller {
         $this->blade->render('dashboard/teacher/dashboard', $this->data);
 	}  
 	
+	/**
+	 * Article view 
+	 *
+	 * @return void
+	 * @author Jason Punzalan
+	 **/
+	public function article($id = NULL)
+	{                     
+	    $this->data['title'] = "Assignments";
+        $this->data['course'] = $this->teacher->course;
+        
+        $article = Article::find_by_pk(array($id), NULL);
+        $this->data['assignment'] = $article->assignment;
+        // if ( !$article ) 
+        $this->data['article'] = $article;
+        $this->blade->render('dashboard/teacher/article', $this->data);
+        
+	} 
+	
+	/**
+	 * Progress of students
+	 *
+	 * @package default
+	 * @author Jason Punzalan
+	 */
 	public function progress($classroom = NULL, $action = 'answers', $username = NULL)
 	{                                                                   
 	    $this->data['title'] = "Classroom Progress";                      
@@ -51,5 +76,5 @@ class Dashboard extends MY_Controller {
 	    $this->blade->render('dashboard/teacher/progress', $this->data);        
 	}   
 	
-
+     
 }

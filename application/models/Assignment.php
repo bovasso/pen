@@ -7,9 +7,9 @@ class Assignment extends ActiveRecord\Model {
      );   
 
      static $has_many = array(
-         'questions',
-         'answers',
-         'articles'
+         array('questions', 'order'=>'position ASC'),
+         array('answers'),
+         array('articles')
      );
      
      /**

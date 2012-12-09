@@ -18,13 +18,13 @@
 			            @foreach($assignments as $assignment)
 			            <option value="{{$assignment->week}}">Week {{$assignment->week}}</option>
 			            @endforeach
-			        </select>			        
+			        </select>	                    
 			    </div>
 			    <div id="table_key" class="left">
-			    	<div class=""></div>
 			    </div>
 			</form>
-		</div>                                       
+		</div>     
+        <span style="float:right"><small><a href="/teacher/dashboard">back to dashboard</a></small></span>
 		@if($action == 'answers')
 		    @include('dashboard/teacher/_progress_answers')
 		@else         

@@ -44,13 +44,13 @@
 						<div class="left w60">
 							<label class="question" for="password">Create a Password&nbsp;<span>(8 or more characters w/letters &amp; numbers)</span></label>
 							<div class="field-box">
-                                <?php echo $this->formbuilder->text( 'password', '', '', array('class'=>'text clear-value', 'id'=>'password')) ?>							    
+                                <?php echo $this->formbuilder->password( 'password', '', '', array('class'=>'text clear-value', 'id'=>'password')) ?>							    
 							</div>
 						</div>
 						<div class="left w40">
 							<label class="question" for="password-confirm">Confirm Password</label>
 							<div class="field-box">
-                                <?php echo $this->formbuilder->text( 'confirm_password', '', '', array('class'=>'text clear-value')) ?>							                                    
+                                <?php echo $this->formbuilder->password( 'confirm_password', '', '', array('class'=>'text clear-value')) ?>							                                    
 							</div>
 						</div>
 						<div class="left w100">

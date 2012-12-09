@@ -362,13 +362,17 @@ class Dashboard extends CI_Controller {
         $this->crud->unset_fields('json');    
         $this->crud->change_field_type('json', 'hidden');
         $this->crud->display_as('custom_article_content', 'Content'); 
+        $this->crud->display_as('custom_image', 'Image');         
+        $this->crud->set_field_upload('custom_image','public/articles');        
         $this->crud->display_as('content', 'Abstract');         
         $this->crud->callback_column('video', array($this,'displayHasVideo'));
         $this->crud->callback_column('source', array($this,'displaySourceLink'));
         $this->crud->unset_texteditor('video');   
         $this->crud->required_fields('title','content','source');    
         $this->crud->callback_before_insert(array($this, '_onSaveSetJSONArticleContentViaAPI'));
-        $this->crud->callback_before_update(array($this, '_onSaveSetJSONArticleContentViaAPI'));
+        $this->crud->callback_before_update(array($this, '_onSaveSetJSONArticleContentViaAPI'));     
+        $this->crud->callback_after_upload(array($this,'resize_article_after_upload'));
+        
         $this->data['title'] = 'Articles';
         $this->data['action'] = $action;
             
@@ -766,6 +770,19 @@ class Dashboard extends CI_Controller {
     public function displayArticlePopupPreviewLink($primary_key, $row)
     { 
         return '/admin/preview/' . $primary_key; 
+    } 
+    
+    function resize_article_after_upload($uploader_response,$field_info, $files_to_upload)
+    {
+        $this->load->library('image_moo');
+        $file_uploaded = $field_info->upload_path. '/' .$uploader_response[0]->name; 
+                
+        // small 
+        $this->image_moo->load($file_uploaded)->resize(180,194)->save($field_info->upload_path . '/small/' . $uploader_response[0]->name,true);
+        // large
+        $this->image_moo->load($file_uploaded)->resize(354,194)->save($field_info->upload_path . '/large/' . $uploader_response[0]->name,true);
+
+        return true;
     }
 }	
 
