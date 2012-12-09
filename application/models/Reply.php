@@ -63,8 +63,8 @@ class Reply extends ActiveRecord\Model {
      * @author Jason Punzalan
      **/
     public function get_time_ago()
-    {       
-        return array_shift(explode(',',timespan(strtotime($this->created_at->format('Y-m-d')))));
+    {                                                                                           
+        return strtolower(timespan(strtotime($this->created_at->format('db'))));         
     }
     
     /**

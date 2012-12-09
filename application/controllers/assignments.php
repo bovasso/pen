@@ -17,6 +17,11 @@ class Assignments extends MY_Controller {
 	function index($id = NULL) {
 		$this->data['title'] = "Assignments";
 		$course = Course::find_by_pk(array(1), NULL);
+		if ( $course->hasNotYetStarted ) {
+		    $this->ci_alerts->set('info', 'Your course has not yet started');
+		    redirect($this->agent->referrer());
+		}                           
+		
 		$this->data['course'] = $course;                           
 				
         if (!is_null($id)) {
@@ -44,9 +49,9 @@ class Assignments extends MY_Controller {
 	        $this->ci_alerts->set('info', "You didn't select an article yet.");
 	        redirect('assignments');
 	    }                           
-	    
+
 		$this->data['title'] = "Assignments";
-		$course = Course::find_by_pk(array(1), NULL);
+		$course = $this->user->classroom->course;
 		$this->data['course'] = $course;
 		$this->data['assignment'] = $course->this_weeks_assignment;
 		

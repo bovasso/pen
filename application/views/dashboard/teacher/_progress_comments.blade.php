@@ -11,7 +11,7 @@
 	    		<ul class="class_list">   
 	    		    @foreach($students as $student)
 	    			<li>
-	    				<div class="student_name"><a href="/teacher/dashboard/progress/comments/{{$student->username}}">{{$student->full_name}}</a></div>
+	    				<div class="student_name"><a href="/teacher/dashboard/progress/{{$classroom->id}}/comments/{{$student->username}}">{{$student->full_name}}</a></div>
 	    				<ul class="student_actions">
 			    			<li class="read"><a href=""><i class="doc <?php echo display_progress($student->progress->answer) ?>"></i></a></li>
 			    			@if( $student->hasMoreThanOnePenpal )
@@ -29,7 +29,7 @@
 	    	<td class="assignment_details">
 	    	
 	    	<div id="assignment-feed">
-                <center><h4>View {{$selected_student->full_name}}'s <a href="/teacher/dashboard/progress/answers/{{$selected_student->id}}/">Answers</a> | <a href="/teacher/dashboard/progress/comments/{{$selected_student->id}}">Comments</a></h4></center>
+                <center><h4>View {{$selected_student->full_name}}'s <a href="/teacher/dashboard/progress/{{$classroom->id}}/answers/{{$selected_student->username}}/">Answers</a> | <a href="/teacher/dashboard/progress/{{$classroom->id}}/comments/{{$selected_student->username}}">Comments</a></h4></center>
                 <br/>
                 @if($selected_student->progress->madeComments)
 				<ul id="actions" class="w100">

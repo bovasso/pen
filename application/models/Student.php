@@ -99,8 +99,9 @@ class Student extends User {
      **/
     public function get_progress()
     {                              
-        //TODO::   
-        $homework = Homework::find_by_user_id_and_assignment_id_and_course_id($this->id, 1, $this->classroom->course->id);
+        $assignment = $this->classroom->course->this_weeks_assignment;
+        
+        $homework = Homework::find_by_user_id_and_assignment_id_and_course_id($this->id, $assignment->id, $this->classroom->course->id);
         
         if (is_null($homework)) $homework = new Homework();
         return $homework;

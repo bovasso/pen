@@ -46,6 +46,6 @@ class Assignment extends ActiveRecord\Model {
      {                         
          $date = $this->read_attribute('due_date');
          return $date->format('l, F j');
-     }
+     }   
      
 }

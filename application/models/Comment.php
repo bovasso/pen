@@ -36,8 +36,8 @@ class Comment extends ActiveRecord\Model {
      **/
     public function get_belongsToUser()
     {    
-        $user = Student::session();	    
-        return $this->answer->user->id == $user->id;
+        $user = Student::session();	                    
+        return $this->user->id == $user->id;
     }
     
     /**
@@ -106,8 +106,8 @@ class Comment extends ActiveRecord\Model {
      * @author Jason Punzalan
      **/
     public function get_time_ago()
-    {       
-        return array_shift(explode(',',timespan(strtotime($this->created_at->format('Y-m-d')))));
-    }    
+    {                                                                                           
+        return strtolower(timespan(strtotime($this->created_at->format('db'))));         
+    }
     
 }

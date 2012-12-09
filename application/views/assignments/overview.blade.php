@@ -10,7 +10,10 @@
 <div class="tab-inner">
     <div class="w100 featured-topic">
     	<div class="img-wrapper left "> 
-            {{$assignment->video}}
+            {{$assignment->video}}    
+            @if ( !$assignment->video )
+                <img src="http://placehold.it/260x150/C0C0C0/E3EEFF&text=video+coming+soon">
+            @endif            
     	</div>
     	<div class="right">
     		<h2>{{$assignment->name}}</h2>
@@ -24,7 +27,17 @@
             @foreach( $assignment->articles as $article)					    
     		<li>
     			<div class="left w30">
-    				<a href="/assignments/article/{{$article->id}}"><img src="http://src.sencha.io/354/194/{{$article->primary_image}}"/></a>	
+    				<a href="/assignments/article/{{$article->id}}">
+                    @if( $article->primary_image )    
+    				    <img src="http://src.sencha.io/354/194/{{$article->primary_image}}"/>
+    				@endif
+    				@if( $article->custom_image )     
+				   	    <img src="/public/articles/small/{{$article->custom_image}}"/>
+				   	@endif
+    				@if( $article->hasNoImage )
+                        <img src="/public/images/default_article_image.png"/>
+    				@endif                                                                                                                                          				
+    				</a>	
     			</div>
     			<div class="right w70">
     				<h4><a href="/assignments/article/{{$article->id}}">{{$article->title}}</a></h4>

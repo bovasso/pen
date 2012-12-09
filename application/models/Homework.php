@@ -128,6 +128,18 @@ class Homework extends ActiveRecord\Model {
       {    
           $user = Student::session();	    
           return $this->user->id == $user->id;
+      } 
+      
+      /**
+       * Selected Article
+       *
+       * @return void
+       * @author Jason Punzalan
+       **/
+      public function get_selected_article()
+      {                        
+          if ($this->article_id) return $this->article_id;
+          return FALSE;
       }
      /**
       * Output

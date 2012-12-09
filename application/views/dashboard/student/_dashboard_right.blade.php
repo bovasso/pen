@@ -8,7 +8,7 @@
 <!-- END #TOGGLES --> 
 
 <div id="main_comments" class="comment-container w100">
-
+    @if ( !$course->hasNotYetStarted )
 	<div class="left avatar a70 w10">
 		<div class="image-wrap" style="background-image: url(<?php echo $student->avatar ?>);"></div>
 	</div><!-- end Avatar -->
@@ -27,7 +27,7 @@
 			</p>
 		</form>
 	</div><!-- end Comment Form -->
-
+    @endif
 </div><!-- end Comments -->
 
 <div id="assignment-feed">
@@ -48,7 +48,7 @@
 				<div class="action-details">
 					<div class="action-auth oring w80">
 						<div class="action-title left">
-						@if($activity->belongsToUser )You @else {{$activity->user->first_name}} @endif<b>{{$activity->action}}</b> <small>{{$activity->time_ago}} ago</small></div>
+						@if($activity->belongsToUser)You @else {{$activity->user->first_name}} @endif<b>{{$activity->action}}</b> <small>{{$activity->time_ago}} ago</small></div>
 					</div> <!-- end Author and Date -->
                     
                     {{$activity->output}}

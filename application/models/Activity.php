@@ -46,8 +46,7 @@ class Activity extends ActiveRecord\Model {
      {
          $type = ucfirst($this->read_attribute('type'));
          $source_id = ucfirst($this->read_attribute('source_id'));         
-
-         $obj = $type::find_by_pk(array($source_id), NULL);
+         $obj = $type::find_by_pk(array($source_id), NULL);                
          return $obj;
      }
         
@@ -58,8 +57,8 @@ class Activity extends ActiveRecord\Model {
       * @author Jason Punzalan
       **/
      public function get_time_ago()
-     {       
-         return array_shift(explode(',',timespan(strtotime($this->created_at->format('Y-m-d')))));
+     {                                                                                           
+         return strtolower(timespan(strtotime($this->created_at->format('db'))));         
      }
      
 }

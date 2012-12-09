@@ -29,7 +29,7 @@
 	    	<td class="assignment_details">	    	
 	    	@if(!empty($selected_student))
 	    	<div id="assignment-feed">
-                <center><h4>View {{$selected_student->full_name}}'s <a href="/teacher/dashboard/progress/answers/{{$selected_student->username}}/">Answers</a> | <a href="/teacher/dashboard/progress/comments/{{$selected_student->username}}">Comments</a></h4></center>
+                <center><h4>View {{$selected_student->full_name}}'s <a href="/teacher/dashboard/progress/{{$classroom->id}}/answers/{{$selected_student->username}}/">Answers</a> | <a href="/teacher/dashboard/progress/{{$classroom->id}}/comments/{{$selected_student->username}}">Comments</a></h4></center>
                 <br/>
                 @if($selected_student->progress->hasAnswers)
 				<ul id="actions" class="w100">
@@ -48,7 +48,18 @@
 
 	    						<div class="action-article">
 	    							<h4>{{$selected_student->progress->article->title}}</h4>
-	    							<div class="article-image left"><img src="http://src.sencha.io/109/80/{{$selected_student->progress->article->primary_image}}"></div><!-- end Article Image -->
+	    							<div class="article-image left">
+	    							    @if( $selected_student->progress->article->primary_image )    
+                            			    <img src="http://src.sencha.io/90/80/{{$selected_student->progress->article->primary_image}}"/>
+                            			@endif
+                            			@if( $selected_student->progress->article->custom_image )     
+                            		   	    <img src="/public/articles/mini/{{$selected_student->progress->article->custom_image}}"/>
+                            		   	@endif
+                            			@if( $selected_student->progress->article->hasNoImage )
+                                            <img src="/public/images/default_article_image.png"/>
+                            			@endif                                                                                                                                          				
+                                        
+	    							    </div><!-- end Article Image -->
 	    							<div class="article-details right w80">
 	    								<p>{{$selected_student->progress->article->abstract}}</p> 
 	    								<p><?php echo anchor_popup($selected_student->progress->article->source, 'Read More', array('alt'=>"Article Name")) ?></p>

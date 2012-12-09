@@ -13,9 +13,12 @@ class Course extends ActiveRecord\Model {
      * @return void
      * @author Jason Punzalan
      **/
-    public function get_this_weeks_assignment($week = 1)
-    {
-        return Assignment::find_by_course_id_and_week($this->id, $week);
+    public function get_this_weeks_assignment()
+    {                                        
+        $today = date('Y-m-d'); 
+        $assignment = Assignment::find('first',array('conditions' => array('start_date >= ? AND course_id = ?', $today, $this->id)));
+//        Assignment::find_by_course_id_and_week($this->id, $week);
+        return $assignment;
     }
     
     /**
@@ -65,7 +68,26 @@ class Course extends ActiveRecord\Model {
     {                         
         $date = $this->read_attribute('start_date');
         return $date->format('l, F j');
-    }     
+    }    
+    
+    /**
+     * hasNotYetStarted
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_hasNotYetStarted()
+    {              
+        $start_date = $this->read_attribute('start_date');        
+        $start_date = $start_date->format('Y-m-d');
+        $start_date = strtotime($start_date);
+        
+        $today = date('Y-m-d');
+        $today = strtotime($today);
+
+        if ( $start_date > $today ) return TRUE;
+        return FALSE;
+    } 
     
     /**
      * End Date

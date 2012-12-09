@@ -11,17 +11,20 @@ class Dashboard extends MY_Controller {
     }
 	
 	function index() {
+	    
         $this->data['title'] = "Dashboard";
         $this->data['course'] = $this->student->classroom->course;		
         $this->data['activities'] = $this->student->penpal_activity;
-        // var_dump($this->student->penpal_activity);exit;
-
         $this->data['teacher'] = $this->student->classroom->teacher;		
         $this->data['assignment'] = $this->student->classroom->course->this_weeks_assignment;
         $this->data['assignments'] = $this->student->classroom->course->assignments;		
-        
-        $this->blade->render('dashboard/student/dashboard', $this->data);
-        
+
+        //find_progress_by_assignment_id        
+        // foreach($this->data['assignments'] as $i) {
+        //     var_dump($i->topic->name);exit;
+        // }
+        // var_dump($this->student->penpal_activity);exit;        
+        $this->blade->render('dashboard/student/dashboard', $this->data);        
 	}   
 	
     

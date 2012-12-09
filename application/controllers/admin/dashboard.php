@@ -316,9 +316,9 @@ class Dashboard extends CI_Controller {
         $this->crud->callback_column('due_date',array($this,'formatDate'));                        
         $this->crud->change_field_type('video', 'text');
         $this->crud->unset_texteditor('video');
-        $this->crud->required_fields('week','name','description','topic_id');
         $this->crud->set_relation('course_id','courses','name');
         $this->crud->set_relation('topic_id','topics','name');  
+        $this->crud->required_fields('week','name','description','topic_id');
         $this->crud->display_as('topic_id', 'Topic'); 
         $this->crud->display_as('course_id', 'Course');         
                 
@@ -776,7 +776,9 @@ class Dashboard extends CI_Controller {
     {
         $this->load->library('image_moo');
         $file_uploaded = $field_info->upload_path. '/' .$uploader_response[0]->name; 
-                
+                                                            
+        // mini
+        $this->image_moo->load($file_uploaded)->resize(90,80)->save($field_info->upload_path . '/mini/' . $uploader_response[0]->name,true);                
         // small 
         $this->image_moo->load($file_uploaded)->resize(180,194)->save($field_info->upload_path . '/small/' . $uploader_response[0]->name,true);
         // large

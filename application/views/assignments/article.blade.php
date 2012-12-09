@@ -18,7 +18,15 @@
     	<div class="left w60">
     		<h2>{{$article->title}}</h2>
             <p class="subhead">Author: {{$article->author}} Date: {{$article->date}}</p>
-            <img src="http://src.sencha.io/354/194/{{$article->primary_image}}"/>
+            @if( $article->primary_image )    
+			    <img src="http://src.sencha.io/354/194/{{$article->primary_image}}"/>
+			@endif
+			@if( $article->custom_image )     
+		   	    <img src="/public/articles/large/{{$article->custom_image}}"/>
+		   	@endif
+			@if( $article->hasNoImage )
+                <img src="/public/images/default_article_image.png"/>
+			@endif                                                                                                                                          				
             <p>
                 {{$article->content}}
             </p>		

@@ -24,10 +24,10 @@ class Classroom extends ActiveRecord\Model {
      **/
     public function create_group()
     {                           
-        $group = new Group();
+        $group = new Group();  
+        $group->classroom_id = $this->id;
         $group->save();
-        $this->group_id = $group->id;
-        
+        $this->group_id = $group->id;        
     }
     /**
      * All penpals for classroom function

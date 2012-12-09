@@ -63,27 +63,22 @@ class Register extends MY_Controller {
         $this->form_validation->set_rules('agree', 'Terms & Conditions', 'required');
                 
         if ($this->form_validation->run() == TRUE) { 
-
-           Student::transaction(function() {
-                $ci =& get_instance();
-            
-                $student = new Student();
-                $student->active = 1;
-                $student->first_name = $ci->input->post('first_name');
-                $student->last_name = $ci->input->post('last_name');                                  
-                $student->gender = $ci->input->post('gender');                                    
-                $student->username = $ci->input->post('username');                                    
-                $student->password = $ci->ion_auth->hash_password($ci->input->post('password'), FALSE);
-                
-                $group_code = Group::find_by_code($ci->input->post('group_code'));
-                if (empty($group_code)) return false;
-                $student->classroom_id = $group_code->classroom->id;
-                $student->school_id = $group_code->classroom->school->id;
-            
+            $student = new Student();
+            $student->active = 1;
+            $student->first_name = $this->input->post('first_name');
+            $student->last_name = $this->input->post('last_name');                                  
+            $student->gender = $this->input->post('gender');                                    
+            $student->username = $this->input->post('username');                                    
+            $student->password = $this->ion_auth->hash_password($this->input->post('password'), FALSE);                                   
+            $group = Group::find_by_code($this->input->post('group_code'));            
+            Student::transaction(function() use ( $student, $group ){ 
+                $student->school_id = $group->classroom->school->id;                                                          
+                $student->classroom_id = $group->classroom->id;               
                 $student->save();
-                $student->login();
             });
-            
+
+            $student->login();
+
             redirect('/student/register/complete');            
 	    }
 	    
