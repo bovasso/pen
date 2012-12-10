@@ -54,7 +54,7 @@ class Student extends User {
      * @return void
      * @author Jason Punzalan
      **/
-    public function get_penpal_activity()
+    public function penpal_activity($limit = 10, $offset = 0)
     {
         $penpals = $this->penpals;
         $ids = array();
@@ -63,8 +63,28 @@ class Student extends User {
             $ids[] = $penpal->penpal_id;
         }
         $ids = array_values($ids);
-        $activities = Activity::find('all', array('order'=>'created_at DESC', 'conditions' => array('user_id IN (?)', $ids)));
+        $activities = Activity::find('all', array('limit'=>$limit, 'offset'=> $offset,'order'=>'created_at DESC', 'conditions' => array('user_id IN (?)', $ids)));
         return $activities;
+    } 
+    
+    /**
+     * Tptal Penpal Activity
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_count_penpal_activity()
+    {
+        $penpals = $this->penpals;
+        $ids = array();
+        $ids[] = $this->id;
+        foreach($penpals as $penpal ){
+            $ids[] = $penpal->penpal_id;
+        }
+        $ids = array_values($ids);
+        $activities = Activity::find('all', array('order'=>'created_at DESC', 'limit'=>50,'conditions' => array('user_id IN (?)', $ids)));
+        
+        return count($activities);
     }
     
     /**

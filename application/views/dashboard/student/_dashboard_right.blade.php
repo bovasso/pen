@@ -30,7 +30,8 @@
     @endif
 </div><!-- end Comments -->
 
-<div id="assignment-feed">
+<div id="assignment-feed">   
+    
 	<ul id="actions" class="w100">
         
         @if ( empty($activities) )
@@ -57,5 +58,8 @@
 			</div><!-- end Right -->
 		</li><!-- end Comment Item -->
         @endforeach
-	</ul>
+	</ul>            
+	
+	<center><?php echo $this->pagination->create_links() ?></center>
+    
 </div>

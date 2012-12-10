@@ -36,8 +36,8 @@
 | This route will tell the Router what URI segments to use if those provided
 | in the URL cannot be matched to a valid route.
 |
-*/
-$route['student_dashboard/(:num)/(:num)/(:num)'] = 'dashboard/student_dashboard/$1/$2/$3';
+*/                                                                
+$route['student/dashboard/(:num)'] = 'student/dashboard/index/$1';                        
 $route['teacher/dashboard/(:num)'] = 'teacher/dashboard/index/$1';
 $route['profile/(:num)'] = 'profile/index/$1';
 $route['profile/edit/(:num)'] = 'profile/edit/$1';

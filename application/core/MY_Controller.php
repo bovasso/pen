@@ -41,11 +41,11 @@ class MY_Controller extends CI_Controller {
             }
                                                
             // Redirect if user is signin'd in as Admin role. TODO:: support admin switching to user
-            if ( $this->ion_auth->user()->role->name == 'Admin') {
-                $this->ci_alerts->set('info', "You're currently signed in as an Admin. Logout and sign-in as a regular user to pages within app");
-                redirect('/admin');
-                exit;
-            }                       
+            // if ( $this->ion_auth->user()->role->name == 'Admin') {
+            //     $this->ci_alerts->set('info', "You're currently signed in as an Admin. Logout and sign-in as a regular user to pages within app");
+            //     redirect('/admin');
+            //     exit;
+            // }                       
             
         }   
         

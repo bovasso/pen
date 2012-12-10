@@ -4,26 +4,28 @@ class Dashboard extends MY_Controller {
     private $student;
     static $is_secure = TRUE;
     
-	function __construct() {
+	function __construct() { 	            
 		parent::__construct();	
+        $this->load->library('pagination');		
 		$this->student = Student::session();	    
 		$this->data['student'] = Student::session();	    
     }
-	
-	function index() {
-	    
+	 
+	function index($offset = 0) {
+	                     
+	    $config['base_url'] = base_url('student/dashboard');
+        $config['total_rows'] = $this->student->count_penpal_activity;
+        $config['per_page'] = 3;
+        $this->pagination->initialize($config); 
+        
         $this->data['title'] = "Dashboard";
         $this->data['course'] = $this->student->classroom->course;		
-        $this->data['activities'] = $this->student->penpal_activity;
+        $this->data['activities'] = $this->student->penpal_activity( $config['per_page'], $offset); 
         $this->data['teacher'] = $this->student->classroom->teacher;		
         $this->data['assignment'] = $this->student->classroom->course->this_weeks_assignment;
         $this->data['assignments'] = $this->student->classroom->course->assignments;		
 
-        //find_progress_by_assignment_id        
-        // foreach($this->data['assignments'] as $i) {
-        //     var_dump($i->topic->name);exit;
-        // }
-        // var_dump($this->student->penpal_activity);exit;        
+        
         $this->blade->render('dashboard/student/dashboard', $this->data);        
 	}   
 	
