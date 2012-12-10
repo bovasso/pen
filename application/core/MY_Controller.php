@@ -31,13 +31,22 @@ class MY_Controller extends CI_Controller {
         //set the current controller and action name
         $this->controller_name = $this->router->fetch_directory() . $this->router->fetch_class();
         $this->action_name     = $this->router->fetch_method();
-
+        
         if ( static::$is_secure ) {   
-
+            
+            // Redirert if user isn't logged in
             if ( $this->ion_auth->user() == FALSE ){
                 redirect('account/logout');
                 exit;
             }
+                                               
+            // Redirect if user is signin'd in as Admin role. TODO:: support admin switching to user
+            if ( $this->ion_auth->user()->role->name == 'Admin') {
+                $this->ci_alerts->set('info', "You're currently signed in as an Admin. Logout and sign-in as a regular user to pages within app");
+                redirect('/admin');
+                exit;
+            }                       
+            
         }   
         
         $this->data['content'] = '';

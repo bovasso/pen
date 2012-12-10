@@ -181,9 +181,40 @@ class Register extends MY_Controller {
 	 * @author Jason Punzalan
 	 **/
 	public function complete()
-	{
+	{                                                
+	    $teacher = Teacher::session(); 
 	    $this->data['title'] = "Thanks!";			    
-	    $this->data['teacher'] = Teacher::session();
+	    $this->data['teacher'] = $teacher;
+	    $this->load->library('email');
+
+        $this->email->from('support@penpalnews.com', 'Michael Bernstein');
+        $this->email->to($teacher->email); 
+        $this->email->subject('Welcome to Penpal News!');
+        
+        foreach($teacher->classrooms as $classroom) {
+            $group_codes[] = $classroom->group->code;
+        }                                            
+        $this->data['group_codes'] = $group_codes;
+
+	    $message = $this->blade->render('emails/welcome', $this->data, TRUE);			    
+        $this->email->message($message);	
+        $this->email->send();
+        redirect('teacher/register/thanks');
+	}                        
+	
+	/**
+	 * Thanks
+	 *
+	 * @return void
+	 * @author Jason Punzalan
+	 **/
+	public function thanks()
+	{   
+	    $group_codes = array();   
+	    $teacher = Teacher::session(); 
+	    $this->data['title'] = "Thanks!";			    
+	    $this->data['teacher'] = $teacher;           
+	    
 	    $this->blade->render('register/teacher/complete', $this->data);			    
 	}
 	

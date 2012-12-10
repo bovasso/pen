@@ -112,7 +112,8 @@ class Dashboard extends CI_Controller {
 		$this->crud->set_subject('Course');
         $this->crud->order_by('start_date','desc');
         $this->data['title'] = 'Course Schedule';
-        $this->data['action'] = $action;
+        $this->data['action'] = $action;      
+        $this->crud->required_fields('start_date','end_date','register_deadline');        
         $this->crud->callback_column('start_date',array($this,'formatDate'));                
         $this->crud->callback_column('end_date',array($this,'formatDate'));                        
         $this->crud->callback_column('register_deadline',array($this,'formatDate'));                
@@ -318,7 +319,7 @@ class Dashboard extends CI_Controller {
         $this->crud->unset_texteditor('video');
         $this->crud->set_relation('course_id','courses','name');
         $this->crud->set_relation('topic_id','topics','name');  
-        $this->crud->required_fields('week','name','description','topic_id');
+        $this->crud->required_fields('week','name','description','topic_id', 'course_id');
         $this->crud->display_as('topic_id', 'Topic'); 
         $this->crud->display_as('course_id', 'Course');         
                 
@@ -336,7 +337,9 @@ class Dashboard extends CI_Controller {
         if ($action == 'assign') {
             $this->data['id'] = $id;
             $this->data['title'] = 'Course Schedule';            
-            $this->data['sub_menu'] = 'Assignments';
+            $this->data['sub_menu'] = 'Assignments';           
+            $this->crud->change_field_type('course_id', 'hidden');            
+            $this->crud->callback_field('course_id', array($this,'displayAsHiddenCourse'));            
     		$output = $this->crud->render();            
             $this->render($output, 'admin/edit_course');
             exit;            
@@ -626,10 +629,9 @@ class Dashboard extends CI_Controller {
 	 * @return void
 	 * @author Jason Punzalan
 	 **/
-	public function displayAsDropdownCourse($value, $row)
+	public function displayAsHiddenCourse($value, $row)
 	{
-        
-        return form_dropdown('week', $options, $value);	    	            
+        return form_hidden('course_id', $this->data['id']);        
 	}
 
 	/**
