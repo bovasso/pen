@@ -22,10 +22,13 @@ class Dashboard extends MY_Controller {
         $this->data['classrooms'] = $this->teacher->classrooms;          
         $this->data['course'] = $this->teacher->course;
         $this->data['assignments'] = $this->teacher->course->assignments;             
+
         if ($assignment_week) {
             $assignment = Assignment::find_by_course_id_and_week($this->teacher->classroom->course->id, $assignment_week );
             $this->data['active_assignment'] = $assignment;
-        }         
+        }else{
+            $this->data['active_assignment'] = $this->teacher->course->this_weeks_assignment;
+        }
         $this->blade->render('dashboard/teacher/dashboard', $this->data);
 	}  
 	
@@ -76,5 +79,34 @@ class Dashboard extends MY_Controller {
 	    $this->blade->render('dashboard/teacher/progress', $this->data);        
 	}   
 	
-     
+    /**
+     * Send Feedback to student
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function send_feedback()
+    {      
+        
+        $this->form_validation->set_rules('comment', 'Comment', 'required');	   			 
+        
+        if ($this->form_validation->run() == TRUE) {
+            $reply = new Reply();
+            $reply->parent_id = $this->input->post('parent_id');
+            $reply->user_id = $this->student->id;  
+            $reply->source = $this->input->post('source');
+            $reply->value = $this->input->post('comment');            
+            $reply->save();                               
+            
+            // Update source activity to push to top of feed
+            $activity_id = $this->input->post('activity_id');
+            $activity = Activity::find_by_id_and_type($activity_id, $reply->source);
+            $activity->updated_at = date('Y-m-d');
+            $activity->save();
+            
+        }
+        
+        redirect( $this->agent->referrer() );                        
+    
+    } 
 }

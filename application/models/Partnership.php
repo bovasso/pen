@@ -64,7 +64,7 @@ class Partnership extends ActiveRecord\Model {
         if ( count($checklist) > 0 ) {
             foreach($checklist as $obj ) { 
                 foreach($students as $key => $student ){                     
-                    if ( $obj->classroom_id !== $student->classroom_id && $obj->gender == $student->gender) {   
+                    if ( $obj->classroom_id !== $student->classroom_id) {   
                        $penpals[] = array($obj, $student);
                        array_splice($students, $key, 1);
                        break;                 

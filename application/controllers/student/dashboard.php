@@ -22,7 +22,18 @@ class Dashboard extends MY_Controller {
         $this->data['course'] = $this->student->classroom->course;		
         $this->data['activities'] = $this->student->penpal_activity( $config['per_page'], $offset); 
         $this->data['teacher'] = $this->student->classroom->teacher;		
-        $this->data['assignment'] = $this->student->classroom->course->this_weeks_assignment;
+        
+        // Double check that assignment exists for this week
+        $assignment = $this->student->classroom->course->this_weeks_assignment;         
+        if ($assignment) {
+            $this->data['assignment'] = $assignment;
+            $this->data['current_week'] = $assignment->week;            
+        }else{              
+            $this->data['assignment'] = NULL;            
+            $this->data['current_week'] = NULL; // setting to null for display template
+        }
+
+        
         $this->data['assignments'] = $this->student->classroom->course->assignments;		
 
         
@@ -43,8 +54,17 @@ class Dashboard extends MY_Controller {
           $comment = new Comment();
           $comment->parent_id = $this->input->post('activity_id');          
           $comment->user_id = $this->student->id;
-          $comment->value = $this->input->post('comment');
+          $comment->value = $this->input->post('comment'); 
           $comment->save();
+          
+          // Update assignment for student
+          $progress = $this->student->progress;
+          $progress->user_id = $this->student->id;
+          $progress->comment = TRUE;    
+          $progress->save_as_activity = ( $progress->hasAnswers )? TRUE : FALSE; // Only show in feed to student has assignment to share.
+          $progress->save();
+          
+          
         }
         
         redirect( $this->agent->referrer() );                        
@@ -80,11 +100,18 @@ class Dashboard extends MY_Controller {
         
         if ($this->form_validation->run() == TRUE) {
             $reply = new Reply();
-            $reply->parent_id = $this->input->post('activity_id');
+            $reply->parent_id = $this->input->post('parent_id');
             $reply->user_id = $this->student->id;  
             $reply->source = $this->input->post('source');
-            $reply->value = $this->input->post('comment');
-            $reply->save();
+            $reply->value = $this->input->post('comment');            
+            $reply->save();                               
+            
+            // Update source activity to push to top of feed
+            $activity_id = $this->input->post('activity_id');
+            $activity = Activity::find_by_id_and_type($activity_id, $reply->source);
+            $activity->updated_at = date('Y-m-d');
+            $activity->save();
+            
         }
         
         redirect( $this->agent->referrer() );                        

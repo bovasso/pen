@@ -7,7 +7,6 @@
  * @author Jason Punzalan
  */
 class Reply extends ActiveRecord\Model {
-    // static $after_create = array('create_activity'); # new records only
     static $belongs_to = array(
         array('user'),
     );   

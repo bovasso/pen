@@ -47,9 +47,10 @@
 			</div><!-- end Avatar -->
 			
 			<div class="comment-form right w80">
-                  <?php echo $this->formbuilder->open( '/student/dashboard/save_comment', array('id'=>'comment')) ?>                                
+                  <?php echo $this->formbuilder->open( '/student/dashboard/save_reply', array('id'=>'comment')) ?>                                
 					<?php echo $this->formbuilder->textarea( 'comment', '', '', array('class'=>'w90')) ?>       
-                      <?php echo $this->formbuilder->hidden( 'activity_id', $answer->id) ?>               							                             
+                    <?php echo $this->formbuilder->hidden( 'activity_id', $comment->activity_id) ?>               							                             
+                    <?php echo $this->formbuilder->hidden( 'parent_id', $comment->id) ?>               							                                                 
 					<p class="btn-wrapper right">
           				<input type="submit" class="submit btn" value="reply"/>
           			</p>                        			

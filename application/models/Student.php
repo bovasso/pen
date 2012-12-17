@@ -63,7 +63,7 @@ class Student extends User {
             $ids[] = $penpal->penpal_id;
         }
         $ids = array_values($ids);
-        $activities = Activity::find('all', array('limit'=>$limit, 'offset'=> $offset,'order'=>'created_at DESC', 'conditions' => array('user_id IN (?)', $ids)));
+        $activities = Activity::find('all', array('limit'=>$limit, 'offset'=> $offset,'order'=>'updated_at DESC', 'conditions' => array('display = 1 AND user_id IN (?)', $ids)));
         return $activities;
     } 
     
@@ -123,7 +123,12 @@ class Student extends User {
         
         $homework = Homework::find_by_user_id_and_assignment_id_and_course_id($this->id, $assignment->id, $this->classroom->course->id);
         
-        if (is_null($homework)) $homework = new Homework();
+        if (is_null($homework)) {
+            $homework = new Homework();
+            $homework->assignment_id = $assignment->id;
+            $homework->course_id = $this->classroom->course->id;            
+        }
+        
         return $homework;
     }                  
     

@@ -1,6 +1,7 @@
 <?php
 
-class Homework extends ActiveRecord\Model {
+class Homework extends ActiveRecord\Model {        
+     public $activity_id = NULL;
      static $table_name = 'student_assignments';
      static $after_save = array('create_activity'); 
      public $save_as_activity = TRUE;
@@ -24,8 +25,8 @@ class Homework extends ActiveRecord\Model {
       * @author Jason Punzalan
       **/
      public function create_activity()
-     {     
-       if ($this->save_as_activity) {
+     {      
+       if ($this->save_as_activity ) {
            $activity = new Activity();
            $activity->user_id = $this->user_id;
            $activity->type = 'homework';
@@ -151,9 +152,10 @@ class Homework extends ActiveRecord\Model {
      {
          $ci =& get_instance();
          $data['answers'] = Answer::find_all_by_user_id_and_homework_id($this->user_id, $this->id);
-         $data['assignment'] = Assignment::find_by_pk(array($this->assignment_id), NULL);
+         $data['assignment'] = Assignment::find_by_pk(array($this->assignment_id), NULL);         
          $data['article'] = Article::find_by_pk(array($this->article_id), NULL);
          $data['activity'] = $this->activity;
+        
          echo $ci->blade->render('dashboard/student/_assignment', $data, TRUE);         
      }
 }

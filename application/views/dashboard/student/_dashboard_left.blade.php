@@ -1,5 +1,5 @@
+@if ($assignment)
 <h3>This Week's Assignments</h3>
-
 <div id="assignment_checklist">
 	<h4>{{$assignment->name}}</h4>    
 	@if ($assignment->video)
@@ -27,7 +27,10 @@
 	<p class="due_date">{{$assignment->due_date}}</p>
 
 </div>
-
+@endif
+@if (!$assignment)   
+<h3>No Assignment This Week</h3> 
+@endif
 <h3>All Assignments</h3>
 
 <div id="assigment_weeks" class="w80">
@@ -36,10 +39,10 @@
 		<li>
 			<p id="{{str_replace(' ', '_', strtolower($assignment_week->topic->name))}}" class="category left"><a href=""><i class="{{str_replace(' ', '_', strtolower($assignment_week->topic->name))}}"></i>{{strtoupper($assignment_week->topic->name)}}</a></p>  	
 			<ul class="student_actions right">
-			@if($assignment_week->week == $assignment->week )     
-				<li class="read"><a href="/assignments/{{$assignment_week->id}}"><i class="doc <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->read) ?>"></i></a></li>
-				<li class="answer"><a href="/assignments/{{$assignment_week->id}}"><i class="bubble <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->answer) ?>"></i></a></li>
-				<li class="comment"><a href="/assignments/{{$assignment_week->id}}"><i class="bubble <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->comment) ?>"></i></a></li>
+			@if($assignment_week->week == $current_week )     
+				<li class="read"><i class="doc <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->read) ?>"></i></li>
+				<li class="answer"><i class="bubble <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->answer) ?>"></i></li>
+				<li class="comment"><i class="bubble <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->comment) ?>"></i></li>
 			@else
     			<li class="read"><i class="doc <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->read) ?>"></i></li>
     			<li class="answer"><i class="bubble <?php echo display_progress($student->find_progress_by_assignment_id($assignment_week->id)->answer) ?>"></i></li>

@@ -16,7 +16,9 @@
 @section('scripts')
 <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {       	
-        $("#assignment-tabs").tabs();
+
+        $('#assignment-tabs').tabs({ selected: <?php echo $active_assignment->week?> });
+        
     });
 </script>      
 @endsection

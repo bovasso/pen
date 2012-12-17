@@ -98,6 +98,7 @@ if ( ! function_exists('is_valid_state')) {
 if ( ! function_exists('get_states')) {
 	function state_array() {
 		$state_list = array(
+		    'NA' => 'Other',
 			'AL' => 'Alabama',
 			'AK' => 'Alaska',
 			'AZ' => 'Arizona',

@@ -7,6 +7,8 @@
  * @author Jason Punzalan
  */
 class Message extends ActiveRecord\Model {
+    public $activity_id = NULL;
+    
     static $after_create = array('create_activity'); # new records only
     static $belongs_to = array(
         array('user'),

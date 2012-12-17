@@ -24,6 +24,12 @@
                                     <?php echo $this->formbuilder->drop_down( 'state', '', state_array() )  ?>
 							</div>
 						</div>
+						<div class="left w50">
+							<label class="question" for="state">In what country is it located?</label>
+							<div class="field-box">
+                                    <?php echo $this->formbuilder->drop_down( 'country', '', country_array() )  ?>
+							</div>
+						</div>						
 						<div class="clear">
 							<legend class="question">How would you characterize the area where you teach?</legend>
 							<div class="field-box">

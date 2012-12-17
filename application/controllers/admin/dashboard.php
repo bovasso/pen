@@ -58,7 +58,7 @@ class Dashboard extends CI_Controller {
 		$this->crud->set_table('users');
 		$this->crud->set_subject('User');
         $this->crud->unset_columns('password', 'suffix', 'email', 'avatar', 'created_on', 'phone', 'about_me', 'classroom_id', 'ip_address', 'salt', 'activation_code', 'opt_in_email', 'forgotten_password_code', 'forgotten_password_time', 'remember_code', 'last_login');
-        $this->crud->unset_fields('password','username', 'classroom_id');
+        $this->crud->unset_fields('password','username', 'salt', 'activation_code', 'ip_address', 'forgotten_password_time', 'forgotten_password_code', 'forgotten_password_time', 'remember_code', 'created_on', 'avatar', 'classroom_id');
                 
 	    $this->crud->set_relation('role_id','roles','name');        
 	    $this->crud->set_relation('classroom_id','classrooms','name');        
@@ -144,7 +144,10 @@ class Dashboard extends CI_Controller {
 		$this->crud->set_subject('School');
         $this->crud->order_by('created_at','desc');
         $this->crud->display_as('teacher_id', 'Teacher');   
+        $this->crud->callback_column('area',array($this,'displayAreaColumn'));                        
         $this->crud->callback_field('state',array($this,'displayStateDropdown'));
+        $this->crud->callback_field('country',array($this,'displayCountryDropdown'));        
+        $this->crud->callback_field('area',array($this,'displayAreaDropdown'));                
         $this->crud->required_fields('state','school','name');
         $this->crud->set_relation('teacher_id','users','{first_name} {last_name}');        
         $this->data['title'] = 'Schools';
@@ -586,6 +589,18 @@ class Dashboard extends CI_Controller {
 	{
 	    return $value;
 	}
+	              
+	/**
+	 * Area for list 
+	 *
+	 * @return void
+	 * @author Jason Punzalan
+	 **/
+	public function displayAreaColumn($value, $row)
+	{          
+	    $area_list = area_array();
+	    return $area_list[$value]; 
+	}      
 	
 	/**
 	 * displayHasVideo
@@ -690,6 +705,28 @@ class Dashboard extends CI_Controller {
     public function displayStateDropdown($value, $row)
     {
         return state_dropdown('state', $value);
+    }
+
+    /**
+     * display State Dropdown
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function displayCountryDropdown($value, $row)
+    {
+        return form_dropdown('country', country_array(), $value);        
+    }
+
+    /**
+     * display State Dropdown
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function displayAreaDropdown($value, $row)
+    {
+        return form_dropdown('area', area_array(), $value);
     }
     
     // Actions for CMS

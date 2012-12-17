@@ -54,6 +54,8 @@ class Register extends MY_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('school', 'School', 'required');
         $this->form_validation->set_rules('state', 'State', 'required');
+        $this->form_validation->set_rules('country', 'Country', 'required');
+
                 
         if ($this->form_validation->run() == TRUE) {
 
@@ -69,6 +71,7 @@ class Register extends MY_Controller {
             $school->teacher_id = $teacher->id;
             $school->name = $this->input->post('school');
             $school->state = $this->input->post('state');                
+            $school->country = $this->input->post('country');            
             $school->area = $this->input->post('area');
             $school->save();                 
 
@@ -101,15 +104,6 @@ class Register extends MY_Controller {
         $this->form_validation->set_rules('age_range_end', 'Ending Age', 'required');
         $this->form_validation->set_rules('class_size', 'Class Size', 'required');
         
-        /*
-         * Making sure there's at least one is present before continuing
-         */
-        if ( $this->input->post('submit') == 'Next Step' ) {
-            if ( count($teacher->classrooms) >= 1 ) {
-                redirect('/teacher/register/course');   
-                exit;
-            };
-        };
         
         /*
          * Use an existing Classroom if ID is passed.
@@ -138,13 +132,29 @@ class Register extends MY_Controller {
             $classroom->age_range_start = $this->input->post('age_range_start');
             $classroom->age_range_end = $this->input->post('age_range_end');
             $classroom->class_size = $this->input->post('class_size');
-
-            Classroom::transaction(function() use ($classroom){
-                $classroom->save();                
-            });
             
-            redirect('/teacher/register/classes');
-        }
+            Classroom::transaction(function() use ($classroom){   
+                $classroom->save(); 
+                $group = Group::find_by_classroom_id($classroom->id);
+                $classroom->group_id = $group->id;
+                $classroom->save();
+            });  
+                     
+            $next_step = TRUE;
+        }   
+
+        /*
+         * Making sure there's at least one is present before continuing
+         */
+        if ( $this->input->post('submit') == 'Next Step' ) {
+            if ( $next_step ) {
+                redirect('/teacher/register/course');   
+                exit;
+            }else{
+                redirect('/teacher/register/classes');
+                exit;                  
+            }
+        };
         
 	    $this->blade->render('register/teacher/classes', $this->data);			   	
 	}

@@ -90,8 +90,41 @@ function display_progress_bar($value)
     if ( $value->comment ) {
         $progress_bar = 100;
     }                     
+                             
+    // If student has commented but not answered questions show only partially complete
+    if ( $value->comment && !$value->answer ) {
+        $progress_bar = 33;        
+    }                      
     
     return $progress_bar;
 
+}    
+
+/**
+ * Country Array function
+ *
+ * @return void
+ * @author Jason Punzalan
+ **/
+function country_array()
+{         
+    $countries = Country::find('all');
+    $country_list = array();
+    foreach ($countries as $country){
+        $country_list[$country->iso_code_2] = $country->name;
+    }                                                        
+    return $country_list;
+}    
+
+/**
+ * Area Arrat
+ *
+ * @return void
+ * @author Jason Punzalan
+ **/
+function area_array()
+{                   
+    return array('u'=>'Urban', 'r'=>'Rural', 's' => 'Suburban');
 }
+
 ?>

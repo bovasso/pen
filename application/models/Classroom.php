@@ -1,8 +1,8 @@
 <?php
 
 class Classroom extends ActiveRecord\Model {
-    
-    static $before_create = array('create_group'); # new records only
+                    
+    static $after_create = array('create_group'); # new records only
     
     static $has_many = array(
         array('students', 'class'=>'Student', 'conditions'=>'role_id = 2'),
@@ -27,7 +27,6 @@ class Classroom extends ActiveRecord\Model {
         $group = new Group();  
         $group->classroom_id = $this->id;
         $group->save();
-        $this->group_id = $group->id;        
     }
     /**
      * All penpals for classroom function

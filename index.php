@@ -1,8 +1,5 @@
 <?php
 
-date_default_timezone_set('America/New_York');
-
-
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -37,12 +34,6 @@ if (defined('ENVIRONMENT'))
 	{
 		case 'development':
 			error_reporting(E_ALL);
-			ini_set('display_errors', 1);
-		break;
-
-		case 'staging':
-			error_reporting(E_ALL);
-			ini_set('display_errors', 1);
 		break;
 	
 		case 'testing':

@@ -56,7 +56,7 @@ class Article extends ActiveRecord\Model {
      **/
     public function get_date()
     {
-        return isset($this->json->date) ? date('m/d/Y', strtotime($this->json->date) ) : 'n/a';
+        return !empty($this->json->date) ? date('m/d/Y', strtotime($this->json->date) ) : 'n/a';
     }
     
     /**

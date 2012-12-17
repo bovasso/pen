@@ -41,7 +41,9 @@
                   <?php echo $this->formbuilder->open( '/student/dashboard/save_reply', array('id'=>'comment')) ?>                                
 					<?php echo $this->formbuilder->textarea( 'comment', '', '', array('class'=>'w90')) ?>       
                     <?php echo $this->formbuilder->hidden( 'source', 'message') ?>               							                             					
-                    <?php echo $this->formbuilder->hidden( 'activity_id', $message->id) ?>               							                             
+                    <?php echo $this->formbuilder->hidden( 'parent_id', $message->id) ?>                           
+                    <?php echo $this->formbuilder->hidden( 'activity_id', $message->activity_id) ?>               							                                     							                                                 
+                            							                             
 					<p class="btn-wrapper right">
           				<input type="submit" class="submit btn" value="reply"/>
           			</p>                        			

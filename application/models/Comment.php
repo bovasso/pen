@@ -1,11 +1,12 @@
 <?php
 
 class Comment extends ActiveRecord\Model {
+    public $activity_id = NULL;
     
     static $belongs_to = array(
         array('user'),
     );   
-    
+       
     static $after_create = array('create_activity'); # new records only
     
     static $delegate = array( 
@@ -58,8 +59,8 @@ class Comment extends ActiveRecord\Model {
      * @author Jason Punzalan
      **/
     public function get_action()
-    {
-        return ' commented on your response ';
+    {                            
+        return ' commented on their assignment ';
     }
     
     /**

@@ -44,8 +44,12 @@
                     <p>{{$article->abstract}}</p>
     				<p class="read-more"><a href="/assignments/article/{{$article->id}}">Read More...</a></p>
     			</div><!-- end Featured Assignment Topic -->
-    		</li>
+    		</li>     		
     		@endforeach
+    		@if (count($assignment->articles) == 0)
+    		      <li>Sorry, it doesn't look like any articles were found for this assignment.</li>
+    		      <li>@include('partials/support')</li>
+    		@endif
     	</ul>
     </div>
 </div>

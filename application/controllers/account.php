@@ -240,14 +240,15 @@ class Account extends MY_Controller {
 			$this->blade->render('account/forgot_password', $this->data);
 		}
 		else
-		{
+		{       
+
 			//run the forgotten password method to email an activation code to the user
 			$forgotten = $this->ion_auth->forgotten_password($this->input->post('email'));
 
 			if ($forgotten)
 			{ 
 				//if there were no errors
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				$this->ci_alerts->set('info', $this->ion_auth->messages());
 				redirect("account/login", 'refresh'); //we should display a confirmation page here instead of the login page
 			}
 			else

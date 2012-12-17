@@ -57,7 +57,7 @@ class Register extends MY_Controller {
         $this->form_validation->set_rules('group_code', 'Group Code', 'required|callback_group_code');		
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');                
-        $this->form_validation->set_rules('username', 'Username', 'required|s_unique[users.username]');                
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');                
         $this->form_validation->set_rules('password', 'Password', 'required|matches[confirm_password]');         
         $this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'required');                         
         $this->form_validation->set_rules('agree', 'Terms & Conditions', 'required');
@@ -189,13 +189,6 @@ class Register extends MY_Controller {
 	    $this->blade->render('register/student/course', $this->data);		
 	}
 	
-	public function test($value='')
-	{
-        $partnership = Partnership::create(array('course_id'=>1, 'classroom_id'=>3, 'partnership_id'=>4));
-        $partnership->save();
-        
-        exit;
-	}
 	
 	/**
 	 * Register completed

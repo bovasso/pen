@@ -2,7 +2,7 @@
 @section('content')
 <div class="wrapper">
 	<div>
-		<h1 style="padding-left:0px">Thank You</h1>
+		<h1>Thank You!</h1>
 		<p>You are signed up for Penpal News</p>
 		<h2>Your class: {{$student->classroom->name}}</h2>
 		<h2>Your teacher: {{$student->classroom->teacher->full_name}}</h2>
