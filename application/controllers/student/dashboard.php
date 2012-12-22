@@ -22,7 +22,10 @@ class Dashboard extends MY_Controller {
         $this->data['course'] = $this->student->classroom->course;		
         $this->data['activities'] = $this->student->penpal_activity( $config['per_page'], $offset); 
         $this->data['teacher'] = $this->student->classroom->teacher;		
-        
+        $this->data['penpals'] = NULL;
+        if ( count($this->student->penpals) > 1 ) {
+            $this->data['penpals'] = $this->student->penpals;
+        }
         // Double check that assignment exists for this week
         $assignment = $this->student->classroom->course->this_weeks_assignment;         
         if ($assignment) {

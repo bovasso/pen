@@ -15,15 +15,16 @@
 	<div class="comment-form right w80">
         <?php echo $this->formbuilder->open( '/student/dashboard/save_message', array('id'=>'comment')) ?>
             <?php echo $this->formbuilder->textarea( 'comment', '', '', array('class'=>'w100')) ?>        
-            
-            
-            <!-- <p id="student_selector" class="left">
+
+            @if ($penpals)
+            <p id="student_selector" class="left">
                 <span>Select a Student: </span>
+            @foreach( $penpals as $penpal ) 
                 <input type="radio" name="radiogroup" id="radio-1">
-                <label for="radio-1">Jack A.</label>
-                <input type="radio" name="radiogroup" id="radio-1">
-                <label for="radio-1">Peggy O.</label>
-            </p> -->
+                <label for="radio-1">{{$penpal->full_name}}</label>
+            @endforeach
+            </p>
+            @endif
 			<p class="btn-wrapper right">
 				<input type="submit" class="submit btn" value="SEND"/>
 			</p>

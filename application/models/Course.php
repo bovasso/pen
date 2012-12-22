@@ -17,7 +17,6 @@ class Course extends ActiveRecord\Model {
     {                                        
         $today = date('Y-m-d'); 
         $assignment = Assignment::find('first',array('conditions' => array('start_date >= ? AND course_id = ?', $today, $this->id)));
-//        Assignment::find_by_course_id_and_week($this->id, $week);
         return $assignment;
     }
     

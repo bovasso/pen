@@ -54,6 +54,7 @@ $(document).ready(function() {
         id = $(this).data('answer');
         $('#answer_' + id).trigger('click');
     });
+    
 });
 </script>
 @endsection

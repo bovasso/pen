@@ -87,23 +87,13 @@ class Dashboard extends MY_Controller {
      **/
     public function send_feedback()
     {      
-        
+               
         $this->form_validation->set_rules('comment', 'Comment', 'required');	   			 
         
         if ($this->form_validation->run() == TRUE) {
-            $reply = new Reply();
-            $reply->parent_id = $this->input->post('parent_id');
-            $reply->user_id = $this->student->id;  
-            $reply->source = $this->input->post('source');
-            $reply->value = $this->input->post('comment');            
-            $reply->save();                               
-            
-            // Update source activity to push to top of feed
-            $activity_id = $this->input->post('activity_id');
-            $activity = Activity::find_by_id_and_type($activity_id, $reply->source);
-            $activity->updated_at = date('Y-m-d');
-            $activity->save();
-            
+            $homework = Homework::find_by_pk(array($this->input->post('homework_id')), NULL);
+            $homework->feedback = $this->input->post('comment');            
+            $homework->save();                                           
         }
         
         redirect( $this->agent->referrer() );                        
