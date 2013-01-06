@@ -35,6 +35,23 @@ class Student extends User {
         $penpals = Penpal::find('all', array('conditions' => array('classroom_id = ? AND user_id = ?', $this->classroom_id, $this->id)));
         return $penpals;
     }
+    
+    /**
+     * Penpals as Array function
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public function get_penpals_student_ids()
+    {   
+        $ids = array();
+        $penpals = Penpal::find('all', array('conditions' => array('classroom_id = ? AND user_id = ?', $this->classroom_id, $this->id)));
+        foreach($penpals as $penpal ){
+            $ids[] = $penpal->id;
+        }                        
+        return $ids;
+    }
+    
       
     /**
      * Two Penpals function

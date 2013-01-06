@@ -62,7 +62,20 @@ class Classroom extends ActiveRecord\Model {
         if (is_null($classes)) return FALSE;
         return $classes;
     }
-    
+     
+    /**
+     * Partner
+     *
+     * @return void
+     * @author Jason Punzalan
+     **/
+    public static function find_partnership_by_classroom_id_and_course_id( $classroom_id, $course_id)
+    {
+        $partnership = Partnership::find( 'first', array('conditions'=>array('classroom_id = ? AND course_id = ? ', $classroom_id, $course_id) ));
+        if (is_null($partnership)) return FALSE;                                                                                                      
+        $classroom = $partnership->classroom;
+        return $classroom;
+    }
     /**
      * Get Seats Available
      *

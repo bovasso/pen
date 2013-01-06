@@ -61,16 +61,16 @@
                                <td>{{$student->classroom->name}}</td><td><small>({{$student->gender}})</small>&nbsp;{{$student->full_name}}</td>
                                <td><i class="icon-resize-horizontal"></i></td>
 
-                               @foreach ( $student->penpals_by_classroom as $penpal)                             
-                               <td>{{$penpal->student->classroom->name}}</td>
+
+                               <td>{{$partnered_classroom->name}}</td>
                                <td>          
                                    <select class="penpals_dropdown_options">
                                         @foreach($available_penpals as $available_penpal)
-                                            <option <?php echo ($penpal->student->id == $available_penpal->student->id)? 'selected="selected"' : '' ?> value="{{$available_penpal->student->id}}" data-student="{{$student->id}}">({{$available_penpal->student->gender}})&nbsp;{{$available_penpal->student->full_name}}</option>
+                                            <option <?php echo (in_array($available_penpal->student->id, $student->penpals_student_ids))? 'selected="selected"' : '' ?> value="{{$available_penpal->student->id}}" data-student="{{$student->id}}">({{$available_penpal->student->gender}})&nbsp;{{$available_penpal->student->full_name}}</option>
                                         @endforeach
                                    </select>
                                </td>                     
-                               @endforeach
+                               
                             </tr>
                         @endforeach                                                      
                     </tbody>

@@ -94,6 +94,7 @@ class Dashboard extends CI_Controller {
             $classroom = Classroom::find_by_pk(array($id), NULL);	    
             $this->data['students'] = $classroom->students_sorted_by_name;   
             $this->data['available_penpals'] = $classroom->penpals_in_classroom;
+            $this->data['partnered_classroom'] = Classroom::find_partnership_by_classroom_id_and_course_id($classroom->id, $classroom->course_id);
     		$output = $this->crud->render();		                        
             $this->render($output, 'admin/edit_penpals', $only_jquery = TRUE);
             exit;
