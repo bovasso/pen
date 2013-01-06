@@ -33,7 +33,8 @@ class Article extends ActiveRecord\Model {
      * @author Jason Punzalan
      **/
     public function get_author()
-    {
+    {      
+        if ( !is_null($this->author) )  return $this->author;
         return isset($this->json->author) ? $this->json->author : 'n/a';
     }
     
@@ -55,7 +56,8 @@ class Article extends ActiveRecord\Model {
      * @author Jason Punzalan
      **/
     public function get_date()
-    {
+    {   
+        if ( !is_null($this->date_of_article) )  return date('m/d/Y', strtotime($this->date_of_article));
         return !empty($this->json->date) ? date('m/d/Y', strtotime($this->json->date) ) : 'n/a';
     }
     

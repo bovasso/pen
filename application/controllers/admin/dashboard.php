@@ -365,7 +365,7 @@ class Dashboard extends CI_Controller {
 		$this->crud->set_table('articles');
 		$this->crud->set_subject('Article');	    
         $this->crud->change_field_type('video', 'text');
-        $this->crud->unset_columns('assignment_id', 'content', 'json', 'custom_article_content');
+        $this->crud->unset_columns('assignment_id', 'content', 'json', 'custom_article_content', 'author', 'date_of_article');
         $this->crud->unset_fields('json');    
         $this->crud->change_field_type('json', 'hidden');
         $this->crud->display_as('custom_article_content', 'Content'); 
